@@ -35,14 +35,18 @@ textarea {
   color: #d82626;
 }
 
-/* bbs style */
+/* apply style */
+
+body {
+  background-color: #FFF5EB;
+}
 .wrapper {
   max-width: 980px;
   margin: 50px auto;
 }
 
 .header {
-  background: rgba(245, 244, 244, 0.705);
+  background: #B2B8A3;
 }
 
 .header__inner {

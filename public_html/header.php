@@ -26,7 +26,6 @@ require_once(__DIR__ .'/../config/config.php');
       <li><a href="<?= SITE_URL; ?>/">ホーム</a></li>
       <?php
       if(isset($_SESSION['me'])) { ?>
-      <li><a href="<?= SITE_URL; ?>/thread_all.php">一覧</a></li>
       <li><a href="<?= SITE_URL; ?>/thread_favorite.php">お気に入り</a></li>
       <li><a href="<?= SITE_URL; ?>/thread_create.php">作成</a></li>
       <?php } else { ?>
