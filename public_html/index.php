@@ -18,9 +18,13 @@ $threads = $threadMod->getThreadAll();
   <?php foreach($threads as $thread): ?>
     <li class="thread__item" data-threadid="<?= $thread->t_id; ?>">
       <div class="thread__head">
+        <img src="<?= h($thread->image); ?>">
         <h2 class="thread__ttl">
           <?= h($thread->title); ?>
         </h2>
+        <p><?= h($thread->address); ?></p><br>
+        <p><?= h($thread->due_date); ?></p><br>
+        <p><?= h($thread->comment); ?></p><br>
       <div class="fav__btn<?php if(isset($thread->f_id)) { echo ' active';} ?>"><i class="fas fa-star"></i></div>
       </div>
 <ul class="thread__body">

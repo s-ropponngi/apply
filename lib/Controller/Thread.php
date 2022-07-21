@@ -20,13 +20,24 @@ class Thread extends \Apply\Controller {
         $this->setErrors('create_thread', $e->getMessage());
     }
     $this->setValues('thread_name', $_POST['thread_name']);
+    $this->setValues('address_name', $_POST['address_name']);
     $this->setValues('comment', $_POST['comment']);
     if ($this->hasError()){
       return;
     } else {
       $threadModel = new \Apply\Model\Thread();
+
+      // 画像の編集(画像のリンク変更)
+      $user_img = $_FILES['image'];
+      $ext = substr($user_img['name'], strrpos($user_img['name'], '.') + 1);
+      $user_img['name'] = uniqid("img_") .'.'. $ext;
+
+      // Model部分に渡すようにしている部分
       $threadModel->createThread([
+        'image' => $user_img['name'],
         'title' => $_POST['thread_name'],
+        'address' => $_POST['address_name'],
+        'due_date' => $_POST['due_date'],
         'comment' => $_POST['comment'],
         'user_id' => $_SESSION['me']->id
       ]);
@@ -51,7 +62,7 @@ class Thread extends \Apply\Controller {
           $threadModel->createComment([
             'thread_id' => $_POST['thread_id'],
             'user_id' => $_SESSION['me']->id,
-            'content' => $_POST['content']
+            'content' => $_POST['content'],
           ]);
       }
       header('Location: '. SITE_URL . '/thread_disp.php?thread_id=' . $_POST['thread_id']);
