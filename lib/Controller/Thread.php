@@ -32,6 +32,44 @@ class Thread extends \Apply\Controller {
       $ext = substr($user_img['name'], strrpos($user_img['name'], '.') + 1);
       $user_img['name'] = uniqid("img_") .'.'. $ext;
 
+      $old_img = $_POST['old_image'];
+      if($old_img == '') {
+        $old_img = NULL;
+      }
+      try {
+        $userModel = new \Apply\Model\Thread();
+        // アップロードした画像があれば、gazouディレクトリにある古い画像を削除し、新しい画像を保存する。
+        // アップロードされてきた画像があれば実行する
+        if($user_img['size'] > 0) {
+          // gazouフォルダーの中にある古い画像をフォルダから削除する
+          unlink('./gazou/'.$old_img);
+          // 新しい画像をgazouフォルダに移動
+          move_uploaded_file($user_img['tmp_name'],'./gazou/'.$user_img['name']);
+          // データベースに保存
+          $userModel->update([
+            'username' => $_POST['username'],
+            'email' => $_POST['email'],
+            'image' => $user_img['name']
+          ]);
+          $_SESSION['me']->image = $user_img['name'];
+          // 画像の変更をしないとき
+        } else {
+          $userModel->update([
+            'username' => $_POST['username'],
+            'email' => $_POST['email'],
+            // 今まで使っていた画像をupdate
+            'userimg' => $old_img
+          ]);
+          $_SESSION['me']->image = $old_img;
+        }
+      }catch(\Exception $e){
+        return;
+      }
+      
+    }
+    $_SESSION['me']->username = $_POST['username'];
+    
+
       // Model部分に渡すようにしている部分
       $threadModel->createThread([
         'image' => $user_img['name'],
@@ -43,8 +81,16 @@ class Thread extends \Apply\Controller {
       ]);
       header('Location: '. SITE_URL . '/index.php');
       exit();
-    }
+
   }
+
+  protected function showUser() {
+    $user = new \Apply\Model\Thread();
+    $userData = $user->find($_SESSION['me']->id);
+    $this->setValues('image', $userData->image);
+  }
+
+
 
   private function createComment() {
     try {
@@ -54,6 +100,7 @@ class Thread extends \Apply\Controller {
       } catch (\Apply\Exception\CharLength $e) {
           $this->setErrors('content', $e->getMessage());
       }
+
       $this->setValues('content', $_POST['content']);
       if ($this->hasError()) {
         return;

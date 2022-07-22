@@ -41,7 +41,7 @@ class Thread extends \Apply\Model {
       // $user_id = $_SESSION['me']->id;
       // $stmt = $this->db->query("SELECT t.id AS t_id,title,t.created,f.id AS f_id FROM threads AS t LEFT JOIN favorites AS f ON t.delflag = 0 AND t.id = f.thread_id  AND f.user_id = $user_id ORDER BY t.id desc");
 
-      $stmt = $this->db->query("SELECT id AS t_id,title,created,address,due_date,comment FROM threads WHERE delflag = 0 ORDER BY id desc");
+      $stmt = $this->db->query("SELECT id AS t_id,title,image,created,address,due_date,comment FROM threads WHERE delflag = 0 ORDER BY id desc");
       return $stmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
@@ -166,6 +166,24 @@ public function searchThread($keyword) {
   // ':title' => '%'.$keyword.'%'= タイトルに〇〇を含むという意味
   $stmt->execute([':title' => '%'.$keyword.'%']);
   return $stmt->fetchAll(\PDO::FETCH_OBJ);
+}
+
+// ログインしている人の情報をマイページのフォームに反映させる
+public function find($id) {
+  $stmt = $this->db->prepare("SELECT * FROM users WHERE id = :id;");
+  $stmt->bindValue('id',$id);
+  $stmt->execute();
+  $stmt->setFetchMode(\PDO::FETCH_CLASS, 'stdClass');
+  $user = $stmt->fetch();
+  return $user;
+}
+
+public function update($values) {
+  $stmt = $this->db->prepare("UPDATE threads SET image = :image where id = :id");
+  $stmt->execute([
+    ':image' => $values['image'],
+    ':id' => $_SESSION['me']->id,
+  ]);
 }
 
 }

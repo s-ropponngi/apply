@@ -18,7 +18,7 @@ $threads = $threadMod->getThreadAll();
   <?php foreach($threads as $thread): ?>
     <li class="thread__item" data-threadid="<?= $thread->t_id; ?>">
       <div class="thread__head">
-        <img src="<?= h($thread->image); ?>">
+        <img src="<?= './gazou/'.h($thread->image); ?>">
         <h2 class="thread__ttl">
           <?= h($thread->title); ?>
         </h2>

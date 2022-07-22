@@ -4,10 +4,10 @@ $app = new Apply\Controller\Thread();
 $app->run();
 ?>
 <h1 class="page__ttl">新規スレッド</h1>
+<form action="" method="post" class="form-group new_thread" id="new_thread" enctype="multipart/form-data">
 <div class="imgfile">
   <img src="<?= isset($app->getValues()->image) ? './gazou/'. h($app->getValues()->image) : './asset/img/noimage.png'; ?>" alt="">
 </div>
-<form action="" method="post" class="form-group new_thread" id="new_thread" enctype="multipart/form-data">
   <input type="file" name="image" accept="image/*">
   <div class="form-group">
     <label>スレッド名</label>
