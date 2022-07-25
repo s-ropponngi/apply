@@ -19,4 +19,14 @@ $(function () {
     }
     reader.readAsDataURL(file);
   });
+
+  // タイトル色付け
+  $('.thread').find('.thread__ttl').each( function( index, element ) {
+    if ($.trim(element.textContent) == '探しています') {
+        $(this).css('background-color','#C2DEE3')
+      } else if($.trim(element.textContent) == '保護しました') {
+        $(this).css('background-color','#F4C7AB')
+      }
+  })
 });
+

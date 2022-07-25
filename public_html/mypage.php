@@ -24,23 +24,6 @@ $app->run();
       <input type="hidden" name="old_image" value="<?= h($app->getValues()->image); ?>">
       <p class="err"></p>
     </div>
-    <div class="col-md-4">
-      <div class="form-group">
-        <!-- <p class="err"></p> -->
-        <div class="imgarea <?= isset($app->getValues()->image) ? '': 'noimage' ?>">
-          <label>
-          <span class="file-btn">
-            編集
-            <!-- 画像の下の編集ボタン -->
-            <input type="file" name="image" class="form" style="display:none" accept="image/*">
-          </span>
-          </label>
-          <div class="imgfile">
-            <img src="<?= isset($app->getValues()->image) ? './gazou/'. h($app->getValues()->image) : './asset/img/noimage.png'; ?>" alt="">
-          </div>
-        </div>
-      </div>
-    </div>
   </form>
   <form class="user-delete" action="user_delete_confirm.php" method="post">
     <input type="submit" class="btn btn-default" value="退会する">

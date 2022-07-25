@@ -91,7 +91,6 @@ body {
 }
 
 .header__inner .prof-show .image img {
-  border-radius: 50%;
   width: 40px;
   height: 40px;
   object-fit: cover;
@@ -161,40 +160,18 @@ body {
 
 .thread__ttl {
   font-size: 30px;
-  color: #0972d3;
-  margin-left: 10px;
+  text-align: center;
+  padding: 20px;
   font-family: 'M PLUS Rounded 1c', sans-serif;
+}
+
+.thread__text {
+  padding: 20px 40px;
 }
 
 .thread__date {
   font-size: 15px;
-}
-
-.thread__body .comment__item {
-  margin-bottom: 30px;
-}
-
-.thread__body .comment__item__head {
-  font-size: 15px;
-  margin-bottom: 10px;
-}
-
-.thread__body .comment__item__name {
-  color: #3c70e0;
-  font-family: 'M PLUS Rounded 1c', sans-serif;
-  margin-right: 10px;
-  font-size: 15px;
-  font-weight: bold;
-}
-
-.thread__body .comment__item__content {
-  font-size: 15px;
-}
-
-.thread__item .form-group {
-  width: 500px;
-  margin: 0 auto 0 0;
-  font-size: 15px;
+  text-align: right;
 }
 
 .thread__item .form-group input[type="submit"] {
@@ -293,9 +270,8 @@ body {
 }
 
 .imgarea img {
-  border-radius: 50%;
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
   object-fit: cover;
 }
 
@@ -334,3 +310,16 @@ body {
   padding: 0;
   font-weight: bold;
 }
+
+
+.thread__head {
+  display:block;
+  background-color: #fff;
+  margin: 50px 150px;
+}
+
+.thread__head img {
+  width: 522px;
+  height: 600px;
+}
+

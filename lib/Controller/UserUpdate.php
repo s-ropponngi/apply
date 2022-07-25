@@ -18,7 +18,6 @@ class UserUpdate extends \Apply\Controller {
     // mypage.phpにあるgetValues部分に表示される
     $this->setValues('username', $userData->username);
     $this->setValues('email', $userData->email);
-    $this->setValues('image', $userData->image);
   }
 
   protected function updateUser() {

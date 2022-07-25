@@ -5,21 +5,24 @@ $app->run();
 ?>
 <h1 class="page__ttl">新規スレッド</h1>
 <form action="" method="post" class="form-group new_thread" id="new_thread" enctype="multipart/form-data">
+<div class="imgarea <?= isset($app->getValues()->image) ? '': 'noimage' ?>">
 <div class="imgfile">
-  <img src="<?= isset($app->getValues()->image) ? './gazou/'. h($app->getValues()->image) : './asset/img/noimage.png'; ?>" alt="">
+  <img src="<?= isset($app->getValues()->image) ? './gazou/'. h($app->getValues()->image) : './asset/img/noimage.jpg'; ?>" alt="">
+</div>
 </div>
   <input type="file" name="image" accept="image/*">
   <div class="form-group">
     <label>スレッド名</label>
     <select name="thread_name" type="text" class="form-control" value="<?= isset($app->getValues()->thread_name) ? h($app->getValues()->thread_name) : ''; ?>">
-      <option value="保護しました">保護しました</option>
-      <option value="探しています">探しています</option>
+      <option value="">選択してください</option>
+      <option value="保護しました" id="c1">保護しました</option>
+      <option value="探しています" id="c2">探しています</option>
     </select>
   </div>
   <div class="form-group">
     <label>都道府県</lavel>
     <select name="address_name" type="text" class="form-control" value="<?= isset($app->getValues()->address_name) ? h($app->getValues()->address_name) : ''; ?>">
-      <option value="0"></option>
+      <option value="">都道府県</option>
       <option value="北海道">北海道</option>
       <option value="青森県">青森県</option>
       <option value="岩手県">岩手県</option>
@@ -73,7 +76,7 @@ $app->run();
     <label>発見日</lavel>
     <input type="text" class="form-control" name="due_date" id="due_date" value="" />
   <div class="form-group">
-    <label>最初のコメント</label>
+    <label>特徴</label>
     <textarea type="text" name="comment" class="form-control"><?= isset($app->getValues()->comment) ? h($app->getValues()->comment) : ''; ?></textarea>
     <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
     <!-- 作成ボタンを押したらcreatethreadがThread.php(Controller)のPOSTの部分に送られる -->

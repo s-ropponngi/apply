@@ -14,7 +14,7 @@ $threadDisp = $threadMod->getThread($thread_id);
   <div class="thread__item">
     <div class="thread__head">
       <h2 class="thread__ttl">
-        <!-- getThreadの戻り値がタイトル部分にな -->
+        <!-- getThreadの戻り値がタイトル部分になる -->
         <?= h($threadDisp->title); ?>
       </h2>
       <form id="csvoutput" method="post" action="thread_csv.php">
@@ -25,6 +25,13 @@ $threadDisp = $threadMod->getThread($thread_id);
       </form>
     </div>
     <ul class="thread__body">
+    <li class="thread__item" data-threadid="<?= $thread->t_id; ?>">
+      <div class="thread__head">
+        <img src="<?= './gazou/'.h($threadDisp->image); ?>">
+        <p><?= h($threadDisp->address); ?></p>
+        <p><?= h($threadDisp->due_date); ?></p>
+        <p><?= h($threadDisp->comment); ?></p>
+      </div>
     <?php
       $comments = $threadMod->getCommentAll($threadDisp->id);
       // getCommentAllの戻り値でコメント数分処理を行っている
