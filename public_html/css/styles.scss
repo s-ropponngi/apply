@@ -309,16 +309,6 @@ textarea {
   text-align: center;
 }
 
-// お気に入りボタン
-.fav__btn {
-  font-size: 20px;
-  &.active {
-    color: rgb(232, 232, 38);
-  }
-}
-// .fav__btn.active {
-// }
-
 .form-search {
   display: flex;
   input[type=submit] {

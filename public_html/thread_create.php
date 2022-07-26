@@ -10,7 +10,10 @@ $app->run();
   <img src="<?= isset($app->getValues()->image) ? './gazou/'. h($app->getValues()->image) : './asset/img/noimage.jpg'; ?>" alt="">
 </div>
 </div>
+<label class="file-img">
   <input type="file" name="image" accept="image/*">
+  <p>写真を選択</p>
+</label>
   <div class="form-group">
     <label>スレッド名</label>
     <select name="thread_name" type="text" class="form-control" value="<?= isset($app->getValues()->thread_name) ? h($app->getValues()->thread_name) : ''; ?>">
@@ -20,7 +23,7 @@ $app->run();
     </select>
   </div>
   <div class="form-group">
-    <label>都道府県</lavel>
+    <label>都道府県</label>
     <select name="address_name" type="text" class="form-control" value="<?= isset($app->getValues()->address_name) ? h($app->getValues()->address_name) : ''; ?>">
       <option value="">都道府県</option>
       <option value="北海道">北海道</option>
@@ -73,7 +76,7 @@ $app->run();
     </select>
   </div>
   <div class="form-group">
-    <label>発見日</lavel>
+    <label>発見日</label>
     <input type="text" class="form-control" name="due_date" id="due_date" value="" />
   <div class="form-group">
     <label>特徴</label>

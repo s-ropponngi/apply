@@ -17,28 +17,25 @@ $threads = $threadMod->getThreadAll();
   </div>
 </form>
 
-
-<ul class="thread">
+<div class="thread">
   <?php foreach($threads as $thread): ?>
-    <li class="thread__item" data-threadid="<?= $thread->t_id; ?>">
+    <div class="thread__item" data-threadid="<?= $thread->t_id; ?>">
       <div class="thread__head">
         <img src="<?= './gazou/'.h($thread->image); ?>">
         <h2 class="thread__ttl">
           <?= h($thread->title); ?>
         </h2>
-      <div class="thread__text">
-        <p>都道府県：<?= h($thread->address); ?></p>
-        <p>発見日：<?= h($thread->due_date); ?></p>
-        <p>特徴：<?= h($thread->comment); ?></p>
+        <div class="thread__text">
+          <p>都道府県：<?= h($thread->address); ?></p>
+          <p>発見日：<?= h($thread->due_date); ?></p>
+          <p>特徴：<?= h($thread->comment); ?></p>
+        </div>
+            <a class="coment_btn" href="<?= SITE_URL; ?>/thread_disp.php?thread_id=<?= $thread->t_id; ?>"><img src="<?= SITE_URL; ?>/asset/img/click_btn.png"></a>
       </div>
-      <div class="operation">
-        <a class="btn btn-primary" href="<?= SITE_URL; ?>/thread_disp.php?thread_id=<?= $thread->t_id; ?>">詳細</a>
-      </div>
-    </div>
       <p class="thread__date">スレッド作成日時：<?= h($thread->created); ?></p>
-    </li>
+  </div>
   <?php endforeach?>
-</ul><!-- thread -->
+  </div><!-- thread -->
 <?php
 require_once(__DIR__ .'/footer.php');
 ?>

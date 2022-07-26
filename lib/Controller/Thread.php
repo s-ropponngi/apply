@@ -45,30 +45,14 @@ class Thread extends \Apply\Controller {
           unlink('./gazou/'.$old_img);
           // 新しい画像をgazouフォルダに移動
           move_uploaded_file($user_img['tmp_name'],'./gazou/'.$user_img['name']);
-          // データベースに保存
-          $userModel->update([
-            'username' => $_POST['username'],
-            'email' => $_POST['email'],
-            'image' => $user_img['name']
-          ]);
-          $_SESSION['me']->image = $user_img['name'];
-          // 画像の変更をしないとき
-        } else {
-          $userModel->update([
-            'username' => $_POST['username'],
-            'email' => $_POST['email'],
-            // 今まで使っていた画像をupdate
-            'userimg' => $old_img
-          ]);
-          $_SESSION['me']->image = $old_img;
         }
       }catch(\Exception $e){
         return;
       }
-      
+
     }
     $_SESSION['me']->username = $_POST['username'];
-    
+
 
       // Model部分に渡すようにしている部分
       $threadModel->createThread([
@@ -161,29 +145,25 @@ class Thread extends \Apply\Controller {
         echo '不正な投稿です';
         exit();
       }
-      if ($_POST['thread_name'] === '' || $_POST['comment'] === ''){
-        throw new \Apply\Exception\EmptyPost("スレッド名または最初のコメントが入力されていません！");
+      if ( $_FILES['image']['type'] === ''|| $_POST['thread_name'] === '' || $_POST['comment'] === ''|| $_POST['address_name'] === ''|| $_POST['due_date'] === ''){
+        throw new \Apply\Exception\EmptyPost("全て入力してください！");
       }
-      if (mb_strlen($_POST['thread_name']) > 20) {
-        throw new \Apply\Exception\CharLength("スレッド名が長すぎます！");
-      }
+
       if (mb_strlen($_POST['comment']) > 200) {
         throw new \Apply\Exception\CharLength("コメントが長すぎます！");
       }
-    }
+    //   if (=== 'noimage.jpg')
+    // }
 
-    if($_POST['type'] === 'createcomment') {
-      if (!isset($_POST['content'])){
-        echo '不正な投稿です';
-        exit();
-      }
+      if($_POST['type'] === 'createcomment') {
+        if (!isset($_POST['content'])){
+          echo '不正な投稿です';
+          exit();
+        }
 
       if($_POST['content'] === '') {
         throw new \Apply\Exception\EmptyPost("コメントが入力されていません！");
       }
-
-      if (mb_strlen($_POST['content']) > 200) {
-        throw new \Apply\Exception\CharLength("コメントが長すぎます！");
     }
   }
 }

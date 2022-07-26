@@ -24,6 +24,19 @@ textarea {
   height: 200px;
 }
 
+ul {
+  list-style-type: none;
+}
+li{
+  list-style: none;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
 .btn {
   width: 150px;
   padding: 10px 0;
@@ -127,8 +140,8 @@ body {
 .thread__item {
   position: relative;
   width: 90%;
-  margin: 2.5em auto;
-  padding: 35px 30px 20px;
+  margin: 2.5rem auto;
+  padding: 6rem 6rem;
   color: #770000;/* 文字色 */
   background-color: #e8ddbd; /*枠背景色*/
   box-shadow: inset 0 0 40px rgba(204, 186, 136,1), 0 2px 2px #ccc;
@@ -152,10 +165,15 @@ body {
 }
 
 .thread__head {
-  display: flex;
+  display:block;
+  background-color: #fff;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 40px;
+}
+
+.thread__head img {
+  width: 100%;
+  height: 50%;
 }
 
 .thread__ttl {
@@ -166,12 +184,20 @@ body {
 }
 
 .thread__text {
-  padding: 20px 40px;
+  padding: 1rem 3rem 1rem;
+}
+
+.thread__text p{
+  margin-bottom: initial;
+}
+.thread__text p:not(:first-child){
+  margin-top: 1rem;
 }
 
 .thread__date {
   font-size: 15px;
   text-align: right;
+  margin-top: 0.5rem;
 }
 
 .thread__item .form-group input[type="submit"] {
@@ -239,6 +265,12 @@ body {
   margin-bottom: 20px;
 }
 
+.coment_btn {
+  width: 25%;
+  position: relative;
+  left: 25%;
+}
+
 .fs12 {
   max-width: 600px;
   margin: 20px auto 0;
@@ -290,18 +322,6 @@ body {
   text-align: center;
 }
 
-.fav__btn {
-  font-size: 20px;
-}
-
-.fav__btn.active {
-  color: #e8e826;
-}
-
-.form-search {
-  display: flex;
-}
-
 .form-search input[type=submit] {
   width: 100px;
   height: 30px;
@@ -311,15 +331,19 @@ body {
   font-weight: bold;
 }
 
+/* スレッド詳細 */
 
-.thread__head {
-  display:block;
-  background-color: #fff;
-  margin: 50px 150px;
+input[type="file"]{
+  display: none;
 }
 
-.thread__head img {
-  width: 522px;
-  height: 600px;
+.file-img {
+  color: #AAAAAA; /* ラベルテキストの色を指定する */
+  background-color: #006DD9;/* ラベルの背景色を指定する */
+  padding: 10px; /* ラベルとテキスト間の余白を指定する */
+  border: double 4px #AAAAAA;/* ラベルのボーダーを指定する */
 }
 
+.file-img p{
+  margin-bottom: initial;
+}
