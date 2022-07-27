@@ -27,6 +27,42 @@ $(function () {
       } else if($.trim(element.textContent) == '保護しました') {
         $(this).css('background-color','#F4C7AB')
       }
-  })
-});
+  });
 
+  // 検索機能
+    searchWord = function(){
+      var searchText = $(this).val(), // 検索ボックスに入力された値
+          targetText,
+          cnt,
+          hitNum;
+      // 検索結果を格納するための配列を用意
+      searchResult = [];
+
+      // 検索結果エリアの表示を空にする
+      $('.thread__item__list').empty();
+      $('.search-result__hit-num').empty();
+
+      // 検索ボックスに値が入ってる場合
+      if (searchText != '') {
+        $('.thread li').each(function() {
+          targetText = $(this).text();
+
+        if (targetText.indexOf(searchText) != -1) {
+          $(this).removeClass('hidden');
+        } else {
+          $(this).addClass('hidden');
+          searchResult.push(targetText);
+        }
+      });
+
+        cnt = $('ul.thread').find('li')
+
+        // ヒットの件数をページに出力
+        hitNum = '<span>検索結果</span>：' + (cnt.length - searchResult.length) + '件見つかりました。';
+        $('.search-result__hit-num').append(hitNum);
+      }
+    };
+
+    // searchWordの実行
+    $('#search-text').on('change', searchWord);
+  });

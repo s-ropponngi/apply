@@ -19,14 +19,6 @@ class Thread extends \Apply\Model {
       $res = $stmt->execute();
       $thread_id = $this->db->lastInsertId();
 
-      // commentsテーブルに最初のコメントを登録
-      // $sql = "INSERT INTO comments (thread_id,comment_num,user_id,content,created,modified) VALUES (:thread_id,1,:user_id,:content,now(),now())";
-      // $stmt = $this->db->prepare($sql);
-      // $stmt->bindValue('thread_id',$thread_id);
-      // $stmt->bindValue('user_id',$values['user_id']);
-      // $stmt->bindValue('content',$values['comment']);
-      // $res = $stmt->execute();
-
       $this->db->commit();
       // 予期せぬエラー(例外処理)が出たらcatchで処理
     } catch (\Exception $e) {
@@ -44,13 +36,6 @@ class Thread extends \Apply\Model {
       $stmt = $this->db->query("SELECT id AS t_id,title,image,created,address,due_date,comment FROM threads WHERE delflag = 0 ORDER BY id desc");
       return $stmt->fetchAll(\PDO::FETCH_OBJ);
     }
-
-  // CSV出力
-public function getCommentCsv($thread_id){
-  $stmt = $this->db->prepare("SELECT comment_num,username,content,comment,created FROM (threads INNER JOIN comments on threads.id = comments.thread_id) INNER JOIN  users ON comments.user_id = users.id WHERE threads.id =:thread_id AND comments.delflag = 0 ORDER BY comment_num ASC;");
-  $stmt->execute([':thread_id' => $thread_id]);
-  return $stmt->fetchAll(\PDO::FETCH_ASSOC);
-}
 
 // コメント取得
 public function getComment($thread_id){
@@ -110,51 +95,6 @@ public function createComment($values) {
     $this->db->commit();
   } catch (\Exception $e) {
     echo $e->getMessage();
-    $this->db->rollBack();
-  }
-}
-
-public function changeFavorite($values) {
-  try {
-    $this->db->beginTransaction();
-    // レコード取得
-    // ログインしているユーザーがお気に入り登録しているのかしていないのか確認(ここしないと削除するのか登録するのかがわからなくなる)
-    $stmt = $this->db->prepare("SELECT * FROM favorites WHERE thread_id = :thread_id AND user_id = :user_id");
-    $stmt->execute([
-      ':thread_id' => $values['thread_id'],
-      ':user_id' => $values['user_id']
-    ]);
-    $stmt->setFetchMode(\PDO::FETCH_CLASS, 'stdClass');
-    // SELECT文の結果
-    $rec = $stmt->fetch();
-    // お気に入り登録する前は$fav_flagは0
-    $fav_flag = 0;
-    // 結果が空だったらのとき＝お気に入り登録する
-    if (empty($rec)) {
-      $sql = "INSERT INTO favorites (thread_id,user_id,created) VALUES (:thread_id,:user_id,now())";
-      $stmt = $this->db->prepare($sql);
-      $stmt->execute([
-        ':thread_id' => $values['thread_id'],
-        ':user_id' => $values['user_id']
-      ]);
-      // お気に入り登録し後は$fav_flagは1
-      $fav_flag = 1;
-      // 結果が空ではなかったら
-    } else {
-      // お気に入りから削除
-      $sql = "DELETE FROM favorites WHERE thread_id = :thread_id AND user_id = :user_id";
-      $stmt = $this->db->prepare($sql);
-      $res = $stmt->execute([
-        ':thread_id' => $values['thread_id'],
-        ':user_id' => $values['user_id']
-      ]);
-      $fav_flag = 0;
-    }
-    $this->db->commit();
-    return $fav_flag;
-  } catch (\Exception $e) {
-    echo $e->getMessage();
-    // エラーがあったら元に戻す
     $this->db->rollBack();
   }
 }

@@ -183,8 +183,12 @@ body {
   font-family: 'M PLUS Rounded 1c', sans-serif;
 }
 
+.text_btn {
+  display: flex;
+}
+
 .thread__text {
-  padding: 1rem 3rem 1rem;
+  padding: 1rem 3rem 3rem;
 }
 
 .thread__text p{
@@ -194,10 +198,25 @@ body {
   margin-top: 1rem;
 }
 
+.comment_btn {
+  width: 20%;
+  margin-left: 10rem;
+}
+
+.comment_btn img {
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.comment_btn img:hover {
+  opacity: 0.7;
+  filter: alpha(opacity=70);
+  -ms-filter: "alpha(opacity=70)";
+}
+
 .thread__date {
   font-size: 15px;
   text-align: right;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
 }
 
 .thread__item .form-group input[type="submit"] {
@@ -263,12 +282,6 @@ body {
 
 .comment-complete p {
   margin-bottom: 20px;
-}
-
-.coment_btn {
-  width: 25%;
-  position: relative;
-  left: 25%;
 }
 
 .fs12 {
@@ -346,4 +359,8 @@ input[type="file"]{
 
 .file-img p{
   margin-bottom: initial;
+}
+
+.thread .hidden {
+  display: none;
 }
