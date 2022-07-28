@@ -99,13 +99,28 @@ public function createComment($values) {
   }
 }
 
-// スレッド名検索
-public function searchThread($keyword) {
-  // LIKE演算子のところは:title = %ラーメン% 検索されたキーワードが入る
-  $stmt = $this->db->prepare("SELECT * FROM threads WHERE title LIKE :title AND delflag = 0;");
-  // ':title' => '%'.$keyword.'%'= タイトルに〇〇を含むという意味
-  $stmt->execute([':title' => '%'.$keyword.'%']);
-  return $stmt->fetchAll(\PDO::FETCH_OBJ);
+// 検索
+public function searchThread() {
+  $area = $_POST['area'];
+
+//DBに繋いで生成する場合の独自コードの一例
+// $sql = "SELECT DISTINCT address FROM threads WHERE title = {$area}";
+// $stmt = $dbh->query($sql);
+// $stmt = $this->db->prepare($sql);
+// $stmt->execute();
+// $res = $stmt->fetch(\PDO::FETCH_OBJ);
+// while($row = mysql_fetch_assoc($rst)){
+    // $html .= '<option value="'.$row['name'].'</option>';
+// }
+
+//▼これで返り値を渡す
+// header('Content-Type: application/json; charset=utf-8');
+// echo json_encode($html);
+  // // LIKE演算子のところは:title = %ラーメン% 検索されたキーワードが入る
+  // $stmt = $this->db->prepare("SELECT * FROM threads WHERE title LIKE :title AND delflag = 0;");
+  // // ':title' => '%'.$keyword.'%'= タイトルに〇〇を含むという意味
+  // $stmt->execute([':title' => '%'.$keyword.'%']);
+  // return $stmt->fetchAll(\PDO::FETCH_OBJ);
 }
 
 // ログインしている人の情報をマイページのフォームに反映させる
