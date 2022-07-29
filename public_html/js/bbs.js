@@ -79,21 +79,33 @@ $(function () {
   //         alert("error"); //通信失敗時
   //     });
   // });
-
-        $('[name="area"]').change(function() {
-          // 選択されているvalue属性値を取り出す
-          var val = $('[name="area"]').val();
-          console.log(val);
+      $(function(){
+       //selectタグ（親） が変更された場合
+        $('[name="address"]').on('change', function(){
+          // 選択されているタイトルのvalue属性値を取り出す
+          var title_val = $('[name="title"]').val()
+          // 選択されている都道府県のvalue属性値を取り出す
+          var address_val = $(this).val();
           $.ajax({
-            url: '/apply/public_html/ajax.php', //データベースを繋げるファイル
-            type:"POST",
-            data:{
-              area: $(this).val(),
+            url: "ajax.php",
+            type: "POST",
+            dataType: 'json',
+            data: {
+              'title': title_val,
+              'address':address_val,
             }
-          }).done(function(html){
-                $('[name="area47"]').append(html);
-            }).fail(function(html) {
-                alert("error"); //通信失敗時
-            });
+          })
+          }).done(function(data){
+            //selectタグ（子） の option値 を一旦削除
+            // $('.address option').remove();
+            //select.php から戻って来た data の値をそれそれ optionタグ として生成し、
+            // .address に optionタグ を追加する
+            // $.each(data, function(id, name){
+            //   $('.address').append($('<option>').text(name).attr('value', id));
+            // });
+          })
+          .fail(function(){
+            console.log("失敗");
+          });
       });
   });

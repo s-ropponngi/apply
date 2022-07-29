@@ -100,28 +100,25 @@ public function createComment($values) {
 }
 
 // 検索
+//Ajaxで渡ってきた値をもとに threadsテーブル から該当する model を抽出
 public function searchThread() {
-  $area = $_POST['area'];
+    $title_name = $_POST['title_id'];
+    $sql = 'SELECT * FROM threads WHERE title = :title_id';
+    $stmt=$pdo->prepare($sql);
+    $stmt->bindValue(':title_id',(int)$title_name, PDO::PARAM_INT);
+    $stmt->execute();
 
-//DBに繋いで生成する場合の独自コードの一例
-// $sql = "SELECT DISTINCT address FROM threads WHERE title = {$area}";
-// $stmt = $dbh->query($sql);
-// $stmt = $this->db->prepare($sql);
-// $stmt->execute();
-// $res = $stmt->fetch(\PDO::FETCH_OBJ);
-// while($row = mysql_fetch_assoc($rst)){
-    // $html .= '<option value="'.$row['name'].'</option>';
-// }
+    //抽出された値を $model_list配列 に格納
+    $title_list = array();
+    while($row = $stmt -> fetch(PDO::FETCH_ASSOC)){
+      $title_list[$row['id']] = $row['title_name'];
+    }
+    header('Content-Type: application/json');
+    //json形式で index.php へバックする
+    echo json_encode($title_list);
 
-//▼これで返り値を渡す
-// header('Content-Type: application/json; charset=utf-8');
-// echo json_encode($html);
-  // // LIKE演算子のところは:title = %ラーメン% 検索されたキーワードが入る
-  // $stmt = $this->db->prepare("SELECT * FROM threads WHERE title LIKE :title AND delflag = 0;");
-  // // ':title' => '%'.$keyword.'%'= タイトルに〇〇を含むという意味
-  // $stmt->execute([':title' => '%'.$keyword.'%']);
-  // return $stmt->fetchAll(\PDO::FETCH_OBJ);
-}
+  }
+
 
 // ログインしている人の情報をマイページのフォームに反映させる
 public function find($id) {

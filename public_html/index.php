@@ -2,29 +2,25 @@
 require_once(__DIR__ .'/header.php');
 $threadMod = new Apply\Model\Thread();
 $threads = $threadMod->getThreadAll();
-$addresses = $threadMod->searchThread();
+$threads = $threadMod->searchThread()
 ?>
 
 <p>説明文</p>
 <h1 class="page__ttl">ホーム画面</h1>
 <div class="search-area">
   <form>
-    <select name="area">
+    <select class="title" name="title">
       <option value="">選択してください</option>
       <option value="保護しました">保護しました</option>
       <option value="探しています">探しています</option>
     </select>
-    <select select name="area47">
-    <option value="">都道府県</option>
-    <?php foreach($addresses as $address): ?>
-    <option><? h($address); ?></option>
-    <?php endforeach?>
+    <select class="address" name="address">
+      <option value="">都道府県</option>
+      <?php foreach($title_list as $key => $title_name){
+            echo '<option name="" value="'.$key.'">'.$title_name.'</option>';
+          }?>
     </select>
   </form>
-    <div class="search-result">
-        <div class="search-result__hit-num"></div>
-        <div class="thread__item__list"></div>
-    </div>
 </div>
 
 <ul class="thread">
