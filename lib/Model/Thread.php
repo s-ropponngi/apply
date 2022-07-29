@@ -101,23 +101,24 @@ public function createComment($values) {
 
 // 検索
 //Ajaxで渡ってきた値をもとに threadsテーブル から該当する model を抽出
-public function searchThread() {
-    $title_name = $_POST['title_id'];
-    $sql = 'SELECT * FROM threads WHERE title = :title_id';
-    $stmt=$pdo->prepare($sql);
-    $stmt->bindValue(':title_id',(int)$title_name, PDO::PARAM_INT);
-    $stmt->execute();
-
-    //抽出された値を $model_list配列 に格納
-    $title_list = array();
-    while($row = $stmt -> fetch(PDO::FETCH_ASSOC)){
-      $title_list[$row['id']] = $row['title_name'];
-    }
-    header('Content-Type: application/json');
-    //json形式で index.php へバックする
-    echo json_encode($title_list);
-
-  }
+public function searchThread($values) {
+   $this->db->beginTransaction();
+    $stmt = "SELECT * FROM threads WHERE title = :title_id AND address = :address_id";
+    $stmt->execute([
+      ':title_id' => $values['title'],
+      ':address_id' => $values['address']
+    ]);
+    $stmt->setFetchMode(\PDO::FETCH_CLASS, 'stdClass');
+    $rec = $stmt->fetch();
+    if (empty($rec)) {
+      $sql = "SELECT DISTINCT 'address' FROM threads";
+      $stmt = $this->db->prepare($sql);
+      $stmt->execute([
+        ':title_id' => $values['title'],
+        ':address_id' => $values['address']
+          ]);
+        }
+      }
 
 
 // ログインしている人の情報をマイページのフォームに反映させる

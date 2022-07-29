@@ -5,9 +5,9 @@ $threadApp = new \Apply\Model\Thread();
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
   try {
-    $res = $threadApp->changeFavorite([
-      'thread_id' => $_POST['thread_id'],
-      'user_id' => $_POST['user_id']
+    $res = $threadApp->searchThread([
+      'title' => $_POST['title'],
+      'address' => $_POST['address']
     ]);
     header('Content-Type: application/json');
     echo json_encode($res);
@@ -16,3 +16,4 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo $e->getMessage();
   }
 }
+
