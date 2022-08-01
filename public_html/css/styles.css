@@ -183,8 +183,12 @@ body {
   font-family: 'M PLUS Rounded 1c', sans-serif;
 }
 
+.text_btn {
+  display: flex;
+}
+
 .thread__text {
-  padding: 1rem 3rem 1rem;
+  padding: 1rem 3rem 3rem;
 }
 
 .thread__text p{
@@ -194,10 +198,25 @@ body {
   margin-top: 1rem;
 }
 
+.comment_btn {
+  width: 20%;
+  margin-left: 10rem;
+}
+
+.comment_btn img {
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.comment_btn img:hover {
+  opacity: 0.7;
+  filter: alpha(opacity=70);
+  -ms-filter: "alpha(opacity=70)";
+}
+
 .thread__date {
   font-size: 15px;
   text-align: right;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
 }
 
 .thread__item .form-group input[type="submit"] {
@@ -232,7 +251,21 @@ body {
 }
 
 .new_thread label {
-  margin-bottom: 5px;
+  margin: 10px;
+}
+
+input[type="file"]{
+  display: none;
+}
+
+.file-img {
+  color: #AAAAAA; /* ラベルテキストの色を指定する */
+  background-color: #006DD9;/* ラベルの背景色を指定する */
+  padding: 10px; /* ラベルとテキスト間の余白を指定する */
+}
+
+.file-img p{
+  margin-bottom: initial;
 }
 
 .new_thread input {
@@ -263,12 +296,6 @@ body {
 
 .comment-complete p {
   margin-bottom: 20px;
-}
-
-.coment_btn {
-  width: 25%;
-  position: relative;
-  left: 25%;
 }
 
 .fs12 {
@@ -333,17 +360,13 @@ body {
 
 /* スレッド詳細 */
 
-input[type="file"]{
+
+
+.thread .hidden {
   display: none;
 }
 
-.file-img {
-  color: #AAAAAA; /* ラベルテキストの色を指定する */
-  background-color: #006DD9;/* ラベルの背景色を指定する */
-  padding: 10px; /* ラベルとテキスト間の余白を指定する */
-  border: double 4px #AAAAAA;/* ラベルのボーダーを指定する */
-}
 
-.file-img p{
-  margin-bottom: initial;
+.display{
+  display: none;
 }
