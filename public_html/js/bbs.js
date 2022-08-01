@@ -21,7 +21,7 @@ $(function () {
   });
 
   // タイトル色付け
-  $('.thread').find('.thread__ttl').each( function( index, element ) {
+  $('.thread__head').find('.thread__ttl').each( function( index, element ) {
     if ($.trim(element.textContent) == '探しています') {
         $(this).css('background-color','#C2DEE3')
       } else if($.trim(element.textContent) == '保護しました') {
@@ -29,14 +29,6 @@ $(function () {
       }
   });
 
-  // 検索タイトル名変更
-  $('.thread').find('.thread__ttl').each( function( index, element ) {
-    if ($.trim(element.textContent) == '探しています') {
-        $(this).css('background-color','#C2DEE3')
-      } else if($.trim(element.textContent) == '保護しました') {
-        $(this).css('background-color','#F4C7AB')
-      }
-  });
 
   // 検索機能
     // searchWord = function(){
@@ -106,6 +98,24 @@ $(function () {
       },
       success: function (data) {
         console.log(data);
+        $.each(data,function(index) {
+          $('#thread').append($('.thread__brock').html());
+
+          $('.thread__brock').find('.main-image').each( function( index, element ) {
+            $(element).attr('src','./gazou/' + data[index]['image']);
+          });
+
+          $('.thread__brock').find('.main-image').each( function( index, element ) {
+            $(element).attr('src','./gazou/' + data[index]['image']);
+          });
+
+          // $('#thread .main-image').attr('src','./gazou/' + data[index]['image']);
+          $('#thread .thread__ttl').text(data[index]['title']);
+          $('#thread .address__text').text(data[index]['address']);
+          $('#thread .due_date__text').text(data[index]['due_date']);
+          $('#thread .comment__text').text(data[index]['comment']);
+          $('#thread .thread__date').text(data[index]['created']);
+        });
       }
     });
   });

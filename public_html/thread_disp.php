@@ -11,27 +11,20 @@ $threadDisp = $threadMod->getThread($thread_id);
 ?>
 <h1 class="page__ttl">スレッド詳細</h1>
 <div class="thread">
-  <div class="thread__item">
-    <div class="thread__head">
-      <h2 class="thread__ttl">
-        <!-- getThreadの戻り値がタイトル部分になる -->
-        <?= h($threadDisp->title); ?>
-      </h2>
-      <form id="csvoutput" method="post" action="thread_csv.php">
-        <button class="btn btn-primary" onclick="document.getElementById('csvoutput').submit();">CSV出力</button>
-        <input type="hidden" name="thread_id" value="<?= h($thread_id); ?>">
-        <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
-        <input type="hidden" name="type" value="outputcsv">
-      </form>
-    </div>
     <ul class="thread__body">
-    <li class="thread__item" data-threadid="<?= $thread->t_id; ?>">
-      <div class="thread__head">
-        <img src="<?= './gazou/'.h($threadDisp->image); ?>">
-        <p><?= h($threadDisp->address); ?></p>
-        <p><?= h($threadDisp->due_date); ?></p>
-        <p><?= h($threadDisp->comment); ?></p>
-      </div>
+      <div class="thread__item">
+        <li data-threadid="<?= $thread->t_id; ?>">
+          <div class="thread__head">
+            <img src="<?= './gazou/'.h($threadDisp->image); ?>">
+            <h2 class="thread__ttl">
+              <?= h($threadDisp->title); ?>
+            </h2>
+            <div class="thread__text">
+              <p><?= h($threadDisp->address); ?></p>
+              <p><?= h($threadDisp->due_date); ?></p>
+              <p><?= h($threadDisp->comment); ?></p>
+            </div>
+          </div>
     <?php
       $comments = $threadMod->getCommentAll($threadDisp->id);
       // getCommentAllの戻り値でコメント数分処理を行っている
@@ -46,7 +39,6 @@ $threadDisp = $threadMod->getThread($thread_id);
         <p class="comment__item__content"><?= h($comment->content); ?></p>
     <?php endforeach; ?>
       </li>
-    </ul>
     <form action="" method="post" class="form-group">
       <div class="form-group">
         <label>コメント</label>
@@ -61,6 +53,7 @@ $threadDisp = $threadMod->getThread($thread_id);
       <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
     </form>
     <p class="comment-page thread__date">スレッド作成日時：<?= h($threadDisp->created); ?></p>
-  </div>
+      </div>
+      </ul>
 </div><!-- thread -->
 <?php require_once(__DIR__ .'/footer.php'); ?>

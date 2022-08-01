@@ -103,13 +103,17 @@ public function createComment($values) {
 //Ajaxで渡ってきた値をもとに threadsテーブル から該当する model を抽出
 public function searchThread($values) {
    $this->db->beginTransaction();
-    $stmt = "SELECT * FROM threads WHERE title = :title_id AND address = :address_id";
+    $stmt = $this->db->prepare("SELECT * FROM threads WHERE title = :title_id AND address = :address_id");
     $stmt->execute([
       ':title_id' => $values['title'],
       ':address_id' => $values['address']
     ]);
     $stmt->setFetchMode(\PDO::FETCH_CLASS, 'stdClass');
-    $rec = $stmt->fetch();
+    $rec = $stmt->fetchAll();
+    return $rec;
+
+
+
     if (empty($rec)) {
       $sql = "SELECT DISTINCT 'address' FROM threads";
       $stmt = $this->db->prepare($sql);
