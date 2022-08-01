@@ -105,16 +105,32 @@ $(function () {
             $(element).attr('src','./gazou/' + data[index]['image']);
           });
 
-          $('.thread__brock').find('.main-image').each( function( index, element ) {
-            $(element).attr('src','./gazou/' + data[index]['image']);
+          $('.thread__brock').find('.thread__ttl').each( function( index, element ) {
+            $(element).text(data[index]['title']);
+          });
+
+          $('.thread__brock').find('.address__text').each( function( index, element ) {
+            $(element).text(data[index]['address']);
+          });
+
+          $('.thread__brock').find('.due_date__text').each( function( index, element ) {
+            $(element).text(data[index]['due_date']);
+          });
+
+          $('.thread__brock').find('.comment__text').each( function( index, element ) {
+            $(element).text(data[index]['comment']);
+          });
+
+          $('.thread__brock').find('.thread__date').each( function( index, element ) {
+            $(element).text(data[index]['created']);
           });
 
           // $('#thread .main-image').attr('src','./gazou/' + data[index]['image']);
-          $('#thread .thread__ttl').text(data[index]['title']);
-          $('#thread .address__text').text(data[index]['address']);
-          $('#thread .due_date__text').text(data[index]['due_date']);
-          $('#thread .comment__text').text(data[index]['comment']);
-          $('#thread .thread__date').text(data[index]['created']);
+          // $('#thread .thread__ttl').text(data[index]['title']);
+          // $('#thread .address__text').text(data[index]['address']);
+          // $('#thread .due_date__text').text(data[index]['due_date']);
+          // $('#thread .comment__text').text(data[index]['comment']);
+          // $('#thread .thread__date').text(data[index]['created']);
         });
       }
     });
