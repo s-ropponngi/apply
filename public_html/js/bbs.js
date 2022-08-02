@@ -80,8 +80,14 @@ $(function () {
   //         alert("error"); //通信失敗時
   //     });
   // });
+
   //selectタグ（親） が変更された場合
   $('[name="address"]').on('change', function(){
+    if ($('.btn1').hasClass('noactive')) {
+      $('.btn1').removeClass('noactive');
+      } else {
+      $('.btn1').addClass('noactive');
+      }
 
     var origin = location.origin;
 
@@ -97,33 +103,43 @@ $(function () {
         'address':address_val,
       },
       success: function (data) {
-        console.log(data);
-        $.each(data,function(index) {
-          $('#thread').append($('.thread__brock').html());
+        console.log($('.thread__item').prop("outerHTML"));
+        if(hasClass($('.thread__item'))){
+          $elm = $('.thread__item:first');
+        }
+        $('.thread__item').remove();
 
-          $('.thread__brock').find('.main-image').each( function( index, element ) {
+        $.each(data,function(index) {
+
+          $('#thread').append($elm).prop("outerHTML");
+
+          $('.thread__item').find('.main-image').each( function( index, element ) {
             $(element).attr('src','./gazou/' + data[index]['image']);
           });
 
-          $('.thread__brock').find('.thread__ttl').each( function( index, element ) {
+          $('.thread__item').find('.thread__ttl').each( function( index, element ) {
             $(element).text(data[index]['title']);
           });
 
-          $('.thread__brock').find('.address__text').each( function( index, element ) {
+          $('.thread__item').find('.address__text').each( function( index, element ) {
             $(element).text(data[index]['address']);
           });
 
-          $('.thread__brock').find('.due_date__text').each( function( index, element ) {
+          $('.thread__item').find('.due_date__text').each( function( index, element ) {
             $(element).text(data[index]['due_date']);
           });
 
-          $('.thread__brock').find('.comment__text').each( function( index, element ) {
+          $('.thread__item').find('.comment__text').each( function( index, element ) {
             $(element).text(data[index]['comment']);
           });
 
-          $('.thread__brock').find('.thread__date').each( function( index, element ) {
+          $('.thread__item').find('.thread__date').each( function( index, element ) {
             $(element).text(data[index]['created']);
           });
+
+          // $(function(){
+          //   $('.thread__item:first').remove();
+          // });
 
           // $('#thread .main-image').attr('src','./gazou/' + data[index]['image']);
           // $('#thread .thread__ttl').text(data[index]['title']);

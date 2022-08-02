@@ -114,15 +114,25 @@ public function searchThread($values) {
 
 
 
-    if (empty($rec)) {
-      $sql = "SELECT DISTINCT 'address' FROM threads";
-      $stmt = $this->db->prepare($sql);
-      $stmt->execute([
-        ':title_id' => $values['title'],
-        ':address_id' => $values['address']
-          ]);
-        }
+    // if (empty($rec)) {
+    //   $sql = "SELECT DISTINCT 'address' FROM threads";
+    //   $stmt = $this->db->prepare($sql);
+    //   $stmt->execute([
+    //     ':title_id' => $values['title'],
+    //     ':address_id' => $values['address']
+    //       ]);
+    //     }
       }
+
+      // public function threadAll($values) {
+      //   $this->db->beginTransaction();
+      //    $stmt = $this->db->prepare("SELECT * FROM `threads` WHERE 1");
+      //    $stmt->setFetchMode(\PDO::FETCH_CLASS, 'stdClass');
+      //    $rec = $stmt->fetchAll();
+      //    return $rec;
+      //   }
+
+
 
 
 // ログインしている人の情報をマイページのフォームに反映させる

@@ -69,7 +69,6 @@ $threads = $threadMod->getThreadAll();
 
 <ul id="thread" class="thread">
   <!-- <li class="thread__item" data-threadid="<?= $thread->t_id; ?>"> -->
-  <div class="thread__brock">
     <li class="thread__item">
       <div class="thread__head">
         <img class="main-image">
@@ -85,13 +84,12 @@ $threads = $threadMod->getThreadAll();
           <p>発見日：<?= h($thread->due_date); ?></p>
           <p>特徴：<?= h($thread->comment); ?></p> -->
           </div>
-          <a class="comment_btn" href="<?= SITE_URL; ?>/thread_disp.php?thread_id=<?= $thread->t_id; ?>"><img src="<?= SITE_URL; ?>/asset/img/click_btn.png"></a>
+          <!-- <a class="comment_btn" href="<?= SITE_URL; ?>/thread_disp.php?thread_id=<?= $thread->t_id; ?>"><img src="<?= SITE_URL; ?>/asset/img/click_btn.png"></a> -->
         </div>
       </div>
       <p class="thread__date"></p>
     <!-- <p class="thread__date">スレッド作成日時：<?= h($thread->created); ?></p> -->
     </li>
-  </div>
 </ul><!-- thread -->
 
 
