@@ -102,55 +102,55 @@ public function createComment($values) {
 // 検索
 //Ajaxで渡ってきた値をもとに threadsテーブル から該当する model を抽出
 public function searchThread($values) {
-   $this->db->beginTransaction();
-    $stmt = $this->db->prepare("SELECT * FROM threads WHERE title = :title_id AND address = :address_id");
-    $stmt->execute([
-      ':title_id' => $values['title'],
-      ':address_id' => $values['address']
-    ]);
-    $stmt->setFetchMode(\PDO::FETCH_CLASS, 'stdClass');
-    $rec = $stmt->fetchAll();
-    return $rec;
+  $this->db->beginTransaction();
+   $stmt = $this->db->prepare("SELECT * FROM threads WHERE title = :title_id AND address = :address_id");
+   $stmt->execute([
+     ':title_id' => $values['title'],
+     ':address_id' => $values['address']
+   ]);
+   $stmt->setFetchMode(\PDO::FETCH_CLASS, 'stdClass');
+   $rec = $stmt->fetchAll();
+   return $rec;
 
 
 
-    // if (empty($rec)) {
-    //   $sql = "SELECT DISTINCT 'address' FROM threads";
-    //   $stmt = $this->db->prepare($sql);
-    //   $stmt->execute([
-    //     ':title_id' => $values['title'],
-    //     ':address_id' => $values['address']
-    //       ]);
-    //     }
-      }
+   // if (empty($rec)) {
+   //   $sql = "SELECT DISTINCT 'address' FROM threads";
+   //   $stmt = $this->db->prepare($sql);
+   //   $stmt->execute([
+   //     ':title_id' => $values['title'],
+   //     ':address_id' => $values['address']
+   //       ]);
+   //     }
+     }
 
-      // public function threadAll($values) {
-      //   $this->db->beginTransaction();
-      //    $stmt = $this->db->prepare("SELECT * FROM `threads` WHERE 1");
-      //    $stmt->setFetchMode(\PDO::FETCH_CLASS, 'stdClass');
-      //    $rec = $stmt->fetchAll();
-      //    return $rec;
-      //   }
+     // public function threadAll($values) {
+     //   $this->db->beginTransaction();
+     //    $stmt = $this->db->prepare("SELECT * FROM `threads` WHERE 1");
+     //    $stmt->setFetchMode(\PDO::FETCH_CLASS, 'stdClass');
+     //    $rec = $stmt->fetchAll();
+     //    return $rec;
+     //   }
 
 
 
 
 // ログインしている人の情報をマイページのフォームに反映させる
 public function find($id) {
-  $stmt = $this->db->prepare("SELECT * FROM users WHERE id = :id;");
-  $stmt->bindValue('id',$id);
-  $stmt->execute();
-  $stmt->setFetchMode(\PDO::FETCH_CLASS, 'stdClass');
-  $user = $stmt->fetch();
-  return $user;
+ $stmt = $this->db->prepare("SELECT * FROM users WHERE id = :id;");
+ $stmt->bindValue('id',$id);
+ $stmt->execute();
+ $stmt->setFetchMode(\PDO::FETCH_CLASS, 'stdClass');
+ $user = $stmt->fetch();
+ return $user;
 }
 
 public function update($values) {
-  $stmt = $this->db->prepare("UPDATE threads SET image = :image where id = :id");
-  $stmt->execute([
-    ':image' => $values['image'],
-    ':id' => $_SESSION['me']->id,
-  ]);
+ $stmt = $this->db->prepare("UPDATE threads SET image = :image where id = :id");
+ $stmt->execute([
+   ':image' => $values['image'],
+   ':id' => $_SESSION['me']->id,
+ ]);
 }
 
 }

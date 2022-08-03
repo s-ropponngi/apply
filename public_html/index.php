@@ -2,7 +2,6 @@
 require_once(__DIR__ .'/header.php');
 $threadMod = new Apply\Model\Thread();
 $threads = $threadMod->getThreadAll();
-// $threads = $threadMod->searchThread()
 ?>
 
 <p>説明文</p>
@@ -68,28 +67,6 @@ $threads = $threadMod->getThreadAll();
 </div>
 
 <ul id="thread" class="thread">
-  <!-- <li class="thread__item" data-threadid="<?= $thread->t_id; ?>"> -->
-    <li class="thread__item">
-      <div class="thread__head">
-        <img class="main-image">
-        <h2 class="thread__ttl">
-          <!-- <?= h($thread->title); ?> -->
-        </h2>
-        <div class="operation">
-          <div class="thread__text">
-            <p class="address__text"></p>
-            <p class="due_date__text"></p>
-            <p class="comment__text"></p>
-          <!-- <p>都道府県：<?= h($thread->address); ?></p>
-          <p>発見日：<?= h($thread->due_date); ?></p>
-          <p>特徴：<?= h($thread->comment); ?></p> -->
-          </div>
-          <!-- <a class="comment_btn" href="<?= SITE_URL; ?>/thread_disp.php?thread_id=<?= $thread->t_id; ?>"><img src="<?= SITE_URL; ?>/asset/img/click_btn.png"></a> -->
-        </div>
-      </div>
-      <p class="thread__date"></p>
-    <!-- <p class="thread__date">スレッド作成日時：<?= h($thread->created); ?></p> -->
-    </li>
 </ul><!-- thread -->
 
 

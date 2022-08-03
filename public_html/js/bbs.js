@@ -21,8 +21,8 @@ $(function () {
   });
 
   // タイトル色付け
-  $('.thread__head').find('.thread__ttl').each( function( index, element ) {
-    if ($.trim(element.textContent) == '探しています') {
+  $('.thread__item').find('.thread__ttlarea').each( function( index, element ) {
+        if ($.trim(element.textContent) == '探しています') {
         $(this).css('background-color','#C2DEE3')
       } else if($.trim(element.textContent) == '保護しました') {
         $(this).css('background-color','#F4C7AB')
@@ -83,11 +83,6 @@ $(function () {
 
   //selectタグ（親） が変更された場合
   $('[name="address"]').on('change', function(){
-    if ($('.btn1').hasClass('noactive')) {
-      $('.btn1').removeClass('noactive');
-      } else {
-      $('.btn1').addClass('noactive');
-      }
 
     var origin = location.origin;
 
@@ -103,50 +98,66 @@ $(function () {
         'address':address_val,
       },
       success: function (data) {
-        console.log($('.thread__item').prop("outerHTML"));
-        if(hasClass($('.thread__item'))){
-          $elm = $('.thread__item:first');
-        }
-        $('.thread__item').remove();
-
+        var $thread = $('#thread');
+        $('#thread').children().remove();
         $.each(data,function(index) {
 
-          $('#thread').append($elm).prop("outerHTML");
+          $thread.append('<li id="thread__block' + index + '" class="thread__block"></li>');
 
-          $('.thread__item').find('.main-image').each( function( index, element ) {
+          $('#thread__block' + index).append('<div id="thread__item' + index + '" class="thread__item"></div>');
+
+          $('#thread__item' + index).append('<div id="thread__imgarea' + index + '" class="thread__imgarea"></div>');
+
+          $('#thread__imgarea' + index).append('<img id="thread__img' + index + '" class="thread__img">');
+
+          $('#thread__imgarea' + index).after('<div id="thread__ttlarea' + index + '" class="thread__ttlarea"></div>');
+
+          $('#thread__ttlarea' + index).append('<h2 id="thread__ttl' + index + '" class="thread__ttl"></h2>');
+
+          $('#thread__ttlarea' + index).after('<div id="operation' + index + '" class="operation"></div>');
+
+          $('#operation' + index).append('<div id="thread__text' + index + '" class="thread__text"></div>');
+
+          $('#thread__text' + index).append('<p id="thread__address' + index + '" class="thread__address"></p>');
+
+          $('#thread__address' + index).after('<p id="thread__due_date' + index + '" class="thread__due_date"></p>');
+
+          $('#thread__due_date' + index).after('<p id="thread__comment' + index + '" class="thread__comment"></p>');
+
+          $('#thread__text' + index).after('<a id="comment_btn' + index + '" class="comment_btn"></a>');
+
+          // $('#comment_btn' + index).after('<img id="comment__btnimg' + index + '" class="comment__btnimg" src="../asset/img/click_btn.png">');
+
+          $('#operation' + index).after('<div id="thread__datearea' + index + '" class="thread__datearea"></div>');
+
+          $('#comment_datearea' + index).append('<p id="thread__date' + index + '" class="thread__date"></p>');
+
+
+
+
+          $('#thread__item' + index).find('.thread__img').each( function( key, element ) {
             $(element).attr('src','./gazou/' + data[index]['image']);
           });
 
-          $('.thread__item').find('.thread__ttl').each( function( index, element ) {
+          $('#thread__item' + index).find('.thread__ttl').each( function( key, element ) {
             $(element).text(data[index]['title']);
           });
 
-          $('.thread__item').find('.address__text').each( function( index, element ) {
+          $('#thread__item' + index).find('.thread__address').each( function( key, element ) {
             $(element).text(data[index]['address']);
           });
 
-          $('.thread__item').find('.due_date__text').each( function( index, element ) {
+          $('#thread__item' + index).find('.thread__due_date').each( function( key, element ) {
             $(element).text(data[index]['due_date']);
           });
 
-          $('.thread__item').find('.comment__text').each( function( index, element ) {
+          $('#thread__item' + index).find('.thread__comment').each( function( key, element ) {
             $(element).text(data[index]['comment']);
           });
 
-          $('.thread__item').find('.thread__date').each( function( index, element ) {
+          $('#thread__item' + index).find('.thread__date').each( function( key, element ) {
             $(element).text(data[index]['created']);
           });
-
-          // $(function(){
-          //   $('.thread__item:first').remove();
-          // });
-
-          // $('#thread .main-image').attr('src','./gazou/' + data[index]['image']);
-          // $('#thread .thread__ttl').text(data[index]['title']);
-          // $('#thread .address__text').text(data[index]['address']);
-          // $('#thread .due_date__text').text(data[index]['due_date']);
-          // $('#thread .comment__text').text(data[index]['comment']);
-          // $('#thread .thread__date').text(data[index]['created']);
         });
       }
     });

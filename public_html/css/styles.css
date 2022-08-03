@@ -33,7 +33,7 @@ li{
 
 img {
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -137,46 +137,57 @@ body {
   color: #323232;
 }
 
+.thread__block {
+  width: 100%;
+  padding:6rem 8rem;
+  color: #770000;/* 文字色 */
+  background-image: url(../asset/img/kanban.png);
+  background-size: 100% 150%;
+  background-repeat: no-repeat;
+  /* background-color: #e8ddbd; /*枠背景色*/
+  /* box-shadow: inset 0 0 40px rgba(204, 186, 136,1), 0 2px 2px #ccc; */
+}
+
+/* .thread__item .comment-page.thread__date {
+  text-align: right;
+} */
 .thread__item {
   position: relative;
-  width: 90%;
-  margin: 2.5rem auto;
-  padding: 6rem 6rem;
-  color: #770000;/* 文字色 */
-  background-color: #e8ddbd; /*枠背景色*/
-  box-shadow: inset 0 0 40px rgba(204, 186, 136,1), 0 2px 2px #ccc;
+  background-color: #fff;
 }
 
 .thread__item::before {
   display: block;
   position: absolute;
+  z-index: 1;
   content: "";
   width: 140px;
   height: 35px;
   left: 35%;
   top: -16px;
-  background-color: rgba(204, 186, 136,0.3);/*テープ色*/
+  background-color: rgba(252, 248, 248, 0.5);/*テープ色*/
   box-shadow: 0 0 3px rgba(0,0,0,0.1);
   transform: rotate( -3deg ); /*テープ角度*/
  }
 
-.thread__item .comment-page.thread__date {
-  text-align: right;
+.thread__imgarea {
+  position: relative;
 }
 
-.thread__head {
-  display:block;
-  background-color: #fff;
-  align-items: center;
-  justify-content: space-between;
+.thread__imgarea::before{
+  content: "";
+  display: block;
+  padding-top: calc((300 / 500) * 100%);
 }
 
-.thread__head img {
-  width: 100%;
-  height: 50%;
+.thread__imgarea img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
 }
 
-.thread__ttl {
+.thread__ttlarea {
   font-size: 30px;
   text-align: center;
   padding: 20px;
@@ -188,7 +199,7 @@ body {
 }
 
 .thread__text {
-  padding: 1rem 3rem 3rem;
+  padding: 1rem 3rem 0rem;
 }
 
 .thread__text p{
@@ -198,39 +209,39 @@ body {
   margin-top: 1rem;
 }
 
-.comment_btn {
-  width: 20%;
-  margin-left: 10rem;
+.comment__btn {
+  padding: 1rem 3rem;
+  width: 30%;
 }
 
-.comment_btn img {
+.comment__btn img {
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }
 
-.comment_btn img:hover {
+.comment__btn img:hover {
   opacity: 0.7;
   filter: alpha(opacity=70);
   -ms-filter: "alpha(opacity=70)";
 }
 
-.thread__date {
+.thread__datearea {
   font-size: 15px;
   text-align: right;
-  margin-top: 1rem;
+  padding: 1rem;
 }
 
-.thread__item .form-group input[type="submit"] {
+.form-group input[type="submit"] {
   margin-top: 30px;
   padding: 10px;
 }
 
-.thread__item .operation {
+.operation {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.thread__item .operation a {
+.operation a {
   font-size: 18px;
 }
 
