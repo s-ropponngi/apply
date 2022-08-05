@@ -5,14 +5,14 @@ $threadApp = new \Apply\Model\Thread();
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
   try {
-    /////////////////////////////////////
-    $res = $threadApp->searchThread([
-      'title' => $_POST['title'],
-      'address' => $_POST['address']
-    ]);
-    /////////////////////////////////////
-    // 全件表示のメソッド
-    /////////////////////////////////////
+    if($_POST['type'] == 'searchThread'){
+      $res = $threadApp->searchThread([
+        'title' => $_POST['title'],
+        'address' => $_POST['address']
+      ]);
+    }else{
+      $res = $threadApp->getThreadAll();
+    }
     header('Content-Type: application/json');
     echo json_encode($res);
   } catch (Exception $e) {

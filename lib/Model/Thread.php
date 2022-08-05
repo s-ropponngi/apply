@@ -28,14 +28,6 @@ class Thread extends \Apply\Model {
       $this->db->rollBack();
     }
   }
-    // 全スレッド取得
-    public function getThreadAll(){
-      // $user_id = $_SESSION['me']->id;
-      // $stmt = $this->db->query("SELECT t.id AS t_id,title,t.created,f.id AS f_id FROM threads AS t LEFT JOIN favorites AS f ON t.delflag = 0 AND t.id = f.thread_id  AND f.user_id = $user_id ORDER BY t.id desc");
-
-      $stmt = $this->db->query("SELECT id AS t_id,title,image,created,address,due_date,comment FROM threads WHERE delflag = 0 ORDER BY id desc");
-      return $stmt->fetchAll(\PDO::FETCH_OBJ);
-    }
 
 // コメント取得
 public function getComment($thread_id){
@@ -103,7 +95,7 @@ public function createComment($values) {
 //Ajaxで渡ってきた値をもとに threadsテーブル から該当する model を抽出
 public function searchThread($values) {
   $this->db->beginTransaction();
-   $stmt = $this->db->prepare("SELECT * FROM threads WHERE title = :title_id AND address = :address_id");
+   $stmt = $this->db->prepare("SELECT * FROM threads WHERE title = :title_id AND address = :address_id AND delflag = 0 ORDER BY id desc");
    $stmt->execute([
      ':title_id' => $values['title'],
      ':address_id' => $values['address']
@@ -111,6 +103,15 @@ public function searchThread($values) {
    $stmt->setFetchMode(\PDO::FETCH_CLASS, 'stdClass');
    $rec = $stmt->fetchAll();
    return $rec;
+  }
+
+// 全スレッド取得
+public function getThreadAll(){
+  $stmt = $this->db->query("SELECT * FROM threads WHERE delflag = 0 ORDER BY id desc");
+  $stmt->setFetchMode(\PDO::FETCH_CLASS, 'stdClass');
+  $rec = $stmt->fetchAll();
+  return $rec;
+}
 
 
 
@@ -122,18 +123,6 @@ public function searchThread($values) {
    //     ':address_id' => $values['address']
    //       ]);
    //     }
-     }
-
-     // public function threadAll($values) {
-     //   $this->db->beginTransaction();
-     //    $stmt = $this->db->prepare("SELECT * FROM `threads` WHERE 1");
-     //    $stmt->setFetchMode(\PDO::FETCH_CLASS, 'stdClass');
-     //    $rec = $stmt->fetchAll();
-     //    return $rec;
-     //   }
-
-
-
 
 // ログインしている人の情報をマイページのフォームに反映させる
 public function find($id) {
