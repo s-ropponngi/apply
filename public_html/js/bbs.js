@@ -153,9 +153,9 @@ $(function () {
 
           $('#thread__due_date' + index).after('<p id="thread__comment' + index + '" class="thread__comment"></p>');
 
-          $('#thread__text' + index).after('<a id="comment_btn' + index + '" class="comment_btn"></a>');
+          $('#thread__text' + index).after('<a id="comment__btn' + index + '" class="comment__btn"></a>');
 
-          $('#comment_btn' + index).append('<img id="comment__btnimg' + index + '" class="comment__btnimg" src="asset/img/click_btn.png">');
+          $('#comment__btn' + index).append('<img id="comment__btnimg' + index + '" class="comment__btnimg" src="asset/img/click_btn.png">');
 
           $('#operation' + index).after('<div id="thread__datearea' + index + '" class="thread__datearea"></div>');
 
@@ -186,6 +186,10 @@ $(function () {
 
           $('#thread__item' + index).find('.thread__date').each( function( key, element ) {
             $(element).text(data[index]['created']);
+          });
+
+          $('#thread__item' + index).find('.comment__btn').each( function( key, element ) {
+            $(element).attr('href','thread_disp.php?thread_id=' + data[index]['id']);
           });
 
           // タイトル色付け
