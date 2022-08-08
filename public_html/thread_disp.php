@@ -9,7 +9,7 @@ $threadMod = new Apply\Model\Thread();
 // $thread_idは$thread_id = $_GET['thread_id'];クエリパラメータで取得した値
 $threadDisp = $threadMod->getThread($thread_id);
 ?>
-<h1 class="page__ttl">スレッド詳細</h1>
+<h1 class="page__ttl"><img src="<?= SITE_URL; ?>/asset/img/info.png"></h1>
 <div class="thread__disp">
   <ul class="thread">
     <li class="thread__block" data-threadid="<?= $thread->t_id; ?>">
