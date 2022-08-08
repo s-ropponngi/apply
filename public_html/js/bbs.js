@@ -20,6 +20,15 @@ $(function () {
     reader.readAsDataURL(file);
   });
 
+  // タイトル色付け
+  $('.thread__item').find('.thread__ttlarea').each( function( index, element ) {
+    if ($.trim(element.textContent) == '探しています') {
+        $(this).css('background-color','#C2DEE3')
+      } else if($.trim(element.textContent) == '保護しました') {
+        $(this).css('background-color','#F4C7AB')
+      }
+  });
+
   // 全件取得
   $(document).ready(function(){
     var origin = location.origin;
@@ -62,9 +71,9 @@ $(function () {
 
           $('#thread__comment' + index).append('<span id="thread__comment-span' + index + '" class="thread__comment-span"></span>');
 
-          $('#thread__text' + index).after('<a id="comment_btn' + index + '" class="comment_btn" href="thread_disp.php/thread_id=35"></a>');
+          $('#thread__text' + index).after('<a id="comment__btn' + index + '" class="comment__btn" href="thread_disp.php/thread_id=35"></a>');
 
-          $('#comment_btn' + index).append('<img id="comment__btnimg' + index + '" class="comment__btnimg" src="asset/img/click_btn.png">');
+          $('#comment__btn' + index).append('<img id="comment__btnimg' + index + '" class="comment__btnimg" src="asset/img/click_btn.png">');
 
           $('#operation' + index).after('<div id="thread__datearea' + index + '" class="thread__datearea"></div>');
 
@@ -95,6 +104,10 @@ $(function () {
 
           $('#thread__item' + index).find('.thread__date').each( function( key, element ) {
             $(element).text(data[index]['created']);
+          });
+
+          $('#thread__item' + index).find('.comment__btn').each( function( key, element ) {
+            $(element).attr('href','thread_disp.php?thread_id=' + data[index]['id']);
           });
 
           if ($.trim($('#thread__ttlarea' + index).find('.thread__ttl').text()) == '探しています') {
@@ -191,15 +204,6 @@ $(function () {
           $('#thread__item' + index).find('.comment__btn').each( function( key, element ) {
             $(element).attr('href','thread_disp.php?thread_id=' + data[index]['id']);
           });
-
-          // タイトル色付け
-          // $('#thread__ttlarea' + index).find('.thread__ttl').each( function( key, element ) {
-          //   if ($.trim(element.textContent) == '探しています') {
-          //     $('#thread__ttlarea' + key).css('background-color','#C2DEE3')
-          //   } else if($.trim(element.textContent) == '保護しました') {
-          //     $('#thread__ttlarea' + key).css('background-color','#F4C7AB')
-          //   }
-          // });
 
           if ($.trim($('#thread__ttlarea' + index).find('.thread__ttl').text()) == '探しています') {
             $('#thread__ttlarea' + index).css('background-color','#C2DEE3')

@@ -4,8 +4,10 @@ $threadMod = new Apply\Model\Thread();
 $threads = $threadMod->getThreadAll();
 ?>
 
-<p>説明文</p>
-<h1 class="page__ttl">ホーム画面</h1>
+<div class="home">
+  <h1 class="ttl__home"><img src="<?= SITE_URL; ?>/asset/img/home.png"></h1>
+  <p class='letter'>少しでも迷子の子が少なくなりますように…<br>
+     皆さんのお力をお貸しください。<br></p>
 <div class="search-area">
   <form>
     <select class="title" name="title">
@@ -68,6 +70,8 @@ $threads = $threadMod->getThreadAll();
 
 <ul id="thread" class="thread">
 </ul><!-- thread -->
+
+</div>
 
 
 <?php

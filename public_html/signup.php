@@ -4,31 +4,28 @@ require_once(__DIR__ .'/header.php');
 $app = new Apply\Controller\Signup();
 $app->run();
 ?>
-<div class="container">
-<!-- formタグのmethod属性はpost(post送信) -->
-  <form action="" method="post" id="signup" class="form">
-    <div class="form-group">
-      <label>メールアドレス</label>
-      <!-- メールアドレスにエラーが起こってもエラーメッセージは出て入力したメールアドレスは消えない仕組み($app->getValues()->email ) -->
+<div class="container__dog">
+  <h1></h1>
+    <form action="" method="post" id="signup" class="form">
+      <div class="form-block">
+      <label for="email"></label>
       <input type="text" name="email" value="<?= isset
-      // getValuesはSignupクラスの親クラスのController.phpに書かれている
-      ($app->getValues()->email) ? h($app->getValues()->email): ''; ?>" class="form-control">
+      ($app->getValues()->email) ? h($app->getValues()->email): ''; ?>" placeholder="メールアドレス">
       <p class="err"><?= h($app->getErrors('email')); ?></p>
     </div>
-    <div class="form-group">
-      <label>ユーザー名</label>
-      <input type="text" name="username" value="<?= isset($app->getValues()->username) ? h($app->getValues()->username): ''; ?>" class="form-control">
+    <div class="form-block">
+      <label for="user"></label>
+      <input type="text" name="username" value="<?= isset($app->getValues()->username) ? h($app->getValues()->username): ''; ?>" placeholder="ニックネーム">
       <p class="err"><?= h($app->getErrors('username')); ?></p>
     </div>
-    <div class="form-group">
-      <label>パスワード</label>
-      <input type="password" name="password" class="form-control">
+    <div class="form-block">
+      <label for="password"></label>
+      <input type="password" name="password" placeholder="パスワード">
       <p class="err"><?= h($app->getErrors('password')); ?></p>
     </div>
-    <button class="btn btn-primary" onclick="document.getElementById('signup').submit();">登録</button>
-    <!-- type属性のhiddenに設定し、セッションに保存してある「token」の値を設定している。tokenと一緒にフォーム送信してきたら外部からのフォーム送信じゃないと判断できる。 -->
+    <div class="button" onclick="document.getElementById('signup').submit();"><img src="<?= SITE_URL; ?>/asset/img/sign-up.png"></div>
     <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
   </form>
-  <p class="fs12"><a href="<?= SITE_URL; ?>/login.php">ログイン</a></p>
+  <p class="form-footer"><a href="<?= SITE_URL; ?>/login.php">ログイン</a></p>
 </div><!-- container -->
 <?php require_once(__DIR__ .'/footer.php'); ?>
