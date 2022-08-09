@@ -92,9 +92,10 @@ $app->run();
       </div>
       <p class="err"><?= h($app->getErrors('create_thread')); ?></p>
     </div>
-    <div class="form-group btn btn-primary" onclick="document.getElementById('new_thread').submit();"><img src="<?= SITE_URL; ?>/asset/img/edit.png"></div>
   </form>
-</div>
+  </div>
+  <div class="form-group btn btn-primary" onclick="document.getElementById('new_thread').submit();"><img src="<?= SITE_URL; ?>/asset/img/edit.png"></div>
+
 
 
 <div class="container">

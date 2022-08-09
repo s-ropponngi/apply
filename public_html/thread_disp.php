@@ -43,14 +43,14 @@ $threadDisp = $threadMod->getThread($thread_id);
         <p class="comment__item__content"><?= h($comment->content); ?></p>
     <?php endforeach; ?>
       </li>
-    <form action="" method="post" class="form-group">
+    <form action="" method="post" class="comment__form-block">
       <div class="comment__form-group">
-        <label>コメント投稿</label>
+        <h2>コメント投稿</h2>
         <textarea type="text" name="content" class="form-control"><?= isset($threadCon->getValues()->content) ? h($threadCon->getValues()->content) : ''; ?></textarea>
         <p class="err"><?= h($threadCon->getErrors('content')); ?></p>
       </div>
-      <div class="comment__form-group">
-        <input type="submit" value="書き込み" class="btn btn-primary">
+      <div class="comment__form-input">
+        <input type="image" src="<?= SITE_URL; ?>/asset/img/input.png">
       </div>
       <input type="hidden" name="thread_id" value="<?= h($thread_id); ?>">
       <input type="hidden" name="type" value="createcomment">

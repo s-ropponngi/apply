@@ -29,6 +29,10 @@ class UserUpdate extends \Apply\Controller {
       $this->setErrors('username', $e->getMessage());
     }
     // エラーが出ても入力された内容が消えない
+    $this->setValues('title', $_POST['thread_name']);
+    $this->setValues('address', $_POST['address_name']);
+    $this->setValues('due_date', $_POST['due_date']);
+    $this->setValues('comment', $_POST['comment']);
     $this->setValues('username', $_POST['username']);
     $this->setValues('email', $_POST['email']);
     if ($this->hasError()) {
