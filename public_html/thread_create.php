@@ -82,7 +82,7 @@ $app->run();
       </div>
       <div class="form-group">
         <label for="day">発見日：</label>
-        <input type="text" class="form-control" name="due_date" id="due_date" value="" placeholder="選択してください">
+        <input type="text" class="form-control " name="due_date" id="due_date" value="" placeholder="選択してください">
       </div>
       <div class="form-group">
         <label for="message">特徴：</label>

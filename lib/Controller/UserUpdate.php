@@ -11,15 +11,6 @@ class UserUpdate extends \Apply\Controller {
     }
   }
 
-  protected function showUser() {
-    $user = new \Apply\Model\User();
-    $userData = $user->find($_SESSION['me']->id);
-    // データベースからの値をセットしている部分
-    // mypage.phpにあるgetValues部分に表示される
-    $this->setValues('username', $userData->username);
-    $this->setValues('email', $userData->email);
-  }
-
   protected function updateUser() {
     try {
       $this->validate();

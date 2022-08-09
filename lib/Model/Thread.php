@@ -126,7 +126,7 @@ public function getThreadAll(){
 
 // ログインしている人の情報をマイページのフォームに反映させる
 public function find($id) {
- $stmt = $this->db->prepare("SELECT * FROM users WHERE id = :id;");
+ $stmt = $this->db->prepare("SELECT * FROM threads WHERE user_id = :id;");
  $stmt->bindValue('id',$id);
  $stmt->execute();
  $stmt->setFetchMode(\PDO::FETCH_CLASS, 'stdClass');

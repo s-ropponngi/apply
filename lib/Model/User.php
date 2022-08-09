@@ -44,11 +44,15 @@ class User extends \Apply\Model {
 
   // ログインしている人の情報をマイページのフォームに反映させる
   public function find($id) {
-    $stmt = $this->db->prepare("SELECT * FROM users WHERE id = :id;");
+    $stmt = $this->db->prepare("SELECT * FROM users JOIN threads ON users.id = threads.user_id WHERE users.id = :id;");
     $stmt->bindValue('id',$id);
     $stmt->execute();
+
+    // var_dump($stmt->errorInfo());
+    // exit;
+
     $stmt->setFetchMode(\PDO::FETCH_CLASS, 'stdClass');
-    $user = $stmt->fetch();
+    $user = $stmt->fetchAll();
     return $user;
   }
 

@@ -130,8 +130,6 @@ class Thread extends \Apply\Controller {
       if (mb_strlen($_POST['comment']) > 200) {
         throw new \Apply\Exception\CharLength("コメントが長すぎます！");
       }
-    //   if (=== 'noimage.jpg')
-    // }
 
       if($_POST['type'] === 'createcomment') {
         if (!isset($_POST['content'])){
