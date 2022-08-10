@@ -135,9 +135,13 @@ public function find($id) {
 }
 
 public function update($values) {
- $stmt = $this->db->prepare("UPDATE threads SET image = :image where id = :id");
+ $stmt = $this->db->prepare("UPDATE threads SET image = :image,title = :title,address = :address,due_date = :due_date,comment = :comment where id = :id");
  $stmt->execute([
    ':image' => $values['image'],
+   ':title' => $values['title'],
+   ':address' => $values['address'],
+   ':due_date' => $values['due_date'],
+   ':comment' => $values['comment'],
    ':id' => $_SESSION['me']->id,
  ]);
 }

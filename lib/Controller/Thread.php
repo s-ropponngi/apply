@@ -7,6 +7,8 @@ class Thread extends \Apply\Controller {
         $this->createThread();
       } elseif($_POST['type']  === 'createcomment') {
         $this->createComment();
+      } elseif($_POST['type']  === 'updatethread'){
+        $this->updateThread();
       }
     }
   }
@@ -66,8 +68,6 @@ class Thread extends \Apply\Controller {
       header('Location: '. SITE_URL . '/index.php');
       exit();
 
-      
-
   }
 
   protected function showUser() {
@@ -111,6 +111,62 @@ class Thread extends \Apply\Controller {
         throw new \Apply\Exception\CharLength("キーワードが長すぎます！");
       }
     }
+  }
+
+  private function updateThread() {
+    try {
+      $this->validate();
+      } catch (\Apply\Exception\EmptyPost $e) {
+          $this->setErrors('update_thread', $e->getMessage());
+      } catch (\Apply\Exception\CharLength $e) {
+          $this->setErrors('update_thread', $e->getMessage());
+      }
+      $this->setValues('thread_name', $_POST['thread_name']);
+      $this->setValues('address_name', $_POST['address_name']);
+      $this->setValues('comment', $_POST['comment']);
+    if ($this->hasError()){
+      return;
+    } else {
+      $threadModel = new \Apply\Model\Thread();
+
+      // 画像の編集(画像のリンク変更)
+      $user_img = $_FILES['image'];
+      $ext = substr($user_img['name'], strrpos($user_img['name'], '.') + 1);
+      $user_img['name'] = uniqid("img_") .'.'. $ext;
+
+      $old_img = (!empty($_POST['old_image']));
+      if($old_img == '') {
+        $old_img = NULL;
+      }
+      try {
+        $userModel = new \Apply\Model\Thread();
+        // アップロードした画像があれば、gazouディレクトリにある古い画像を削除し、新しい画像を保存する。
+        // アップロードされてきた画像があれば実行する
+        if($user_img['size'] > 0) {
+          // gazouフォルダーの中にある古い画像をフォルダから削除する
+          unlink('./gazou/'.$old_img);
+          // 新しい画像をgazouフォルダに移動
+          move_uploaded_file($user_img['tmp_name'],'./gazou/'.$user_img['name']);
+        }
+      }catch(\Exception $e){
+        return;
+      }
+
+    }
+    $_SESSION['me']->username = (!empty($_POST['username']));
+
+
+      // Model部分に渡すようにしている部分
+      $threadModel->updateThread([
+        'image' => $user_img['name'],
+        'title' => $_POST['thread_name'],
+        'address' => $_POST['address_name'],
+        'due_date' => $_POST['due_date'],
+        'comment' => $_POST['comment'],
+        'user_id' => $_SESSION['me']->id
+      ]);
+      header('Location: '. SITE_URL . '/index.php');
+      exit();
   }
 
   private function validate() {

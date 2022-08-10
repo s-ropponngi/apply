@@ -1,22 +1,26 @@
 <?php
 require_once(__DIR__ .'/header.php');
-$app = new Apply\Controller\UserUpdate();
-$app->run();
-// $app = new Apply\Controller\UserUpdate();
-// $userDatas = $app->run();
+
 $user = new \Apply\Model\User();
 $userDatas = $user->find($_SESSION['me']->id);
-?>
-<h1 class="ttl__mypage"><img src="<?= SITE_URL; ?>/asset/img/mypage.png"></h1>
 
+$threadCon = new Apply\Controller\Thread();
+$threadCon->run();
+// thread_idはクエリパラメータで値いを取得
+// $_GETはリンクがGET送信だから
+$thread_id = $_GET['thread_id'];
+$threadMod = new Apply\Model\Thread();
+// $thread_idは$thread_id = $_GET['thread_id'];クエリパラメータで取得した値
+$threadDisp = $threadMod->getThread($thread_id);
+?>
+<h1 class="page__ttl"><img src="<?= SITE_URL; ?>/asset/img/info.png"></h1>
 <form action="" method="post" class="new_thread" id="new_thread" enctype="multipart/form-data">
 
-  <?php foreach($userDatas as $userData): ?>
     <div class="new__thread-block">
       <div class="img__block">
-        <div class="imgarea <?= isset($userData->image) ? '': 'noimage' ?>">
+        <div class="imgarea <?= isset($threadCon->getValues()->image) ? '': 'noimage' ?>">
           <div class="imgfile">
-            <img src="<?= './gazou/'.h($userData->image); ?>" alt="">
+            <img src="<?= './gazou/'.h($threadDisp->image); ?>" alt="">
           </div>
         </div>
         <label class="file-img">
@@ -27,15 +31,15 @@ $userDatas = $user->find($_SESSION['me']->id);
       <div class="form__block">
         <div class="form-group">
           <label for="name">タイトル:</label>
-          <select name="thread_name" type="text" class="form-control" value="<?= isset($userData->title) ? h($userData->title) : ''; ?>">
+          <select name="thread_name" type="text" class="form-control" value="<?= isset($userData->title) ? h($threadDisp->title) : ''; ?>">
             <option value="">選択してください</option>
-            <option value="保護しました" id="c1" <?= $userData->title == '保護しました' ? 'selected':''  ?>>保護しました</option>
-            <option value="探しています" id="c2"  <?= $userData->title == '探しています' ? 'selected':''  ?>>探しています</option>
+            <option value="保護しました" id="c1" <?= $threadDisp->title == '保護しました' ? 'selected':''  ?>>保護しました</option>
+            <option value="探しています" id="c2"  <?= $threadDisp->title == '探しています' ? 'selected':''  ?>>探しています</option>
           </select>
         </div>
         <div class="form-group">
           <label for="address">発見場所:</label>
-          <select name="address_name" type="text" class="form-control" value="<?= isset($userData->address) ? h($userData->address) : ''; ?>">
+          <select name="address_name" type="text" class="form-control" value="<?= isset($userData->address) ? h($threadDisp->address) : ''; ?>">
             <option value="">選択してください</option>
             <option value="北海道">北海道</option>
             <option value="青森県">青森県</option>
@@ -88,47 +92,20 @@ $userDatas = $user->find($_SESSION['me']->id);
         </div>
         <div class="form-group">
           <label for="day">発見日:</label>
-          <input type="text" class="form-control" name="due_date" id="due_date" value="<?= $userData->due_date ?>" placeholder="選択してください">
+          <input type="text" class="form-control" name="due_date" id="due_date" value="<?= $threadDisp->due_date ?>" placeholder="選択してください">
         </div>
         <div class="form-group">
           <label for="message">特徴:</label>
           <textarea maxlength="40" type="text" name="comment" class="form-control" placeholder="40文字以内でお願いいたします"><?= isset($userData->comment) ? h($userData->comment) : ''; ?></textarea>
           <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
-          <input type="hidden" name="type" value="updateuser">
+          <input type="hidden" name="type" value="updatethread">
         </div>
+        <p class="err"><?= h($threadCon->getErrors('update_thread')); ?></p>
       </div>
     </div>
-    <a class="form-group btn btn-primary" href="<?= SITE_URL; ?>/thread_update.php?thread_id=<?=($userData->id); ?>"><img src="<?= SITE_URL; ?>/asset/img/edit.png"></a>
-    <?php endforeach; ?>
-
-
-  </form>
-
-
-
-<div class="container">
-  <form action="" method="post" id="userupdate" class="form mypage-form row" enctype="multipart/form-data">
-    <div class="col-md-8">
-      <div class="form-block">
-        <label>メールアドレス</label>
-        <input type="text" name="email" value="<?= isset($userData->email) ? h($userData->email): ''; ?>">
-        <p class="err"><?= h($app->getErrors('email')); ?></p>
-      </div>
-      <div class="form-block">
-        <label>ユーザー名</label>
-        <input type="text" name="username" value="<?= isset($userData->username) ? h($userData->username): ''; ?>">
-        <p class="err"><?= h($app->getErrors('username')); ?></p>
-      </div>
-      <button class="btn btn-primary" onclick="document.getElementById('userupdate').submit();">更新</button>
-      <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
-    </div>
-  </form>
-  <form class="user-delete" action="user_delete_confirm.php" method="post">
-    <input type="submit" class="btn btn-default" value="退会する">
+    <div class="form-group btn btn-primary" onclick="document.getElementById('new_thread').submit();"><img src="<?= SITE_URL; ?>/asset/img/edit.png"></div>
     <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
-  </form>
-</div><!--container -->
 
-<?php
-require_once(__DIR__ .'/footer.php');
-?>
+
+  </form>
+<?php require_once(__DIR__ .'/footer.php'); ?>

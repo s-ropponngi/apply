@@ -8,7 +8,7 @@ $threads = $threadMod->getThreadAll();
   <h1 class="ttl__home"><img src="<?= SITE_URL; ?>/asset/img/home.png"></h1>
   <p class='letter'>少しでも迷子の子が少なくなりますように…<br>
      皆さんのお力をお貸しください。<br></p>
-<div class="search-area">
+<div class="search__area">
   <form>
     <select class="title" name="title">
       <option value="">選択してください</option>
