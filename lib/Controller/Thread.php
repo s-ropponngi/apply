@@ -3,12 +3,14 @@ namespace Apply\Controller;
 class Thread extends \Apply\Controller {
   public function run() {
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
-      if ($_POST['type']  === 'createthread') {
-        $this->createThread();
-      } elseif($_POST['type']  === 'createcomment') {
-        $this->createComment();
-      } elseif($_POST['type']  === 'updatethread'){
-        $this->updateThread();
+      if(isset($_POST['type'])){
+        if ($_POST['type']  === 'createthread') {
+          $this->createThread();
+        } elseif($_POST['type']  === 'createcomment') {
+          $this->createComment();
+        } elseif($_POST['type']  === 'updatethread'){
+          $this->updateThread();
+        }
       }
     }
   }
@@ -23,6 +25,7 @@ class Thread extends \Apply\Controller {
     }
     $this->setValues('thread_name', $_POST['thread_name']);
     $this->setValues('address_name', $_POST['address_name']);
+    $this->setValues('due_date', $_POST['due_date']);
     $this->setValues('comment', $_POST['comment']);
     if ($this->hasError()){
       return;
@@ -102,17 +105,6 @@ class Thread extends \Apply\Controller {
       exit();
   }
 
-  private function validateSearch() {
-    if($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['type'])) {
-      if ($_GET['keyword'] === ''){
-        throw new \Apply\Exception\EmptyPost("検索キーワードが入力されていません！");
-      }
-      if (mb_strlen($_GET['keyword']) > 20) {
-        throw new \Apply\Exception\CharLength("キーワードが長すぎます！");
-      }
-    }
-  }
-
   private function updateThread() {
     try {
       $this->validate();
@@ -140,12 +132,8 @@ class Thread extends \Apply\Controller {
       }
       try {
         $userModel = new \Apply\Model\Thread();
-        // アップロードした画像があれば、gazouディレクトリにある古い画像を削除し、新しい画像を保存する。
-        // アップロードされてきた画像があれば実行する
         if($user_img['size'] > 0) {
-          // gazouフォルダーの中にある古い画像をフォルダから削除する
           unlink('./gazou/'.$old_img);
-          // 新しい画像をgazouフォルダに移動
           move_uploaded_file($user_img['tmp_name'],'./gazou/'.$user_img['name']);
         }
       }catch(\Exception $e){
@@ -167,14 +155,14 @@ class Thread extends \Apply\Controller {
       ]);
       header('Location: '. SITE_URL . '/index.php');
       exit();
-  }
+    }
 
   private function validate() {
     if (!isset($_POST['token']) || $_POST['token'] !== $_SESSION['token']) {
       echo "不正なトークンです!";
       exit();
     }
-    if ($_POST['type'] === 'createthread') {
+    if ($_POST['type'] === 'createthread'||'updateThread') {
       if (!isset($_POST['thread_name']) || !isset($_POST['comment'])){
         echo '不正な投稿です';
         exit();

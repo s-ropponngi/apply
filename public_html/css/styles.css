@@ -12,7 +12,7 @@ html {
 
 textarea {
   resize: none;
-  height: 13rem;
+  height: 10rem;
 }
 
 ul {
@@ -275,12 +275,13 @@ body {
 }
 
 .thread__block {
-  margin: 0 auto;
+  margin: 5rem auto;
   width: 100%;
-  padding:6rem 8rem;
+  height: 1400px;
+  padding: 9rem 8rem;
   color: #54381D;
   background-image: url(../asset/img/kanban.png);
-  background-size: 100% 150%;
+  background-size: 100% 100%;
   background-repeat: no-repeat;
 }
 

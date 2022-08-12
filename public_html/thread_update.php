@@ -1,17 +1,22 @@
 <?php
 require_once(__DIR__ .'/header.php');
 
-$user = new \Apply\Model\User();
-$userDatas = $user->find($_SESSION['me']->id);
+$thread_disp = new \Apply\Model\Thread();
+if(isset($_POST['thread_id'])){
+  $thread_id = $_POST['thread_id'];
+  $threadDisp = $thread_disp->getThread($thread_id);
 
+} else {
+  // var_dump($_POST);
+  // exit;
+}
+// var_dump($_POST['thread_id']);
+// exit;
+
+// $userDatas = $user->find($_SESSION['me']->id);
 $threadCon = new Apply\Controller\Thread();
 $threadCon->run();
-// thread_idはクエリパラメータで値いを取得
-// $_GETはリンクがGET送信だから
-$thread_id = $_GET['thread_id'];
-$threadMod = new Apply\Model\Thread();
-// $thread_idは$thread_id = $_GET['thread_id'];クエリパラメータで取得した値
-$threadDisp = $threadMod->getThread($thread_id);
+
 ?>
 <h1 class="page__ttl"><img src="<?= SITE_URL; ?>/asset/img/info.png"></h1>
 <form action="" method="post" class="new_thread" id="new_thread" enctype="multipart/form-data">
@@ -19,8 +24,9 @@ $threadDisp = $threadMod->getThread($thread_id);
     <div class="new__thread-block">
       <div class="img__block">
         <div class="imgarea <?= isset($threadCon->getValues()->image) ? '': 'noimage' ?>">
+
           <div class="imgfile">
-            <img src="<?= './gazou/'.h($threadDisp->image); ?>" alt="">
+            <img src="<?= isset($_POST['thread_id']) ? './gazou/'.h($threadDisp->image) : './gazou/'.h($_POST['image']) ; ?>" alt="">
           </div>
         </div>
         <label class="file-img">
@@ -96,16 +102,17 @@ $threadDisp = $threadMod->getThread($thread_id);
         </div>
         <div class="form-group">
           <label for="message">特徴:</label>
-          <textarea maxlength="40" type="text" name="comment" class="form-control" placeholder="40文字以内でお願いいたします"><?= isset($userData->comment) ? h($userData->comment) : ''; ?></textarea>
+          <textarea maxlength="40" type="text" name="comment" class="form-control" placeholder="40文字以内でお願いいたします"><?= isset($threadDisp->comment) ? h($threadDisp->comment) : ''; ?></textarea>
           <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
           <input type="hidden" name="type" value="updatethread">
+          <input type="hidden" name="old_image" value="<?= h($threadDisp->image) ?>">
         </div>
         <p class="err"><?= h($threadCon->getErrors('update_thread')); ?></p>
       </div>
     </div>
+    </form>
     <div class="form-group btn btn-primary" onclick="document.getElementById('new_thread').submit();"><img src="<?= SITE_URL; ?>/asset/img/edit.png"></div>
-    <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
 
 
-  </form>
+  
 <?php require_once(__DIR__ .'/footer.php'); ?>

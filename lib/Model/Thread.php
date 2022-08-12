@@ -47,6 +47,8 @@ public function getCommentCount($thread_id) {
 
 // スレッド1件取得(スレッド内容を取得)
 public function getThread($thread_id){
+  // var_dump($thread_id);
+  // exit;
   $stmt = $this->db->prepare("SELECT * FROM threads WHERE id = :id AND delflag = 0;");
   $stmt->bindValue(":id",$thread_id);
   $stmt->execute();
@@ -135,6 +137,8 @@ public function find($id) {
 }
 
 public function update($values) {
+  var_dump($values);
+  exit;
  $stmt = $this->db->prepare("UPDATE threads SET image = :image,title = :title,address = :address,due_date = :due_date,comment = :comment where id = :id");
  $stmt->execute([
    ':image' => $values['image'],

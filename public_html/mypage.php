@@ -9,7 +9,7 @@ $userDatas = $user->find($_SESSION['me']->id);
 ?>
 <h1 class="ttl__mypage"><img src="<?= SITE_URL; ?>/asset/img/mypage.png"></h1>
 
-<form action="" method="post" class="new_thread" id="new_thread" enctype="multipart/form-data">
+
 
   <?php foreach($userDatas as $userData): ?>
     <div class="new__thread-block">
@@ -98,11 +98,14 @@ $userDatas = $user->find($_SESSION['me']->id);
         </div>
       </div>
     </div>
-    <a class="form-group btn btn-primary" href="<?= SITE_URL; ?>/thread_update.php?thread_id=<?=($userData->id); ?>"><img src="<?= SITE_URL; ?>/asset/img/edit.png"></a>
+    <form action="thread_update.php" method="post" class="new_thread" id="<?= 'new_thread'. $userData->id ?> " enctype="multipart/form-data">
+
+    <input type="image" class="form-group btn btn-primary" src="<?= SITE_URL; ?>/asset/img/edit.png">
+
+    <input type="hidden" name="thread_id" value="<?= h($userData->id); ?>">
+    <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
+    </form>
     <?php endforeach; ?>
-
-
-  </form>
 
 
 
