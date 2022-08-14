@@ -39,7 +39,7 @@ class UserUpdate extends \Apply\Controller {
     exit();
   }
 
-  
+
 
   // ユーザー登録のときと一緒
   private function updateUservalidate() {

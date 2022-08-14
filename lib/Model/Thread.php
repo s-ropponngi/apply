@@ -137,8 +137,6 @@ public function find($id) {
 }
 
 public function update($values) {
-  var_dump($values);
-  exit;
  $stmt = $this->db->prepare("UPDATE threads SET image = :image,title = :title,address = :address,due_date = :due_date,comment = :comment where id = :id");
  $stmt->execute([
    ':image' => $values['image'],

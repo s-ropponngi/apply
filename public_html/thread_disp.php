@@ -29,7 +29,7 @@ $threadDisp = $threadMod->getThread($thread_id);
         </div>
         <div class="thread__datearea">
         <p class="comment-page thread__date">スレッド作成日時：<?= h($threadDisp->created); ?></p>
-        </div>
+    </div>
     <?php
       $comments = $threadMod->getCommentAll($threadDisp->id);
       foreach($comments as $comment):
@@ -43,6 +43,7 @@ $threadDisp = $threadMod->getThread($thread_id);
         <p class="comment__item__content"><?= h($comment->content); ?></p>
     <?php endforeach; ?>
       </li>
+    </ul>
     <form action="" method="post" class="comment__form-block">
       <div class="comment__form-group">
         <h2>コメント投稿</h2>
@@ -56,7 +57,6 @@ $threadDisp = $threadMod->getThread($thread_id);
       <input type="hidden" name="type" value="createcomment">
       <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
     </form>
-      </div>
-      </ul>
+  </div>
 </div><!-- thread -->
 <?php require_once(__DIR__ .'/footer.php'); ?>

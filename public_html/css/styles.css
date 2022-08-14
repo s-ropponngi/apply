@@ -435,12 +435,11 @@ input[type="file"]{
 }
 
 .form__block {
-  margin: 5rem auto;
-  width: 25rem;
+  margin: 4rem auto;
+  width: 50%;
 }
 .form-group {
   display: flex;
-  justify-content: space-between;
   margin-top: 1rem;
 }
 
@@ -450,7 +449,6 @@ input[type="file"]{
 
 .form-group label {
   width: 30%;
-  margin: 1rem;
 }
 
 .form-group select {
@@ -476,8 +474,8 @@ input[type="file"]{
 }
 
 .btn-primary {
-  margin: 2rem auto;
-  width: 30%;
+  margin: 4rem auto;
+  width: 40%;
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }
 
@@ -707,6 +705,9 @@ input[type="file"]{
   width: 60%;
  }
 
+ .col-md-8 {
+  margin: 3rem 5rem;
+ }
  /* スレッド詳細 */
 
 .page__ttl {

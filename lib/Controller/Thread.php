@@ -107,7 +107,7 @@ class Thread extends \Apply\Controller {
 
   private function updateThread() {
     try {
-      $this->validate();
+      $this->validateupdate();
       } catch (\Apply\Exception\EmptyPost $e) {
           $this->setErrors('update_thread', $e->getMessage());
       } catch (\Apply\Exception\CharLength $e) {
@@ -157,34 +157,65 @@ class Thread extends \Apply\Controller {
       exit();
     }
 
-  private function validate() {
+    private function validate() {
+      if (!isset($_POST['token']) || $_POST['token'] !== $_SESSION['token']) {
+        echo "不正なトークンです!";
+        exit();
+      }
+      // 新規スレッド作成のスレッド名と最初のコメントのバリデーション
+      if ($_POST['type'] === 'createthread') {
+        // thread_nameとcommentにPOST送信されていなかったら不正な投稿(!issetはセットされていない意味)
+        if (!isset($_POST['thread_name']) || !isset($_POST['comment'])){
+          echo '不正な投稿です';
+          exit();
+        }
+        if ($_POST['thread_name'] === '' || $_POST['comment'] === ''){
+          throw new \Apply\Exception\EmptyPost("スレッド名または最初のコメントが入力されていません！");
+        }
+        // 20文字以上入力したらエラーがでる
+        if (mb_strlen($_POST['thread_name']) > 20) {
+          // エラーが出たらここが実行される
+          throw new \Apply\Exception\CharLength("スレッド名が長すぎます！");
+        }
+        // 200文字以上入力したらエラーがでる
+        if (mb_strlen($_POST['comment']) > 200) {
+          // エラーが出たらここが実行される
+          throw new \Apply\Exception\CharLength("コメントが長すぎます！");
+        }
+      }
+  
+      // スレッド詳細画面でコメントのバリデーション
+      if($_POST['type'] === 'createcomment') {
+        if (!isset($_POST['content'])){
+          echo '不正な投稿です';
+          exit();
+        }
+  
+        if($_POST['content'] === '') {
+          throw new \Apply\Exception\EmptyPost("コメントが入力されていません！");
+        }
+  
+        if (mb_strlen($_POST['content']) > 200) {
+          throw new \Apply\Exception\CharLength("コメントが長すぎます！");
+      }
+    }
+  }
+
+  private function validateupdate() {
     if (!isset($_POST['token']) || $_POST['token'] !== $_SESSION['token']) {
       echo "不正なトークンです!";
       exit();
     }
-    if ($_POST['type'] === 'createthread'||'updateThread') {
-      if (!isset($_POST['thread_name']) || !isset($_POST['comment'])){
+    if ($_POST['type'] === 'updateThread') {
+      if (!isset($_POST['thread_name']) ){
         echo '不正な投稿です';
         exit();
       }
       if ( $_FILES['image']['type'] === ''|| $_POST['thread_name'] === '' || $_POST['comment'] === ''|| $_POST['address_name'] === ''|| $_POST['due_date'] === ''){
         throw new \Apply\Exception\EmptyPost("全て入力してください！");
       }
-
-      if (mb_strlen($_POST['comment']) > 200) {
-        throw new \Apply\Exception\CharLength("コメントが長すぎます！");
-      }
-
-      if($_POST['type'] === 'createcomment') {
-        if (!isset($_POST['content'])){
-          echo '不正な投稿です';
-          exit();
-        }
-
-      if($_POST['content'] === '') {
-        throw new \Apply\Exception\EmptyPost("コメントが入力されていません！");
       }
     }
   }
-}
-}
+
+
