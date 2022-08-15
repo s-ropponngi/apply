@@ -122,28 +122,18 @@ class Thread extends \Apply\Controller {
       $threadModel = new \Apply\Model\Thread();
 
       // 画像の編集(画像のリンク変更)
-      $user_img = $_FILES['image'];
-      $ext = substr($user_img['name'], strrpos($user_img['name'], '.') + 1);
-      $user_img['name'] = uniqid("img_") .'.'. $ext;
-
-      $old_img = (!empty($_POST['old_image']));
-      if($old_img == '') {
+      if($_FILES['image']['name'] == '') {
+        $old_img = $_POST['old_image'];
+        $user_img['name'] = $old_img;
+      }else{
+        $user_img = $_FILES['image'];
+        $ext = substr($user_img['name'], strrpos($user_img['name'], '.') + 1);
+        $user_img['name'] = uniqid("img_") .'.'. $ext;
       }
       try {
         $userModel = new \Apply\Model\Thread();
-        if($user_img['size'] > 0) {
-          unlink('./gazou/'.$old_img);
-          move_uploaded_file($user_img['tmp_name'],'./gazou/'.$user_img['name']);
-        }
-      }catch(\Exception $e){
-        return;
-      }
 
-    }
-    $_SESSION['me']->username = (!empty($_POST['username']));
-
-
-      // Model部分に渡すようにしている部分
+        // Model部分に渡すようにしている部分
       $threadModel->updateThread([
         'image' => $user_img['name'],
         'title' => $_POST['thread_name'],
@@ -152,6 +142,14 @@ class Thread extends \Apply\Controller {
         'comment' => $_POST['comment'],
         'thread_id' => $_POST['thread_id']
       ]);
+        if($user_img['size'] > 0) {
+          unlink('./gazou/'.$old_img);
+          move_uploaded_file($user_img['tmp_name'],'./gazou/'.$user_img['name']);
+        }
+      }catch(\Exception $e){
+        return;
+      }
+    }
       header('Location: '. SITE_URL . '/index.php');
       exit();
     }
@@ -207,7 +205,7 @@ class Thread extends \Apply\Controller {
         echo '不正な投稿です';
         exit();
       }
-      if ( $_FILES['image']['type'] === ''|| $_POST['thread_name'] === '' || $_POST['comment'] === ''|| $_POST['address_name'] === ''|| $_POST['due_date'] === ''){
+      if ($_POST['thread_name'] === '' || $_POST['comment'] === ''|| $_POST['address_name'] === ''|| $_POST['due_date'] === ''){
         throw new \Apply\Exception\EmptyPost("全て入力してください！");
       }
       }
