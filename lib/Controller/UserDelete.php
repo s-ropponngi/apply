@@ -5,7 +5,10 @@ namespace Apply\Controller;
 class UserDelete extends \Apply\Controller {
   public function run() {
     $user = new \Apply\Model\User();
-    $userData = $user->find($_SESSION['me']->id);
+    $userData = $user->findUser($_SESSION['me']->id);
+    // var_dump($userData);
+    // exit;
+
     $this->setValues('username', $userData->username);
     $this->setValues('email', $userData->email);
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['type']) == 'delete') {

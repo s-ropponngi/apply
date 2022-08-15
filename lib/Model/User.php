@@ -53,6 +53,16 @@ class User extends \Apply\Model {
     return $user;
   }
 
+// 退会ページに飛ばすユーザーの値
+  public function findUser($id) {
+    $stmt = $this->db->prepare("SELECT * FROM users WHERE users.id = :id;");
+    $stmt->bindValue('id',$id);
+    $stmt->execute();
+    $stmt->setFetchMode(\PDO::FETCH_CLASS, 'stdClass');
+    $user = $stmt->fetch();
+    return $user;
+  }
+
   public function update($values) {
     $stmt = $this->db->prepare("UPDATE users SET username = :username,email = :email, modified = now() where id = :id;");
     $stmt->execute([

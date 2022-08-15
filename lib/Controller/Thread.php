@@ -128,7 +128,6 @@ class Thread extends \Apply\Controller {
 
       $old_img = (!empty($_POST['old_image']));
       if($old_img == '') {
-        $old_img = NULL;
       }
       try {
         $userModel = new \Apply\Model\Thread();
@@ -151,7 +150,7 @@ class Thread extends \Apply\Controller {
         'address' => $_POST['address_name'],
         'due_date' => $_POST['due_date'],
         'comment' => $_POST['comment'],
-        'user_id' => $_SESSION['me']->id
+        'thread_id' => $_POST['thread_id']
       ]);
       header('Location: '. SITE_URL . '/index.php');
       exit();
@@ -169,8 +168,8 @@ class Thread extends \Apply\Controller {
           echo '不正な投稿です';
           exit();
         }
-        if ($_POST['thread_name'] === '' || $_POST['comment'] === ''){
-          throw new \Apply\Exception\EmptyPost("スレッド名または最初のコメントが入力されていません！");
+        if ( $_FILES['image']['type'] === ''|| $_POST['thread_name'] === '' || $_POST['comment'] === ''|| $_POST['address_name'] === ''|| $_POST['due_date'] === ''){
+          throw new \Apply\Exception\EmptyPost("全て入力してください！");
         }
         // 20文字以上入力したらエラーがでる
         if (mb_strlen($_POST['thread_name']) > 20) {
@@ -183,18 +182,15 @@ class Thread extends \Apply\Controller {
           throw new \Apply\Exception\CharLength("コメントが長すぎます！");
         }
       }
-  
       // スレッド詳細画面でコメントのバリデーション
       if($_POST['type'] === 'createcomment') {
         if (!isset($_POST['content'])){
           echo '不正な投稿です';
           exit();
         }
-  
         if($_POST['content'] === '') {
           throw new \Apply\Exception\EmptyPost("コメントが入力されていません！");
         }
-  
         if (mb_strlen($_POST['content']) > 200) {
           throw new \Apply\Exception\CharLength("コメントが長すぎます！");
       }
@@ -206,7 +202,7 @@ class Thread extends \Apply\Controller {
       echo "不正なトークンです!";
       exit();
     }
-    if ($_POST['type'] === 'updateThread') {
+    if ($_POST['type'] === 'updatethread') {
       if (!isset($_POST['thread_name']) ){
         echo '不正な投稿です';
         exit();

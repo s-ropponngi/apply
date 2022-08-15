@@ -10,17 +10,17 @@ $app->run();
       <div class="form-block">
       <label for="email"></label>
       <input type="text" name="email" value="<?= isset
-      ($app->getValues()->email) ? h($app->getValues()->email): ''; ?>" placeholder="メールアドレス">
+      ($app->getValues()->email) ? h($app->getValues()->email): ''; ?>" placeholder="メールアドレス" class="form-control">
       <p class="err"><?= h($app->getErrors('email')); ?></p>
     </div>
     <div class="form-block">
       <label for="user"></label>
-      <input type="text" name="username" value="<?= isset($app->getValues()->username) ? h($app->getValues()->username): ''; ?>" placeholder="ニックネーム">
+      <input type="text" name="username" value="<?= isset($app->getValues()->username) ? h($app->getValues()->username): ''; ?>" placeholder="ニックネーム" class="form-control">
       <p class="err"><?= h($app->getErrors('username')); ?></p>
     </div>
     <div class="form-block">
       <label for="password"></label>
-      <input type="password" name="password" placeholder="パスワード">
+      <input type="password" name="password" placeholder="パスワード" class="form-control">
       <p class="err"><?= h($app->getErrors('password')); ?></p>
     </div>
     <div class="button" onclick="document.getElementById('signup').submit();"><img src="<?= SITE_URL; ?>/asset/img/sign-up.png"></div>

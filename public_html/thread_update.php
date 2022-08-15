@@ -106,6 +106,7 @@ $threadCon->run();
           <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
           <input type="hidden" name="type" value="updatethread">
           <input type="hidden" name="old_image" value="<?= h($threadDisp->image) ?>">
+          <input type="hidden" name="thread_id" value="<?= h($threadDisp->id) ?>">
         </div>
         <p class="err"><?= h($threadCon->getErrors('update_thread')); ?></p>
       </div>

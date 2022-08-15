@@ -136,7 +136,9 @@ public function find($id) {
  return $user;
 }
 
-public function update($values) {
+public function updateThread($values) {
+//   var_dump($values);
+//  exit;
  $stmt = $this->db->prepare("UPDATE threads SET image = :image,title = :title,address = :address,due_date = :due_date,comment = :comment where id = :id");
  $stmt->execute([
    ':image' => $values['image'],
@@ -144,8 +146,10 @@ public function update($values) {
    ':address' => $values['address'],
    ':due_date' => $values['due_date'],
    ':comment' => $values['comment'],
-   ':id' => $_SESSION['me']->id,
+   ':id' => $values['thread_id'],
  ]);
+//  var_dump($stmt->errorInfo());
+//  exit;
 }
 
 }
