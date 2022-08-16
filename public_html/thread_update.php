@@ -5,15 +5,8 @@ $thread_disp = new \Apply\Model\Thread();
 if(isset($_POST['thread_id'])){
   $thread_id = $_POST['thread_id'];
   $threadDisp = $thread_disp->getThread($thread_id);
-
-} else {
-  // var_dump($_POST);
-  // exit;
 }
-// var_dump($_POST['thread_id']);
-// exit;
 
-// $userDatas = $user->find($_SESSION['me']->id);
 $threadCon = new Apply\Controller\Thread();
 $threadCon->run();
 
@@ -47,53 +40,53 @@ $threadCon->run();
           <label for="address">発見場所:</label>
           <select name="address_name" type="text" class="form-control" value="<?= isset($userData->address) ? h($threadDisp->address) : ''; ?>">
             <option value="">選択してください</option>
-            <option value="北海道">北海道</option>
-            <option value="青森県">青森県</option>
-            <option value="岩手県">岩手県</option>
-            <option value="宮城県">宮城県</option>
-            <option value="秋田県">秋田県</option>
-            <option value="山形県">山形県</option>
-            <option value="福島県">福島県</option>
-            <option value="茨城県">茨城県</option>
-            <option value="栃木県">栃木県</option>
-            <option value="群馬県">群馬県</option>
-            <option value="埼玉県">埼玉県</option>
-            <option value="千葉県">千葉県</option>
-            <option value="東京都">東京都</option>
-            <option value="神奈川県">神奈川県</option>
-            <option value="新潟県">新潟県</option>
-            <option value="富山県">富山県</option>
-            <option value="石川県">石川県</option>
-            <option value="福井県">福井県</option>
-            <option value="山梨県">山梨県</option>
-            <option value="長野県">長野県</option>
-            <option value="岐阜県">岐阜県</option>
-            <option value="静岡県">静岡県</option>
-            <option value="愛知県">愛知県</option>
-            <option value="三重県">三重県</option>
-            <option value="滋賀県">滋賀県</option>
-            <option value="京都府">京都府</option>
-            <option value="大阪府">大阪府</option>
-            <option value="兵庫県">兵庫県</option>
-            <option value="奈良県">奈良県</option>
-            <option value="和歌山県">和歌山県</option>
-            <option value="鳥取県">鳥取県</option>
-            <option value="島根県">島根県</option>
-            <option value="岡山県">岡山県</option>
-            <option value="広島県">広島県</option>
-            <option value="山口県">山口県</option>
-            <option value="徳島県">徳島県</option>
-            <option value="香川県">香川県</option>
-            <option value="愛媛県">愛媛県</option>
-            <option value="高知県">高知県</option>
-            <option value="福岡県">福岡県</option>
-            <option value="佐賀県">佐賀県</option>
-            <option value="長崎県">長崎県</option>
-            <option value="熊本県">熊本県</option>
-            <option value="大分県">大分県</option>
-            <option value="宮崎県">宮崎県</option>
-            <option value="鹿児島県">鹿児島県</option>
-            <option value="沖縄県">沖縄県</option>
+            <option value="北海道" <?php if ( $threadDisp->address === '北海道' ) { echo ' selected'; } ?>>北海道</option>
+            <option value="青森県" <?php if ( $threadDisp->address === '青森県' ) { echo ' selected'; } ?>>青森県</option>
+            <option value="岩手県" <?php if ( $threadDisp->address === '岩手県' ) { echo ' selected'; } ?>>岩手県</option>
+            <option value="宮城県" <?php if ( $threadDisp->address === '宮城県' ) { echo ' selected'; } ?>>宮城県</option>
+            <option value="秋田県" <?php if ( $threadDisp->address === '秋田県' ) { echo ' selected'; } ?>>秋田県</option>
+            <option value="山形県" <?php if ( $threadDisp->address === '山形県' ) { echo ' selected'; } ?>>山形県</option>
+            <option value="福島県" <?php if ( $threadDisp->address === '福島県' ) { echo ' selected'; } ?>>福島県</option>
+            <option value="茨城県" <?php if ( $threadDisp->address === '茨城県' ) { echo ' selected'; } ?>>茨城県</option>
+            <option value="栃木県" <?php if ( $threadDisp->address === '栃木県' ) { echo ' selected'; } ?>>栃木県</option>
+            <option value="群馬県" <?php if ( $threadDisp->address === '群馬県' ) { echo ' selected'; } ?>>群馬県</option>
+            <option value="埼玉県" <?php if ( $threadDisp->address === '埼玉県' ) { echo ' selected'; } ?>>埼玉県</option>
+            <option value="千葉県" <?php if ( $threadDisp->address === '千葉県' ) { echo ' selected'; } ?>>千葉県</option>
+            <option value="東京都" <?php if ( $threadDisp->address === '東京都' ) { echo ' selected'; } ?>>東京都</option>
+            <option value="神奈川県" <?php if ( $threadDisp->address === '神奈川県' ) { echo ' selected'; } ?>>神奈川県</option>
+            <option value="新潟県" <?php if ( $threadDisp->address === '新潟県' ) { echo ' selected'; } ?>>新潟県</option>
+            <option value="富山県" <?php if ( $threadDisp->address === '富山県' ) { echo ' selected'; } ?>>富山県</option>
+            <option value="石川県" <?php if ( $threadDisp->address === '石川県' ) { echo ' selected'; } ?>>石川県</option>
+            <option value="福井県" <?php if ( $threadDisp->address === '福井県' ) { echo ' selected'; } ?>>福井県</option>
+            <option value="山梨県" <?php if ( $threadDisp->address === '山梨県' ) { echo ' selected'; } ?>>山梨県</option>
+            <option value="長野県" <?php if ( $threadDisp->address === '長野県' ) { echo ' selected'; } ?>>長野県</option>
+            <option value="岐阜県" <?php if ( $threadDisp->address === '岐阜県' ) { echo ' selected'; } ?>>岐阜県</option>
+            <option value="静岡県" <?php if ( $threadDisp->address === '静岡県' ) { echo ' selected'; } ?>>静岡県</option>
+            <option value="愛知県" <?php if ( $threadDisp->address === '愛知県' ) { echo ' selected'; } ?>>愛知県</option>
+            <option value="三重県" <?php if ( $threadDisp->address === '三重県' ) { echo ' selected'; } ?>>三重県</option>
+            <option value="滋賀県" <?php if ( $threadDisp->address === '滋賀県' ) { echo ' selected'; } ?>>滋賀県</option>
+            <option value="京都府" <?php if ( $threadDisp->address === '京都府' ) { echo ' selected'; } ?>>京都府</option>
+            <option value="大阪府" <?php if ( $threadDisp->address === '大阪府' ) { echo ' selected'; } ?>>大阪府</option>
+            <option value="兵庫県" <?php if ( $threadDisp->address === '兵庫県' ) { echo ' selected'; } ?>>兵庫県</option>
+            <option value="奈良県" <?php if ( $threadDisp->address === '奈良県' ) { echo ' selected'; } ?>>奈良県</option>
+            <option value="和歌山県" <?php if ( $threadDisp->address === '和歌山県' ) { echo ' selected'; } ?>>和歌山県</option>
+            <option value="鳥取県" <?php if ( $threadDisp->address === '鳥取県' ) { echo ' selected'; } ?>>鳥取県</option>
+            <option value="島根県" <?php if ( $threadDisp->address === '島根県' ) { echo ' selected'; } ?>>島根県</option>
+            <option value="岡山県" <?php if ( $threadDisp->address === '岡山県' ) { echo ' selected'; } ?>>岡山県</option>
+            <option value="広島県" <?php if ( $threadDisp->address === '広島県' ) { echo ' selected'; } ?>>広島県</option>
+            <option value="山口県" <?php if ( $threadDisp->address === '山口県' ) { echo ' selected'; } ?>>山口県</option>
+            <option value="徳島県" <?php if ( $threadDisp->address === '徳島県' ) { echo ' selected'; } ?>>徳島県</option>
+            <option value="香川県" <?php if ( $threadDisp->address === '香川県' ) { echo ' selected'; } ?>>香川県</option>
+            <option value="愛媛県" <?php if ( $threadDisp->address === '愛媛県' ) { echo ' selected'; } ?>>愛媛県</option>
+            <option value="高知県" <?php if ( $threadDisp->address === '高知県' ) { echo ' selected'; } ?>>高知県</option>
+            <option value="福岡県" <?php if ( $threadDisp->address === '福岡県' ) { echo ' selected'; } ?>>福岡県</option>
+            <option value="佐賀県" <?php if ( $threadDisp->address === '佐賀県' ) { echo ' selected'; } ?>>佐賀県</option>
+            <option value="長崎県" <?php if ( $threadDisp->address === '長崎県' ) { echo ' selected'; } ?>>長崎県</option>
+            <option value="熊本県" <?php if ( $threadDisp->address === '熊本県' ) { echo ' selected'; } ?>>熊本県</option>
+            <option value="大分県" <?php if ( $threadDisp->address === '大分県' ) { echo ' selected'; } ?>>大分県</option>
+            <option value="宮崎県" <?php if ( $threadDisp->address === '宮崎県' ) { echo ' selected'; } ?>>宮崎県</option>
+            <option value="鹿児島県" <?php if ( $threadDisp->address === '鹿児島県' ) { echo ' selected'; } ?>>鹿児島県</option>
+            <option value="沖縄県" <?php if ( $threadDisp->address === '沖縄県' ) { echo ' selected'; } ?>>沖縄県</option>
           </select>
         </div>
         <div class="form-group">
@@ -114,6 +107,4 @@ $threadCon->run();
     </form>
     <div class="form-group btn btn-primary" onclick="document.getElementById('new_thread').submit();"><img src="<?= SITE_URL; ?>/asset/img/edit.png"></div>
 
-
-  
 <?php require_once(__DIR__ .'/footer.php'); ?>

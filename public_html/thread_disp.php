@@ -22,7 +22,7 @@ $threadDisp = $threadMod->getThread($thread_id);
         </div>
         <div class="operation">
           <div class="thread__text">
-            <p>都道府県：<?= h($threadDisp->address); ?></p>
+            <p>発見場所：<?= h($threadDisp->address); ?></p>
             <p>発見日：<?= h($threadDisp->due_date); ?></p>
             <p>特徴：<?= h($threadDisp->comment); ?></p>
           </div>

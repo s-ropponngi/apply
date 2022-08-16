@@ -6,6 +6,7 @@ $app->run();
 // $userDatas = $app->run();
 $user = new \Apply\Model\User();
 $userDatas = $user->find($_SESSION['me']->id);
+$userNames = $user->findUser($_SESSION['me']->id);
 ?>
 <h1 class="ttl__mypage"><img src="<?= SITE_URL; ?>/asset/img/mypage.png"></h1>
 
@@ -54,12 +55,12 @@ $userDatas = $user->find($_SESSION['me']->id);
     <div class="col-md-8">
       <div class="form-block">
         <label>メールアドレス</label>
-        <input type="text" name="email" value="<?= isset($userData->email) ? h($userData->email): ''; ?>">
+        <input type="text" name="email" value="<?= isset($userNames->email) ? h($userNames->email): ''; ?>">
         <p class="err"><?= h($app->getErrors('email')); ?></p>
       </div>
       <div class="form-block">
         <label>ユーザー名</label>
-        <input type="text" name="username" value="<?= isset($userData->username) ? h($userData->username): ''; ?>">
+        <input type="text" name="username" value="<?= isset($userNames->username) ? h($userNames->username): ''; ?>">
         <p class="err"><?= h($app->getErrors('username')); ?></p>
       </div>
       <button class="btn btn-primary" onclick="document.getElementById('userupdate').submit();">更新</button>

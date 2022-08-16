@@ -33,44 +33,36 @@ class Thread extends \Apply\Controller {
       $threadModel = new \Apply\Model\Thread();
 
       // 画像の編集(画像のリンク変更)
-      $user_img = $_FILES['image'];
-      $ext = substr($user_img['name'], strrpos($user_img['name'], '.') + 1);
-      $user_img['name'] = uniqid("img_") .'.'. $ext;
-
-      $old_img = $_POST['old_image'];
-      if($old_img == '') {
-        $old_img = NULL;
+      if($_FILES['image']['name'] == '') {
+        $old_img = $_POST['old_image'];
+        $user_img['name'] = $old_img;
+      }else{
+        $user_img = $_FILES['image'];
+        $ext = substr($user_img['name'], strrpos($user_img['name'], '.') + 1);
+        $user_img['name'] = uniqid("img_") .'.'. $ext;
       }
       try {
         $userModel = new \Apply\Model\Thread();
-        // アップロードした画像があれば、gazouディレクトリにある古い画像を削除し、新しい画像を保存する。
-        // アップロードされてきた画像があれば実行する
+
+        // Model部分に渡すようにしている部分
+        $threadModel->createThread([
+          'image' => $user_img['name'],
+          'title' => $_POST['thread_name'],
+          'address' => $_POST['address_name'],
+          'due_date' => $_POST['due_date'],
+          'comment' => $_POST['comment'],
+          'user_id' => $_SESSION['me']->id
+        ]);
         if($user_img['size'] > 0) {
-          // gazouフォルダーの中にある古い画像をフォルダから削除する
           unlink('./gazou/'.$old_img);
-          // 新しい画像をgazouフォルダに移動
           move_uploaded_file($user_img['tmp_name'],'./gazou/'.$user_img['name']);
         }
       }catch(\Exception $e){
         return;
       }
-
     }
-    $_SESSION['me']->username = $_POST['username'];
-
-
-      // Model部分に渡すようにしている部分
-      $threadModel->createThread([
-        'image' => $user_img['name'],
-        'title' => $_POST['thread_name'],
-        'address' => $_POST['address_name'],
-        'due_date' => $_POST['due_date'],
-        'comment' => $_POST['comment'],
-        'user_id' => $_SESSION['me']->id
-      ]);
       header('Location: '. SITE_URL . '/index.php');
       exit();
-
   }
 
   protected function showUser() {

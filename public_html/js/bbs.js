@@ -59,7 +59,7 @@ $(function () {
 
           $('#operation' + index).append('<div id="thread__text' + index + '" class="thread__text"></div>');
 
-          $('#thread__text' + index).append('<p id="thread__address' + index + '" class="thread__address">都道府県：</p>');
+          $('#thread__text' + index).append('<p id="thread__address' + index + '" class="thread__address">発見場所：</p>');
 
           $('#thread__address' + index).append('<span id="thread__address-span' + index + '" class="thread__address-span"></span>');
 
@@ -119,6 +119,23 @@ $(function () {
       }
     });
   });
+
+//   $('[name="title"]').on('change', function(){
+//     var origin = location.origin;
+//     var title_val = $(this).val();
+//     $.ajax({
+//       url: origin + '/apply/public_html/ajax.php',
+//       type: "POST",
+//       data: {
+//         'type': 'searchThread',
+//         'title': title_val,
+//       },
+//     }).done(function(html){
+//         $("#select-area47").append(html);
+//     }).fail(function(html) {
+//         alert("error"); //通信失敗時
+//     });
+// });
 
 
   // 検索機能
