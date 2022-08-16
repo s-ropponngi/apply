@@ -48,30 +48,30 @@ $userNames = $user->findUser($_SESSION['me']->id);
     </div>
     <?php endforeach; ?>
 
-
-
-<div class="container">
-  <form action="" method="post" id="userupdate" class="form mypage-form row" enctype="multipart/form-data">
-    <div class="col-md-8">
-      <div class="form-block">
-        <label>メールアドレス</label>
-        <input type="text" name="email" value="<?= isset($userNames->email) ? h($userNames->email): ''; ?>">
-        <p class="err"><?= h($app->getErrors('email')); ?></p>
+<div class="neko-wrap-c">
+  <div class="container">
+    <form action="" method="post" id="userupdate" class="form mypage-form row" enctype="multipart/form-data">
+      <div class="form">
+        <div class="form-block">
+          <label for="email"></label>
+          <input type="text" name="email" value="<?= isset($userNames->email) ? h($userNames->email): ''; ?>" placeholder="メールアドレス">
+          <p class="err"><?= h($app->getErrors('email')); ?></p>
+        </div>
+        <div class="form-block">
+          <label for="user"></label>
+          <input type="text" name="username" value="<?= isset($userNames->username) ? h($userNames->username): ''; ?>" placeholder="ユーザー名">
+          <p class="err"><?= h($app->getErrors('username')); ?></p>
+        </div>
+        <button class="btn btn-primary" onclick="document.getElementById('userupdate').submit();">更新</button>
+        <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
       </div>
-      <div class="form-block">
-        <label>ユーザー名</label>
-        <input type="text" name="username" value="<?= isset($userNames->username) ? h($userNames->username): ''; ?>">
-        <p class="err"><?= h($app->getErrors('username')); ?></p>
-      </div>
-      <button class="btn btn-primary" onclick="document.getElementById('userupdate').submit();">更新</button>
+    </form>
+    <form class="user-delete" action="user_delete_confirm.php" method="post">
+      <input type="submit" class="btn btn-default" value="退会する">
       <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
-    </div>
-  </form>
-  <form class="user-delete" action="user_delete_confirm.php" method="post">
-    <input type="submit" class="btn btn-default" value="退会する">
-    <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
-  </form>
-</div><!--container -->
+    </form>
+  </div><!--container -->
+</div>
 
 <?php
 require_once(__DIR__ .'/footer.php');

@@ -107,6 +107,18 @@ public function searchThread($values) {
    return $rec;
   }
 
+  // 検索機能(タイトル絞る)
+  public function searchAddress($values) {
+    $this->db->beginTransaction();
+     $stmt = $this->db->prepare("SELECT DISTINCT s.address AS address FROM (SELECT * FROM `threads` WHERE title = :title_id AND delflag = 0) AS s");
+     $stmt->execute([
+       ':title_id' => $values['title'],
+     ]);
+     $stmt->setFetchMode(\PDO::FETCH_CLASS, 'stdClass');
+     $rec = $stmt->fetchAll();
+     return $rec;
+    }
+
 // 全スレッド取得
 public function getThreadAll(){
   $stmt = $this->db->query("SELECT * FROM threads WHERE delflag = 0 ORDER BY id desc");
@@ -114,17 +126,6 @@ public function getThreadAll(){
   $rec = $stmt->fetchAll();
   return $rec;
 }
-
-
-
-   // if (empty($rec)) {
-   //   $sql = "SELECT DISTINCT 'address' FROM threads";
-   //   $stmt = $this->db->prepare($sql);
-   //   $stmt->execute([
-   //     ':title_id' => $values['title'],
-   //     ':address_id' => $values['address']
-   //       ]);
-   //     }
 
 // ログインしている人の情報をマイページのフォームに反映させる
 public function find($id) {

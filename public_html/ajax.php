@@ -5,7 +5,11 @@ $threadApp = new \Apply\Model\Thread();
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
   try {
-    if($_POST['type'] == 'searchThread'){
+    if($_POST['type'] == 'searchAddress'){
+      $res = $threadApp->searchAddress([
+        'title' => $_POST['title'],
+      ]);
+  } elseif ($_POST['type'] == 'searchThread') {
       $res = $threadApp->searchThread([
         'title' => $_POST['title'],
         'address' => $_POST['address']

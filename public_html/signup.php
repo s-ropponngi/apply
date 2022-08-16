@@ -15,7 +15,7 @@ $app->run();
     </div>
     <div class="form-block">
       <label for="user"></label>
-      <input type="text" name="username" value="<?= isset($app->getValues()->username) ? h($app->getValues()->username): ''; ?>" placeholder="ニックネーム" class="form-control">
+      <input type="text" name="username" value="<?= isset($app->getValues()->username) ? h($app->getValues()->username): ''; ?>" placeholder="ユーザー名" class="form-control">
       <p class="err"><?= h($app->getErrors('username')); ?></p>
     </div>
     <div class="form-block">

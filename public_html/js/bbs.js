@@ -120,22 +120,31 @@ $(function () {
     });
   });
 
-//   $('[name="title"]').on('change', function(){
-//     var origin = location.origin;
-//     var title_val = $(this).val();
-//     $.ajax({
-//       url: origin + '/apply/public_html/ajax.php',
-//       type: "POST",
-//       data: {
-//         'type': 'searchThread',
-//         'title': title_val,
-//       },
-//     }).done(function(html){
-//         $("#select-area47").append(html);
-//     }).fail(function(html) {
-//         alert("error"); //通信失敗時
-//     });
-// });
+  $('[name="title"]').on('change', function(){
+    var origin = location.origin;
+    var title_val = $(this).val();
+    $.ajax({
+      url: origin + '/apply/public_html/ajax.php',
+      type: "POST",
+      data: {
+        'type': 'searchAddress',
+        'title': title_val,
+      },
+
+    success: function (data) {
+      // var $address = '';
+      var $address = $('#address');
+      $('#address').children().remove();
+      // $address.after('');
+      // $address.after('<option id="address' + index + '" class="address"></option>');
+      // if()
+      $.each(data,function(index) {
+        $address.after('<option id="address' + index + '" class="address"></option>');
+        $('#address' + index).text(data[index]['address']);
+      })
+    }
+    })
+  });
 
 
   // 検索機能
