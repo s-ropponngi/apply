@@ -3,7 +3,9 @@ require_once(__DIR__ .'/header.php');
 $app = new Apply\Controller\Thread();
 $app->run();
 ?>
-<h1 class="ttl__new_create"><img src="<?= SITE_URL; ?>/asset/img/new_create.png"></h1>
+<h1 class="ttl__area">Thread Create</h1>
+<p class='letter'>情報を投稿いただきありがとうございます。<br>
+誰かの役に立ちますように…</p>
 
 <div class="new__thread-block">
   <form action="" method="post" class="new_thread" id="new_thread" enctype="multipart/form-data">

@@ -8,7 +8,8 @@ $user = new \Apply\Model\User();
 $userDatas = $user->find($_SESSION['me']->id);
 $userNames = $user->findUser($_SESSION['me']->id);
 ?>
-<h1 class="ttl__mypage"><img src="<?= SITE_URL; ?>/asset/img/mypage.png"></h1>
+<h1 class="ttl__area">My Page</h1>
+  <p class='letter'>投稿に変更がありましたら。こちらで変更してください。</p>
 
 
 
@@ -48,8 +49,9 @@ $userNames = $user->findUser($_SESSION['me']->id);
     </div>
     <?php endforeach; ?>
 
+<p class='letter_under'>メールアドレス＆ユーザーネーム変更する際はこちらで変更してください。</p>
 <div class="neko-wrap-c">
-  <div class="container">
+  <div class="container__cat">
     <form action="" method="post" id="userupdate" class="form mypage-form row" enctype="multipart/form-data">
       <div class="form">
         <div class="form-block">

@@ -3,9 +3,13 @@ require_once(__DIR__ .'/header.php');
 $app = new Apply\Controller\UserDelete();
 $app->run();
 ?>
-<h1 class="page__ttl">ユーザー退会</h1>
-<p class="user-disp">以下のユーザーを退会します。実行する場合は「退会」ボタンを押してください。</p>
-<div class="container">
+<h1 class="ttl__area">User Delete</h1>
+
+<div class="hukidashi">
+  <p>以下のユーザーを退会します。実行する場合は「退会」ボタンを押してください。</p>
+</div>
+
+<div class="container__dog">
     <div class="form-group">
       <p>メールアドレス：<?= isset($app->getValues()->email) ? h($app->getValues()->email): ''; ?></p>
     </div>

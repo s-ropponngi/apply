@@ -30,7 +30,7 @@ $(function () {
   });
 
   // 全件取得
-  $(document).ready(function(){
+  $(document).ready(function() {
     var origin = location.origin;
     $.ajax({
       url: origin + '/apply/public_html/ajax.php',
@@ -134,7 +134,7 @@ $(function () {
     success: function (data) {
       // var $address = '';
       var $address = $('#address');
-      $('#address').children().remove();
+      $('.address .address').remove();
       // $address.after('');
       // $address.after('<option id="address' + index + '" class="address"></option>');
       // if()

@@ -28,7 +28,12 @@ img {
   object-fit: cover;
 }
 
+p {
+  font-family: initial;
+}
+
 .err {
+  text-align: center;
   margin: 10px 0;
   color: #d82626;
 }
@@ -38,10 +43,46 @@ img {
 body {
   background-color: #FFF5EB;
 }
+
 .wrapper {
   max-width: 100%;
   margin: 0 auto;
 }
+
+.ttl__area {
+  font-family: 'Leckerli One', cursive;
+  margin: 3rem auto 1rem;
+  font-size: 100px;
+  text-align: center;
+}
+
+.letter {
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: 16px;
+}
+
+.letter_under {
+  text-align: center;
+  margin-top: 7rem;
+  font-size: 16px;
+}
+
+@media screen and (min-width: 768px) {
+  .ttl__area {
+    font-family: 'Leckerli One', cursive;
+    margin: 5rem auto;
+    font-size: 100px;
+  }
+
+  .letter {
+    text-align: center;
+    margin-bottom: 5rem;
+    font-size: 18px;
+  }
+}
+
+
 
 /* ヘッダー */
 
@@ -158,16 +199,7 @@ body {
 
 /* ホーム画面 */
 
-.ttl__home {
-  margin: 3rem auto 1rem;
-  width: 40%;
-}
 
-.letter {
-  text-align: center;
-  margin-bottom: 3rem;
-  font-size: 14px;
-}
 
 .search__area {
   text-align: center;
@@ -223,16 +255,9 @@ body {
 
 
 
-@media screen and (min-width: 768px) {
-.ttl__home {
-  margin: 5rem auto 2rem;
-  width: 40%;
-}
 
-.letter {
-  text-align: center;
-  margin-bottom: 5rem;
-}
+
+@media screen and (min-width: 768px) {
 
 .search__area .title {
   border-radius: 5px;
@@ -553,6 +578,21 @@ input[type="file"]{
 
 /* ログイン画面 */
 
+.hukidashi {
+  background-image: url(../asset/img/hukidashi.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 60%;
+  margin: 0 auto;
+}
+
+.hukidashi p {
+  text-align: center;
+  margin-bottom: 5rem;
+  font-size: 18px;
+  padding: 5rem 6rem;
+}
+
 .container__cat {
   position: relative;
   margin: 8rem auto;
@@ -588,11 +628,6 @@ input[type="file"]{
   border-radius: 50px 10px 50px 100px;
   transform: rotate( -45deg );
   box-shadow: 1px 1px 3px #acacac; /* 耳の影（不要なら行を削除） */
- }
- .cat-wrap-d{
-  background-color: transparent;
-  position: relative;
-  z-index: 0;
  }
 
 .form {
@@ -689,56 +724,6 @@ input[type="file"]{
  }
 
  /* マイページ */
- .ttl__mypage {
-  margin: 5rem auto;
-  width: 60%;
- }
-
- /* .col-md-8 {
-  margin: 3rem 5rem;
- } */
-
- .container {
-  position: relative;
-  margin: 8rem auto;
-  padding: 2rem;
-  width: 75%; /* ボックス幅 */
-  background: #ffffff; /* ボックス背景色 */
-  color: #333333; /* 文字色 */
-  font-weight: bold; /* テキスト太字（不要なら行を削除） */
-  text-align: center; /* テキスト中央（不要なら行を削除） */
-  border: 5px solid #d3d3d3; /* ボックス枠線(太さ・線種・色) */
-  border-radius: 50px;
-  z-index: auto;
- }
- .container::before,
- .container::after {
-  height: 3.75rem;
-  width: 3.75rem;
-  position: absolute;
-  content:'';
-  top: -1.875rem;
-  z-index: -10;
- }
- .container::before {
-  left: 20%;
-  background: #ffc0cd; /* 左耳背景色 */
-  border: 5px solid #d3d3d3; /* 左耳枠線(太さ・線種・色) */
-  border-radius: 10px 50px 100px 50px;
-  transform: rotate( 45deg );
- }
- .container::after {
-  right: 20%;
-  background: #ffc0cd; /* 右耳背景色 */
-  border: 5px solid #d3d3d3; /* 右耳枠線(太さ・線種・色) */
-  border-radius: 50px 10px 50px 100px;
-  transform: rotate( -45deg );
- }
- .neko-wrap-c{
-  background-color: transparent;
-  position: relative;
-  z-index: 0;
- }
 
  /* スレッド詳細 */
 
