@@ -9,7 +9,7 @@ $userDatas = $user->find($_SESSION['me']->id);
 $userNames = $user->findUser($_SESSION['me']->id);
 ?>
 <h1 class="ttl__area">My Page</h1>
-  <p class='letter'>投稿に変更がありましたら。こちらで変更してください。</p>
+  <p class='letter'>投稿に変更がありましたらこちらで変更してください。</p>
 
 
 
@@ -49,8 +49,10 @@ $userNames = $user->findUser($_SESSION['me']->id);
     </div>
     <?php endforeach; ?>
 
-<p class='letter_under'>メールアドレス＆ユーザーネーム変更する際はこちらで変更してください。</p>
-<div class="neko-wrap-c">
+<div class="hukidashi">
+  <p>メールアドレス＆ユーザーネーム変更する際はこちらで変更してください。</p>
+</div>
+
   <div class="container__cat">
     <form action="" method="post" id="userupdate" class="form mypage-form row" enctype="multipart/form-data">
       <div class="form">
@@ -73,7 +75,6 @@ $userNames = $user->findUser($_SESSION['me']->id);
       <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
     </form>
   </div><!--container -->
-</div>
 
 <?php
 require_once(__DIR__ .'/footer.php');

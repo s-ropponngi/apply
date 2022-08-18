@@ -4,6 +4,11 @@ require_once(__DIR__ .'/header.php');
 $app = new Apply\Controller\Login();
 $app->run();
 ?>
+
+<div class="hukidashi">
+  <p>こちらでログインしてください。</p>
+</div>
+
 <div class="cat-wrap-d">
   <div class="container__cat">
     <h1></h1>

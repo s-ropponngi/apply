@@ -11,7 +11,7 @@ $threadCon = new Apply\Controller\Thread();
 $threadCon->run();
 
 ?>
-<h1 class="page__ttl"><img src="<?= SITE_URL; ?>/asset/img/info.png"></h1>
+<h1 class="ttl__area">Edit Page</h1>
 <form action="" method="post" class="new_thread" id="new_thread" enctype="multipart/form-data">
 
     <div class="new__thread-block">

@@ -4,6 +4,11 @@ require_once(__DIR__ .'/header.php');
 $app = new Apply\Controller\Signup();
 $app->run();
 ?>
+
+<div class="hukidashi">
+  <p>こちらで会員登録してください。</p>
+</div>
+
 <div class="container__dog">
   <h1></h1>
     <form action="" method="post" id="signup" class="form">

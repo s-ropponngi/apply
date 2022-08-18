@@ -4,6 +4,7 @@ html {
   font-weight: 200;
   letter-spacing: 0.1em;
   color: #54381D;
+  font-size: 14px;
 }
 
 * {
@@ -52,31 +53,31 @@ body {
 .ttl__area {
   font-family: 'Leckerli One', cursive;
   margin: 3rem auto 1rem;
-  font-size: 100px;
+  font-size: 60px;
   text-align: center;
 }
 
 .letter {
   text-align: center;
-  margin-bottom: 3rem;
-  font-size: 16px;
-}
-
-.letter_under {
-  text-align: center;
-  margin-top: 7rem;
-  font-size: 16px;
+  margin: 2rem;
 }
 
 @media screen and (min-width: 768px) {
+
+  html {
+    font-size: 16px;
+  }
+  .wrapper {
+    max-width: 980px;
+    margin: 50px auto;
+  }
+
   .ttl__area {
-    font-family: 'Leckerli One', cursive;
     margin: 5rem auto;
     font-size: 100px;
   }
 
   .letter {
-    text-align: center;
     margin-bottom: 5rem;
     font-size: 18px;
   }
@@ -87,12 +88,43 @@ body {
 /* ヘッダー */
 
 .header {
+  position: relative;
   background: #B2B8A3;
+  height: 5rem;
+}
+
+.header::before {
+  position: absolute;
+  content: '';
+  left: 50%;
+  z-index: -2147483647;
+  width: 25%;
+  height: 100%;
+  border-radius: 50%;
+  background: inherit;
+  transform: translateX(-50%) translateY(42%);
+  bottom: 0px;
+}
+
+.header__main {
+  position: absolute;
+  width: 100%;
+}
+
+.header__logo {
+  text-align: center;
+  width: 100%;
+  margin-top: -3rem;
+  z-index: 2147483647;
+}
+
+.header__logo-img {
+  width: 15%;
 }
 
 .header__inner {
-  width: 90%;
-  margin: 0 auto;
+  padding: 1rem 0.5rem;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -105,8 +137,6 @@ body {
 }
 
 .header__inner nav ul li {
-  font-size: 16px;
-  font-family: 'M PLUS Rounded 1c', sans-serif;
   text-align: center;
   display: flex;
   align-items: center;
@@ -122,14 +152,29 @@ body {
   align-items: center;
 }
 
+.header__inner .prof-show .name {
+  font-weight: bold;
+  color:#54381D;
+}
+
+.header__inner .prof-show .image img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+}
+
+.header__inner .header-r {
+  display: flex;
+}
+
 .user-btn {
   display: flex;
   align-items: center;
-  margin-left: 20px;
+  margin-left: 0.25rem;
 }
 
 .user-btn input[type=submit] {
-  color: #007bff;
+  color: #54381D;
   background: none;
   border: none;
 }
@@ -139,60 +184,35 @@ body {
   text-decoration: underline;
 }
 
+.name {
+  font-family: initial;
+}
+
 @media screen and (min-width: 768px) {
-  .wrapper {
-    max-width: 980px;
-    margin: 50px auto;
+
+  .header {
+    height: 10rem;
   }
 
-  .header__inner nav ul li {
-    font-size: 20px;
-    font-family: 'M PLUS Rounded 1c', sans-serif;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .header::before {
+    width: 15%;
+    border-radius: 50%;
   }
 
-  .header__inner nav ul li + li {
-    margin-left: 20px;
+  .header__logo {
+    margin-top: -6rem;
   }
 
-  .header__inner .header-r {
-    display: flex;
+  .header__logo-img {
+    width: 10%;
   }
 
-  .header__inner .prof-show {
-    display: flex;
-    align-items: center;
-  }
-
-  .header__inner .prof-show .name {
-    font-weight: bold;
-    color: #007bff;
-  }
-
-  .header__inner .prof-show .image img {
-    width: 40px;
-    height: 40px;
-    object-fit: cover;
+  .header__inner {
+    padding: 3rem 10rem;
   }
 
   .user-btn {
-    display: flex;
-    align-items: center;
-    margin-left: 20px;
-  }
-
-  .user-btn input[type=submit] {
-    color: #007bff;
-    background: none;
-    border: none;
-  }
-
-  .user-btn input[type=submit]:hover {
-    color: #0056b3;
-    text-decoration: underline;
+    margin-left: 1.25rem;
   }
 
 }
@@ -242,68 +262,10 @@ body {
 }
 
 .thread__block {
-  margin: 1rem;
+  margin: 1rem auto;
   width: 100%;
+  height: 300px;
   padding:3rem;
-  color: #54381D;
-  background-image: url(../asset/img/kanban.png);
-  background-size: 100% 150%;
-  background-repeat: no-repeat;
-}
-
-
-
-
-
-
-
-@media screen and (min-width: 768px) {
-
-.search__area .title {
-  border-radius: 5px;
-  border: solid 1px #999999;
-  box-sizing: border-box;
-  padding: 0.5rem 1rem;
-  font-size: 20px;
-}
-
-.search__area .title select {
-  border-radius: 5px;
-  width: 100%;
-  border: none;
-  box-shadow: none;
-  background: transparent;
-  -webkit-appearance: none;
-  outline: none;
-  cursor: pointer;
-  background: #fff
-}
-
-.search__area .address {
-  border-radius: 5px;
-  border: solid 1px #999999;
-  box-sizing: border-box;
-  padding: 0.5rem 1rem;
-  font-size: 20px;
-}
-
-.search__area .address select {
-  border-radius: 5px;
-  width: 100%;
-  border: none;
-  box-shadow: none;
-  background: transparent;
-  -webkit-appearance: none;
-  outline: none;
-  cursor: pointer;
-  background: #fff
-}
-
-.thread__block {
-  margin: 5rem auto;
-  width: 100%;
-  height: 1400px;
-  padding: 9rem 8rem;
   color: #54381D;
   background-image: url(../asset/img/kanban.png);
   background-size: 100% 100%;
@@ -313,6 +275,114 @@ body {
 .thread__item {
   position: relative;
   background-color: #fff;
+}
+
+.thread__item::before {
+  display: block;
+  position: absolute;
+  z-index: 1;
+  content: "";
+  width: 140px;
+  height: 35px;
+  left: 35%;
+  top: -16px;
+  background-color: rgba(252, 248, 248, 0.5);/*テープ色*/
+  box-shadow: 0 0 3px rgba(0,0,0,0.1);
+  transform: rotate( -3deg ); /*テープ角度*/
+ }
+
+.thread__imgarea {
+  position: relative;
+}
+
+.thread__imgarea::before{
+  content: "";
+  display: block;
+  padding-top: calc((300 / 500) * 100%);
+}
+
+.thread__imgarea img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+}
+
+.thread__ttlarea {
+  font-size: 30px;
+  text-align: center;
+  padding: 20px;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+}
+
+.text_btn {
+  display: flex;
+}
+
+.thread__text {
+  padding: 1rem 3rem 0rem;
+}
+
+.thread__text p{
+  margin-bottom: initial;
+}
+.thread__text p:not(:first-child){
+  margin-top: 1rem;
+}
+
+.comment__btn {
+  padding: 1rem 3rem;
+  width: 30%;
+}
+
+.comment__btn img {
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.comment__btn img:hover {
+  opacity: 0.7;
+  filter: alpha(opacity=70);
+  -ms-filter: "alpha(opacity=70)";
+}
+
+.thread__datearea {
+  font-size: 15px;
+  text-align: right;
+  padding: 1rem;
+}
+
+.form-group input[type="submit"] {
+  margin-top: 30px;
+  padding: 10px;
+}
+
+.operation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+@media screen and (min-width: 768px) {
+
+.search__area .title {
+  padding: 0.5rem 1rem;
+  font-size: 20px;
+}
+
+.search__area .address {
+  padding: 0.5rem 1rem;
+  font-size: 20px;
+}
+
+.thread__block {
+  margin: 5rem auto;
+  height: 1400px;
+  padding: 9rem 8rem;
+  background-image: url(../asset/img/kanban.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 .thread__item::before {
@@ -582,21 +652,22 @@ input[type="file"]{
   background-image: url(../asset/img/hukidashi.png);
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  width: 60%;
-  margin: 0 auto;
+  width: 50%;
+  height: 350px;
+  margin: 4rem auto;
 }
 
 .hukidashi p {
   text-align: center;
   margin-bottom: 5rem;
   font-size: 18px;
-  padding: 5rem 6rem;
+  padding: 8rem 3rem;
 }
 
 .container__cat {
   position: relative;
-  margin: 8rem auto;
-  padding: 2rem;
+  margin: 4rem auto;
+  padding: 3rem 10rem;
   width: 75%; /* ボックス幅 */
   background: #fdf5e6; /* ボックス背景色 */
   border: 5px solid #666666; /* ボックス枠線(太さ・線種・色) */
@@ -629,10 +700,6 @@ input[type="file"]{
   transform: rotate( -45deg );
   box-shadow: 1px 1px 3px #acacac; /* 耳の影（不要なら行を削除） */
  }
-
-.form {
-  padding: 0 5rem;
-}
 
 .form-block {
   margin-bottom: 0.75rem;
@@ -693,8 +760,8 @@ input[type="file"]{
 
 .container__dog {
   position: relative;
-  margin: 8rem auto;
-  padding: 2rem;
+  margin: 4rem auto;
+  padding: 3rem 10rem;
   width: 75%; /* ボックス幅 */
   background: #fdf5e6; /* ボックス背景色 */
   border: 5px solid #666666; /* ボックス枠線(太さ・線種・色)*/

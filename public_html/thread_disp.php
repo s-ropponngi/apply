@@ -10,6 +10,8 @@ $threadMod = new Apply\Model\Thread();
 $threadDisp = $threadMod->getThread($thread_id);
 ?>
 <h1 class="ttl__area">Thread Info</h1>
+<p class="letter">こちらでコメントができます。<br>情報ございましたらコメントお願いします。</p>
+
 <div class="thread__disp">
   <ul class="thread">
     <li class="thread__block" data-threadid="<?= $thread->t_id; ?>">
