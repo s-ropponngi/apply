@@ -46,7 +46,7 @@ body {
 }
 
 .wrapper {
-  max-width: 100%;
+  max-width: 80%;
   margin: 0 auto;
 }
 
@@ -67,9 +67,9 @@ body {
   html {
     font-size: 16px;
   }
+
   .wrapper {
-    max-width: 980px;
-    margin: 50px auto;
+    max-width: 70%;
   }
 
   .ttl__area {
@@ -262,11 +262,10 @@ body {
 }
 
 .thread__block {
-  margin: 1rem auto;
+  margin: 3rem auto;
   width: 100%;
-  height: 300px;
-  padding:3rem;
-  color: #54381D;
+  height: 50rem;
+  padding: 5rem 2rem;
   background-image: url(../asset/img/kanban.png);
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -282,9 +281,9 @@ body {
   position: absolute;
   z-index: 1;
   content: "";
-  width: 140px;
-  height: 35px;
-  left: 35%;
+  width: 90px;
+  height: 30px;
+  left: 30%;
   top: -16px;
   background-color: rgba(252, 248, 248, 0.5);/*テープ色*/
   box-shadow: 0 0 3px rgba(0,0,0,0.1);
@@ -309,18 +308,13 @@ body {
 }
 
 .thread__ttlarea {
-  font-size: 30px;
+  font-size: 20px;
   text-align: center;
-  padding: 20px;
-  font-family: 'M PLUS Rounded 1c', sans-serif;
+  padding: 8px;
 }
 
-.text_btn {
-  display: flex;
-}
-
-.thread__text {
-  padding: 1rem 3rem 0rem;
+.operation {
+  padding: 1rem 1rem 0;
 }
 
 .thread__text p{
@@ -331,11 +325,13 @@ body {
 }
 
 .comment__btn {
-  padding: 1rem 3rem;
-  width: 30%;
+  display: block;
+  text-align: center;
+  margin-top: 1rem;
 }
 
 .comment__btn img {
+  max-width: 40%;
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }
 
@@ -346,7 +342,7 @@ body {
 }
 
 .thread__datearea {
-  font-size: 15px;
+  font-size: 12px;
   text-align: right;
   padding: 1rem;
 }
@@ -354,12 +350,6 @@ body {
 .form-group input[type="submit"] {
   margin-top: 30px;
   padding: 10px;
-}
-
-.operation {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 
@@ -378,7 +368,7 @@ body {
 
 .thread__block {
   margin: 5rem auto;
-  height: 1400px;
+  height: 85rem;
   padding: 9rem 8rem;
   background-image: url(../asset/img/kanban.png);
   background-size: 100% 100%;
@@ -423,28 +413,25 @@ body {
   font-family: 'M PLUS Rounded 1c', sans-serif;
 }
 
-.text_btn {
+.operation {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.thread__text {
-  padding: 1rem 3rem 0rem;
-}
 
-.thread__text p{
-  margin-bottom: initial;
-}
 .thread__text p:not(:first-child){
   margin-top: 1rem;
 }
 
 .comment__btn {
-  padding: 1rem 3rem;
-  width: 30%;
+  max-width: 25%;
+  margin-top: initial;
 }
 
 .comment__btn img {
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  max-width: initial;
 }
 
 .comment__btn img:hover {
@@ -464,11 +451,7 @@ body {
   padding: 10px;
 }
 
-.operation {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+
 }
 
 /* スレッド作成 */
@@ -652,8 +635,8 @@ input[type="file"]{
   background-image: url(../asset/img/hukidashi.png);
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  width: 50%;
-  height: 350px;
+  width: 60%;
+  height: 120px;
   margin: 4rem auto;
 }
 
@@ -755,6 +738,118 @@ input[type="file"]{
 .form-footer a:hover {
   border-bottom: 1px dotted #8c8c8c;
 }
+
+@media screen and (min-width: 768px) {
+
+  .hukidashi {
+    background-image: url(../asset/img/hukidashi.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 50%;
+    height: 350px;
+    margin: 8rem auto;
+  }
+
+  .hukidashi p {
+    text-align: center;
+    margin-bottom: 5rem;
+    font-size: 18px;
+    padding: 8rem 3rem;
+  }
+
+  .container__cat {
+    position: relative;
+    margin: 4rem auto;
+    padding: 3rem 10rem;
+    width: 75%; /* ボックス幅 */
+    background: #fdf5e6; /* ボックス背景色 */
+    border: 5px solid #666666; /* ボックス枠線(太さ・線種・色) */
+    border-radius: 50px;
+    box-shadow: 1px 1px 3px #acacac; /* ボックス影（不要なら行を削除） */
+    z-index: auto;
+   }
+   .container__cat::before,
+   .container__cat::after {
+    height: 3.75rem;
+    width: 3.75rem;
+    position: absolute;
+    content:'';
+    top: -1.875rem;
+    z-index: -10;
+   }
+   .container__cat::before {
+    left: 20%;
+    background: #555555; /* 左耳背景色 */
+    border: 5px solid #666666; /* 左耳枠線(太さ・線種・色) */
+    border-radius: 10px 50px 100px 50px;
+    transform: rotate( 45deg );
+    box-shadow: 1px -1px 3px #acacac; /* 耳の影（不要なら行を削除） */
+   }
+   .container__cat::after {
+    right: 20%;
+    background: #B8824D; /* 右耳背景色 */
+    border: 5px solid #666666; /* 右耳枠線(太さ・線種・色) */
+    border-radius: 50px 10px 50px 100px;
+    transform: rotate( -45deg );
+    box-shadow: 1px 1px 3px #acacac; /* 耳の影（不要なら行を削除） */
+   }
+
+  .form-block {
+    margin-bottom: 0.75rem;
+    width: 100%;
+  }
+
+  .form-block input {
+    background: #fff;
+    border: none;
+    border-bottom: 2px solid #e9e9e9;
+    color: #666;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1em;
+    height: 50px;
+    transition: border-color 0.3s;
+    width: 100%;
+  }
+
+  .form-block input:focus {
+    border-bottom: 2px solid #c0c0c0;
+    outline: none;
+  }
+
+  .button {
+    width: 30%;
+    margin: 0 auto;
+  }
+
+  .button img{
+    width: 100%;
+    margin: 2em 0 0;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  }
+
+  .button img:hover {
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+    -ms-filter: "alpha(opacity=70)";
+  }
+
+  .form-footer {
+    font-size: 1em;
+    padding-top: 2em;
+    text-align: center;
+  }
+
+  .form-footer a {
+    color: #8c8c8c;
+    text-decoration: none;
+    transition: border-color 0.3s;
+  }
+
+  .form-footer a:hover {
+    border-bottom: 1px dotted #8c8c8c;
+  }
+}
+
 
 /* ユーザー登録画面 */
 
