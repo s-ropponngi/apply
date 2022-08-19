@@ -1,8 +1,8 @@
 <?php
 ini_set('display_errors',1);
-define('DSN','mysql:host=localhost;charset=utf8;dbname=apply');
-define('DB_USERNAME','apply_user');
-define('DB_PASSWORD','w2T8PIFVUG8po53v');
+define('DSN','mysql:host=us-cdbr-east-06.cleardb.net;charset=utf8;dbname=heroku_c9e1ae2759f6c1e');
+define('DB_USERNAME','b3df6f381eee25');
+define('DB_PASSWORD','8872b555');
 define('SITE_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/apply/public_html');
 require_once(__DIR__ .'/../lib/Controller/functions.php');
 require_once(__DIR__ . '/autoload.php');
