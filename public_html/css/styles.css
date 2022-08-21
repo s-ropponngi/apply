@@ -264,8 +264,8 @@ body {
 .thread__block {
   margin: 3rem auto;
   width: 100%;
-  height: 50rem;
-  padding: 5rem 2rem;
+  height: 60rem;
+  padding: 6rem 2rem;
   background-image: url(../asset/img/kanban.png);
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -331,7 +331,7 @@ body {
 }
 
 .comment__btn img {
-  max-width: 40%;
+  max-width: 35%;
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }
 
@@ -352,8 +352,6 @@ body {
   padding: 10px;
 }
 
-
-
 @media screen and (min-width: 768px) {
 
 .search__area .title {
@@ -368,8 +366,8 @@ body {
 
 .thread__block {
   margin: 5rem auto;
-  height: 85rem;
-  padding: 9rem 8rem;
+  height: 70rem;
+  padding: 8rem 5rem;
   background-image: url(../asset/img/kanban.png);
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -451,6 +449,18 @@ body {
   padding: 10px;
 }
 
+@media screen and (min-width: 1200px) {
+  .thread__block {
+    margin: 5rem auto;
+    height: 90rem;
+    padding: 9rem 8rem;
+    background-image: url(../asset/img/kanban.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+  }
+
+}
+
 
 }
 
@@ -470,6 +480,7 @@ body {
 
 .img__block {
   position: relative;
+  padding-top: 4rem;
 }
 
 .imgarea {
@@ -497,8 +508,8 @@ body {
 .file-img {
   position: absolute;
   width: 15%;
-  top: 25rem;
-  right: 5rem;
+  top: 13rem;
+  right: 2rem;
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }
 
@@ -526,18 +537,18 @@ input[type="file"]{
  }
 
 .form-group label {
-  width: 30%;
+  width: 35%;
 }
 
 .form-group select {
   width: 70%;
-  font-size: 20px; color: #77787B;
+  font-size: 16px; color: #77787B;
   border: none;
 }
 
 .flatpickr-input {
   width: 70%;
-  font-size: 20px;
+  font-size: 16px;
   border: none;
   color: #77787B;
 }
@@ -545,7 +556,7 @@ input[type="file"]{
 .form-group textarea {
   width: 70%;
   font-family : inherit;
-  font-size: 20px;
+  font-size: 16px;
   border: none;
   line-height: 2;
   color: #77787B;
@@ -635,23 +646,21 @@ input[type="file"]{
   background-image: url(../asset/img/hukidashi.png);
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  width: 60%;
-  height: 120px;
+  width: 80%;
+  height: 100%;
   margin: 4rem auto;
 }
 
 .hukidashi p {
   text-align: center;
-  margin-bottom: 5rem;
-  font-size: 18px;
-  padding: 8rem 3rem;
+  font-size: 16px;
+  padding: 4rem 1rem 5rem;
 }
 
 .container__cat {
   position: relative;
   margin: 4rem auto;
-  padding: 3rem 10rem;
-  width: 75%; /* ボックス幅 */
+  width: 100%; /* ボックス幅 */
   background: #fdf5e6; /* ボックス背景色 */
   border: 5px solid #666666; /* ボックス枠線(太さ・線種・色) */
   border-radius: 50px;
@@ -684,9 +693,13 @@ input[type="file"]{
   box-shadow: 1px 1px 3px #acacac; /* 耳の影（不要なら行を削除） */
  }
 
+ .form__inner {
+  margin: 2rem;
+ }
+
 .form-block {
-  margin-bottom: 0.75rem;
-  width: 100%;
+  margin: 0.2rem auto;
+  width: 80%;
 }
 
 .form-block input {
@@ -695,8 +708,8 @@ input[type="file"]{
   border-bottom: 2px solid #e9e9e9;
   color: #666;
   font-family: 'Open Sans', sans-serif;
-  font-size: 1em;
-  height: 50px;
+  font-size: 14px;
+  height: 30px;
   transition: border-color 0.3s;
   width: 100%;
 }
@@ -713,7 +726,7 @@ input[type="file"]{
 
 .button img{
   width: 100%;
-  margin: 2em 0 0;
+  margin-top: 1rem;
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }
 
@@ -724,8 +737,8 @@ input[type="file"]{
 }
 
 .form-footer {
-  font-size: 1em;
-  padding-top: 2em;
+  font-size: 14px;
+  margin-top: 1rem;
   text-align: center;
 }
 
@@ -745,22 +758,20 @@ input[type="file"]{
     background-image: url(../asset/img/hukidashi.png);
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    width: 50%;
-    height: 350px;
-    margin: 8rem auto;
+    width: 55%;
+    height: 100%;
+    margin: 8rem auto 3rem;
   }
 
   .hukidashi p {
     text-align: center;
-    margin-bottom: 5rem;
     font-size: 18px;
-    padding: 8rem 3rem;
+    padding: 6rem 3rem 8rem;
   }
 
   .container__cat {
     position: relative;
     margin: 4rem auto;
-    padding: 3rem 10rem;
     width: 75%; /* ボックス幅 */
     background: #fdf5e6; /* ボックス背景色 */
     border: 5px solid #666666; /* ボックス枠線(太さ・線種・色) */
@@ -794,9 +805,8 @@ input[type="file"]{
     box-shadow: 1px 1px 3px #acacac; /* 耳の影（不要なら行を削除） */
    }
 
-  .form-block {
-    margin-bottom: 0.75rem;
-    width: 100%;
+  .form__inner {
+    margin: 3rem;
   }
 
   .form-block input {
@@ -827,27 +837,6 @@ input[type="file"]{
     filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
   }
 
-  .button img:hover {
-    opacity: 0.7;
-    filter: alpha(opacity=70);
-    -ms-filter: "alpha(opacity=70)";
-  }
-
-  .form-footer {
-    font-size: 1em;
-    padding-top: 2em;
-    text-align: center;
-  }
-
-  .form-footer a {
-    color: #8c8c8c;
-    text-decoration: none;
-    transition: border-color 0.3s;
-  }
-
-  .form-footer a:hover {
-    border-bottom: 1px dotted #8c8c8c;
-  }
 }
 
 
@@ -856,8 +845,7 @@ input[type="file"]{
 .container__dog {
   position: relative;
   margin: 4rem auto;
-  padding: 3rem 10rem;
-  width: 75%; /* ボックス幅 */
+  width: 100%; /* ボックス幅 */
   background: #fdf5e6; /* ボックス背景色 */
   border: 5px solid #666666; /* ボックス枠線(太さ・線種・色)*/
   border-radius: 50px;
@@ -885,14 +873,41 @@ input[type="file"]{
   transform: rotate( -30deg );
  }
 
+ @media screen and (min-width: 768px) {
+  .container__dog {
+    position: relative;
+    width: 75%; /* ボックス幅 */
+    background: #fdf5e6; /* ボックス背景色 */
+    border: 5px solid #666666; /* ボックス枠線(太さ・線種・色)*/
+    border-radius: 50px;
+   }
+   .container__dog::before,
+   .container__dog::after {
+    height: 6.5rem;
+    width: 3.5rem;
+    position: absolute;
+    content: '';
+    top: -25px;
+   }
+   .container__dog::before {
+    left: -2%;
+    background: #C07C3E; /* 左耳背景色 */
+    border: 5px solid #666666; /* 左耳枠線(太さ・線種・色) */
+    border-radius: 100px 50px;
+    transform: rotate( 30deg );
+   }
+   .container__dog::after {
+    right: -2%;
+    background: #C07C3E; /* 右耳背景色 */
+    border: 5px solid #666; /* 右耳枠線(太さ・線種・色) */
+    border-radius: 50px 100px;
+    transform: rotate( -30deg );
+   }
+ }
+
  /* マイページ */
 
  /* スレッド詳細 */
-
-.page__ttl {
-  margin: 5rem auto;
-  width: 70%;
-}
 
 .comment__item {
   position: relative;
@@ -929,19 +944,24 @@ input[type="file"]{
 	-o-transform: rotate(-3deg);
 }
 
+.comment__item__head {
+  font-family: initial;
+}
+
 .comment__form-group {
   background-image: url(../asset/img/backgland__img.png);
   background-size: 100% 100%;
   background-repeat: no-repeat;
   margin: 3rem auto;
-  padding: 5rem;
+  padding: 3rem;
   text-align: center;
-  width: 75%;
+  width: 85%;
 }
 
 .comment__form-group textarea {
-  font-size: 18px;
+  font-size: 16px;
   width: 85%;
+  height: 7rem;
 }
 
 .comment__form-input {
@@ -959,7 +979,39 @@ input[type="file"]{
   -ms-filter: "alpha(opacity=70)";
 }
 
+@media screen and (min-width: 768px) {
 
+.comment__form-group {
+  background-image: url(../asset/img/backgland__img.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  margin: 3rem auto;
+  padding: 4rem;
+  text-align: center;
+  width: 75%;
+}
+
+.comment__form-group textarea {
+  font-size: 18px;
+  width: 85%;
+  height: 10rem;
+}
+
+.comment__form-input {
+  text-align: center;
+}
+
+.comment__form-input input {
+  width: 25%;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.comment__form-input input:hover {
+  opacity: 0.7;
+  filter: alpha(opacity=70);
+  -ms-filter: "alpha(opacity=70)";
+}
+}
 
 
 
