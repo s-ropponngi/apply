@@ -33,7 +33,7 @@ $(function () {
   $(document).ready(function() {
     var origin = location.origin;
     $.ajax({
-      url: origin + '/apply/public_html/ajax.php',
+      url: origin + '/ajax.php',
       type: "POST",
       data: {
         'type': 'getThreadAll',
