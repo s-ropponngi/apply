@@ -9,9 +9,8 @@ $app->run();
   <p>こちらでログインしてください。</p>
 </div>
 
-<div class="cat-wrap-d">
   <div class="container__cat">
-    <h1></h1>
+    <div class="form__inner">
       <form action="" method="post" id="login" class="form">
         <div class="form-block">
           <label for="email"></label>
@@ -26,6 +25,6 @@ $app->run();
         <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
       </form>
     <p class="form-footer"><a href="signup.php">ユーザー登録</a></p>
-  </div><!--container -->
-</div>
+  </div>
+</div><!--container -->
 <?php require_once(__DIR__ .'/footer.php'); ?>

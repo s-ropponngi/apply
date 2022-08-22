@@ -10,7 +10,7 @@ $app->run();
 </div>
 
 <div class="container__dog">
-  <h1></h1>
+  <div class="form__inner">
     <form action="" method="post" id="signup" class="form">
       <div class="form-block">
       <label for="email"></label>
@@ -32,5 +32,6 @@ $app->run();
     <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
   </form>
   <p class="form-footer"><a href="<?= SITE_URL; ?>/login.php">ログイン</a></p>
+  </div>
 </div><!-- container -->
 <?php require_once(__DIR__ .'/footer.php'); ?>
