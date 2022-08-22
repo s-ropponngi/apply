@@ -33,7 +33,7 @@ $(function () {
   $(document).ready(function() {
     var origin = location.origin;
     $.ajax({
-      url: origin + '/ajax.php',
+      url: origin + '/apply/public_html/ajax.php',
       type: "POST",
       data: {
         'type': 'getThreadAll',
@@ -124,7 +124,7 @@ $(function () {
     var origin = location.origin;
     var title_val = $(this).val();
     $.ajax({
-      url: origin + '/ajax.php',
+      url: origin + '/apply/public_html/ajax.php',
       type: "POST",
       data: {
         'type': 'searchAddress',
@@ -158,7 +158,7 @@ $(function () {
     // 選択されている都道府県のvalue属性値を取り出す
     var address_val = $(this).val();
     $.ajax({
-      url: origin + '/ajax.php',
+      url: origin + '/apply/public_html/ajax.php',
       type: "POST",
       data: {
         'type': 'searchThread',
@@ -217,15 +217,15 @@ $(function () {
             $(element).text(data[index]['title']);
           });
 
-          $('#thread__item' + index).find('.thread__address').each( function( key, element ) {
+          $('#thread__item' + index).find('.thread__address-span').each( function( key, element ) {
             $(element).text(data[index]['address']);
           });
 
-          $('#thread__item' + index).find('.thread__due_date').each( function( key, element ) {
+          $('#thread__item' + index).find('.thread__due_date-span').each( function( key, element ) {
             $(element).text(data[index]['due_date']);
           });
 
-          $('#thread__item' + index).find('.thread__comment').each( function( key, element ) {
+          $('#thread__item' + index).find('.thread__comment-span').each( function( key, element ) {
             $(element).text(data[index]['comment']);
           });
 
