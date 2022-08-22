@@ -13,7 +13,7 @@ html {
 
 textarea {
   resize: none;
-  height: 10rem;
+  height: 7rem;
 }
 
 ul {
@@ -34,9 +34,17 @@ p {
 }
 
 .err {
+  font-size: 16px;
   text-align: center;
-  margin: 10px 0;
   color: #d82626;
+}
+
+@media screen and (min-width: 768px) {
+  .err {
+    font-size: 20px;
+    text-align: center;
+    color: #d82626;
+  }
 }
 
 /* apply style */
@@ -475,12 +483,11 @@ body {
   background-image: url(../asset/img/backgland__img.png);
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  padding: 10rem 0 1rem 0;
 }
 
 .img__block {
   position: relative;
-  padding-top: 4rem;
+  padding-top: 5rem;
 }
 
 .imgarea {
@@ -508,8 +515,8 @@ body {
 .file-img {
   position: absolute;
   width: 15%;
-  top: 13rem;
-  right: 2rem;
+  top: 83%;
+  right: 7%;
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }
 
@@ -524,12 +531,18 @@ input[type="file"]{
 }
 
 .form__block {
-  margin: 4rem auto;
-  width: 50%;
+  margin: 2.5rem auto;
+  width: 75%;
+  padding-bottom: 3rem;
 }
 .form-group {
   display: flex;
   margin-top: 1rem;
+  font-family: initial;
+}
+
+.form-group p {
+  margin-top: 5rem;
 }
 
 .form-group .btn-primary img{
@@ -537,7 +550,9 @@ input[type="file"]{
  }
 
 .form-group label {
-  width: 35%;
+  width: 30%;
+  font-size: 12px;
+  padding-top: 3px;
 }
 
 .form-group select {
@@ -558,13 +573,19 @@ input[type="file"]{
   font-family : inherit;
   font-size: 16px;
   border: none;
-  line-height: 2;
+  line-height: 1.5;
   color: #77787B;
+  margin-bottom: 2rem;
+}
+
+.form-control {
+  width: 70%;
+  padding-top: 3px;
 }
 
 .btn-primary {
-  margin: 4rem auto;
-  width: 40%;
+  margin: 2rem auto;
+  width: 35%;
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }
 
@@ -572,6 +593,113 @@ input[type="file"]{
   opacity: 0.7;
   filter: alpha(opacity=70);
   -ms-filter: "alpha(opacity=70)";
+}
+
+@media screen and (min-width: 768px) {
+  .img__block {
+    position: relative;
+    padding-top: 8rem;
+  }
+
+  .imgarea {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .imgfile {
+    position: relative;
+  }
+
+  .imgfile::before{
+    content: "";
+    display: block;
+    padding-top: calc((300 / 500) * 100%);
+  }
+
+  .imgfile img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+  }
+
+  .file-img {
+    position: absolute;
+    width: 15%;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  }
+
+  .file-img img:hover {
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+    -ms-filter: "alpha(opacity=70)";
+  }
+
+  input[type="file"]{
+    display: none;
+  }
+
+  .form__block {
+    margin: 2.5rem auto;
+    width: 50%;
+    padding-bottom: 5rem;
+  }
+
+  .form-group {
+    display: flex;
+    margin-top: 1rem;
+  }
+
+  .form-group .btn-primary img{
+    width: 35%;
+   }
+
+  .form-group label {
+    width: 30%;
+    font-size: 18px;
+    padding-top: 5px;
+  }
+
+  .form-group select {
+    width: 70%;
+    font-size: 24px; color: #77787B;
+    border: none;
+  }
+
+  .flatpickr-input {
+    width: 70%;
+    font-size: 24px;
+    border: none;
+    color: #77787B;
+  }
+
+  .form-group textarea {
+    width: 70%;
+    font-family : inherit;
+    font-size: 24px;
+    border: none;
+    line-height: 1.5;
+    color: #77787B;
+    margin-bottom: 4rem;
+  }
+
+  .form-control {
+    width: 70%;
+    font-size: 20px;
+    padding-top: 5px;
+  }
+
+  .btn-primary {
+    margin: 5rem auto;
+    width: 40%;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  }
+
+  .btn-primary img:hover {
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+    -ms-filter: "alpha(opacity=70)";
+  }
 }
 
 .comment-confirm .guide {
@@ -906,6 +1034,11 @@ input[type="file"]{
  }
 
  /* マイページ */
+
+ .user-delete {
+  text-align: center;
+  margin-bottom: 1rem;
+ }
 
  /* スレッド詳細 */
 

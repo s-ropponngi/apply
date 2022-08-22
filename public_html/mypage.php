@@ -53,28 +53,29 @@ $userNames = $user->findUser($_SESSION['me']->id);
   <p>メールアドレス＆ユーザーネーム変更する際はこちらで変更してください。</p>
 </div>
 
-  <div class="container__cat">
+<div class="container__cat">
+  <div class="form__inner">
     <form action="" method="post" id="userupdate" class="form mypage-form row" enctype="multipart/form-data">
-      <div class="form">
-        <div class="form-block">
-          <label for="email"></label>
-          <input type="text" name="email" value="<?= isset($userNames->email) ? h($userNames->email): ''; ?>" placeholder="メールアドレス">
-          <p class="err"><?= h($app->getErrors('email')); ?></p>
-        </div>
-        <div class="form-block">
-          <label for="user"></label>
-          <input type="text" name="username" value="<?= isset($userNames->username) ? h($userNames->username): ''; ?>" placeholder="ユーザー名">
-          <p class="err"><?= h($app->getErrors('username')); ?></p>
-        </div>
-        <button class="btn btn-primary" onclick="document.getElementById('userupdate').submit();">更新</button>
-        <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
+      <div class="form-block">
+        <label for="email"></label>
+        <input type="text" name="email" value="<?= isset($userNames->email) ? h($userNames->email): ''; ?>" placeholder="メールアドレス">
+      </div>
+      <div class="form-block">
+        <label for="user"></label>
+        <input type="text" name="username" value="<?= isset($userNames->username) ? h($userNames->username): ''; ?>" placeholder="ユーザー名">
+        <p class="err"><?= h($app->getErrors('email')); ?></p>
+        <p class="err"><?= h($app->getErrors('username')); ?></p>
+      </div>
+      <div class="button" onclick="document.getElementById('userupdate').submit();"><img src="<?= SITE_URL; ?>/asset/img/update.png"></div>
+      <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
       </div>
     </form>
     <form class="user-delete" action="user_delete_confirm.php" method="post">
       <input type="submit" class="btn btn-default" value="退会する">
       <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
     </form>
-  </div><!--container -->
+  </div>
+</div><!--container -->
 
 <?php
 require_once(__DIR__ .'/footer.php');

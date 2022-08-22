@@ -9,7 +9,7 @@ require_once(__DIR__ .'/../config/config.php');
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Cache-Control" content="no-cache">
-  <title>codelab掲示板</title>
+  <title>LOOK掲示板</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
   <!-- googleフォント -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
