@@ -8,7 +8,7 @@ require_once(__DIR__ .'/../lib/Controller/functions.php');
 require_once(__DIR__ . '/autoload.php');
 session_start();
 
-$current_uri =  $_SERVER["REQUEST_URI"];
+$current_uri = 'http://' . $_SERVER["REQUEST_URI"];
 
 $file_name = basename($current_uri);
 
