@@ -33,7 +33,7 @@ $(function () {
   $(document).ready(function() {
     var origin = location.origin;
     $.ajax({
-      url: origin + '/apply/public_html/ajax.php',
+      url: origin + '/ajax.php',
       type: "POST",
       data: {
         'type': 'getThreadAll',
@@ -124,7 +124,7 @@ $(function () {
     var origin = location.origin;
     var title_val = $(this).val();
     $.ajax({
-      url: origin + '/apply/public_html/ajax.php',
+      url: origin + '/ajax.php',
       type: "POST",
       data: {
         'type': 'searchAddress',
@@ -158,7 +158,7 @@ $(function () {
     // 選択されている都道府県のvalue属性値を取り出す
     var address_val = $(this).val();
     $.ajax({
-      url: origin + '/apply/public_html/ajax.php',
+      url: origin + '/ajax.php',
       type: "POST",
       data: {
         'type': 'searchThread',
