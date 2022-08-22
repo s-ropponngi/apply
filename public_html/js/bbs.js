@@ -71,7 +71,7 @@ $(function () {
 
           $('#thread__comment' + index).append('<span id="thread__comment-span' + index + '" class="thread__comment-span"></span>');
 
-          $('#thread__text' + index).after('<a id="comment__btn' + index + '" class="comment__btn" href="thread_disp.php/thread_id=35"></a>');
+          $('#thread__text' + index).after('<a id="comment__btn' + index + '" class="comment__btn"></a>');
 
           $('#comment__btn' + index).append('<img id="comment__btnimg' + index + '" class="comment__btnimg" src="asset/img/click_btn.png">');
 
@@ -186,11 +186,17 @@ $(function () {
 
           $('#operation' + index).append('<div id="thread__text' + index + '" class="thread__text"></div>');
 
-          $('#thread__text' + index).append('<p id="thread__address' + index + '" class="thread__address"></p>');
+          $('#thread__text' + index).append('<p id="thread__address' + index + '" class="thread__address">発見場所：</p>');
 
-          $('#thread__address' + index).after('<p id="thread__due_date' + index + '" class="thread__due_date"></p>');
+          $('#thread__address' + index).append('<span id="thread__address-span' + index + '" class="thread__address-span"></span>');
 
-          $('#thread__due_date' + index).after('<p id="thread__comment' + index + '" class="thread__comment"></p>');
+          $('#thread__address' + index).after('<p id="thread__due_date' + index + '" class="thread__due_date">発見日：</p>');
+
+          $('#thread__due_date' + index).append('<span id="thread__due_date-span' + index + '" class="thread__due_date-span"></span>');
+
+          $('#thread__due_date' + index).after('<p id="thread__comment' + index + '" class="thread__comment">特徴：</p>');
+
+          $('#thread__comment' + index).append('<span id="thread__comment-span' + index + '" class="thread__comment-span"></span>');
 
           $('#thread__text' + index).after('<a id="comment__btn' + index + '" class="comment__btn"></a>');
 
@@ -211,15 +217,15 @@ $(function () {
             $(element).text(data[index]['title']);
           });
 
-          $('#thread__item' + index).find('.thread__address').each( function( key, element ) {
+          $('#thread__item' + index).find('.thread__address-span').each( function( key, element ) {
             $(element).text(data[index]['address']);
           });
 
-          $('#thread__item' + index).find('.thread__due_date').each( function( key, element ) {
+          $('#thread__item' + index).find('.thread__due_date-span').each( function( key, element ) {
             $(element).text(data[index]['due_date']);
           });
 
-          $('#thread__item' + index).find('.thread__comment').each( function( key, element ) {
+          $('#thread__item' + index).find('.thread__comment-span').each( function( key, element ) {
             $(element).text(data[index]['comment']);
           });
 
