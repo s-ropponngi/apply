@@ -11,17 +11,15 @@ $app->run();
 
 <div class="container__dog">
   <div class="form__inner">
-    <div class="form-group">
-      <p>メールアドレス：<?= isset($app->getValues()->email) ? h($app->getValues()->email): ''; ?></p>
+      <p>メールアドレス：<?= isset($app->getValues()->email) ? h($app->getValues()->email): ''; ?></p><br>
       <p>ユーザー名：<?= isset($app->getValues()->username) ? h($app->getValues()->username): ''; ?></p>
-    </div>
-  </div>
-  <form class="user-delete user-confirm" action="user_delete_done.php" method="post">
-    <a class="btn btn-primary" href="javascript:history.back();">まだしません。</a>
-    <input type="submit" class="btn btn-primary" value="退会">
+  <form class="form__delete" action="user_delete_done.php" method="post">
+    <input type="image" class="button" src="<?= SITE_URL; ?>/asset/img/delete.png">
     <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
-    <input type="hidden" name="type" value="delete">
+    <input type="hidden" name="type" value="delete"><br>
+    <a class="button_under" href="javascript:history.back();">キャンセル</a>
   </form>
+  </div>
 </div><!--container -->
 <?php
 require_once(__DIR__ .'/footer.php');

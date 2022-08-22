@@ -702,51 +702,6 @@ input[type="file"]{
   }
 }
 
-.comment-confirm .guide {
-  font-size: 20px;
-}
-
-.comment-confirm .content {
-  margin: 50px 0;
-  font-size: 20px;
-  background: #fff;
-  padding: 10px;
-}
-
-.comment-confirm .form-group input[type="submit"] {
-  margin-top: 0;
-  margin-left: 10px;
-}
-
-.comment-complete {
-  font-size: 20px;
-}
-
-.comment-complete p {
-  margin-bottom: 20px;
-}
-
-.user-confirm {
-  display: flex;
-  justify-content: center;
-}
-
-.user-confirm a {
-  display: block;
-  margin-right: 40px;
-}
-
-.user-disp {
-  font-size: 16px;
-  margin-bottom: 50px;
-}
-
-.file-btn {
-  width: 180px;
-  font-size: 12px;
-  font-weight: bold;
-}
-
 /* フッター */
 
 .copy {
@@ -822,7 +777,7 @@ input[type="file"]{
  }
 
  .form__inner {
-  margin: 2rem;
+  margin: 4rem 1rem 1rem;
  }
 
 .form-block {
@@ -1033,11 +988,25 @@ input[type="file"]{
    }
  }
 
- /* マイページ */
+ /* マイページ,退会ページ */
 
  .user-delete {
   text-align: center;
   margin-bottom: 1rem;
+ }
+
+ .form__inner p {
+  text-align: center;
+ }
+
+ .form__delete {
+  text-align: center;
+  margin-top: 3rem;
+ }
+
+ .button_under {
+  display: block;
+  margin-top: 3rem;
  }
 
  /* スレッド詳細 */
@@ -1086,9 +1055,9 @@ input[type="file"]{
   background-size: 100% 100%;
   background-repeat: no-repeat;
   margin: 3rem auto;
-  padding: 3rem;
+  padding: 2rem;
   text-align: center;
-  width: 85%;
+  width: 95%;
 }
 
 .comment__form-group textarea {
@@ -1119,7 +1088,7 @@ input[type="file"]{
   background-size: 100% 100%;
   background-repeat: no-repeat;
   margin: 3rem auto;
-  padding: 4rem;
+  padding: 2rem;
   text-align: center;
   width: 75%;
 }
