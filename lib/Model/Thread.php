@@ -28,14 +28,6 @@ class Thread extends \Apply\Model {
       $this->db->rollBack();
     }
   }
-    // 全スレッド取得
-    public function getThreadAll(){
-      // $user_id = $_SESSION['me']->id;
-      // $stmt = $this->db->query("SELECT t.id AS t_id,title,t.created,f.id AS f_id FROM threads AS t LEFT JOIN favorites AS f ON t.delflag = 0 AND t.id = f.thread_id  AND f.user_id = $user_id ORDER BY t.id desc");
-
-      $stmt = $this->db->query("SELECT id AS t_id,title,image,created,address,due_date,comment FROM threads WHERE delflag = 0 ORDER BY id desc");
-      return $stmt->fetchAll(\PDO::FETCH_OBJ);
-    }
 
 // コメント取得
 public function getComment($thread_id){
@@ -55,6 +47,8 @@ public function getCommentCount($thread_id) {
 
 // スレッド1件取得(スレッド内容を取得)
 public function getThread($thread_id){
+  // var_dump($thread_id);
+  // exit;
   $stmt = $this->db->prepare("SELECT * FROM threads WHERE id = :id AND delflag = 0;");
   $stmt->bindValue(":id",$thread_id);
   $stmt->execute();
@@ -102,45 +96,61 @@ public function createComment($values) {
 // 検索
 //Ajaxで渡ってきた値をもとに threadsテーブル から該当する model を抽出
 public function searchThread($values) {
-   $this->db->beginTransaction();
-    $stmt = $this->db->prepare("SELECT * FROM threads WHERE title = :title_id AND address = :address_id");
-    $stmt->execute([
-      ':title_id' => $values['title'],
-      ':address_id' => $values['address']
-    ]);
-    $stmt->setFetchMode(\PDO::FETCH_CLASS, 'stdClass');
-    $rec = $stmt->fetchAll();
-    return $rec;
+  $this->db->beginTransaction();
+   $stmt = $this->db->prepare("SELECT * FROM threads WHERE title = :title_id AND address = :address_id AND delflag = 0 ORDER BY id desc");
+   $stmt->execute([
+     ':title_id' => $values['title'],
+     ':address_id' => $values['address']
+   ]);
+   $stmt->setFetchMode(\PDO::FETCH_CLASS, 'stdClass');
+   $rec = $stmt->fetchAll();
+   return $rec;
+  }
 
+  // 検索機能(タイトル絞る)
+  public function searchAddress($values) {
+    $this->db->beginTransaction();
+     $stmt = $this->db->prepare("SELECT DISTINCT s.address AS address FROM (SELECT * FROM `threads` WHERE title = :title_id AND delflag = 0) AS s");
+     $stmt->execute([
+       ':title_id' => $values['title'],
+     ]);
+     $stmt->setFetchMode(\PDO::FETCH_CLASS, 'stdClass');
+     $rec = $stmt->fetchAll();
+     return $rec;
+    }
 
-
-    if (empty($rec)) {
-      $sql = "SELECT DISTINCT 'address' FROM threads";
-      $stmt = $this->db->prepare($sql);
-      $stmt->execute([
-        ':title_id' => $values['title'],
-        ':address_id' => $values['address']
-          ]);
-        }
-      }
-
+// 全スレッド取得
+public function getThreadAll(){
+  $stmt = $this->db->query("SELECT * FROM threads WHERE delflag = 0 ORDER BY id desc");
+  $stmt->setFetchMode(\PDO::FETCH_CLASS, 'stdClass');
+  $rec = $stmt->fetchAll();
+  return $rec;
+}
 
 // ログインしている人の情報をマイページのフォームに反映させる
 public function find($id) {
-  $stmt = $this->db->prepare("SELECT * FROM users WHERE id = :id;");
-  $stmt->bindValue('id',$id);
-  $stmt->execute();
-  $stmt->setFetchMode(\PDO::FETCH_CLASS, 'stdClass');
-  $user = $stmt->fetch();
-  return $user;
+ $stmt = $this->db->prepare("SELECT * FROM threads WHERE user_id = :id;");
+ $stmt->bindValue('id',$id);
+ $stmt->execute();
+ $stmt->setFetchMode(\PDO::FETCH_CLASS, 'stdClass');
+ $user = $stmt->fetch();
+ return $user;
 }
 
-public function update($values) {
-  $stmt = $this->db->prepare("UPDATE threads SET image = :image where id = :id");
-  $stmt->execute([
-    ':image' => $values['image'],
-    ':id' => $_SESSION['me']->id,
-  ]);
+public function updateThread($values) {
+//   var_dump($values);
+//  exit;
+ $stmt = $this->db->prepare("UPDATE threads SET image = :image,title = :title,address = :address,due_date = :due_date,comment = :comment where id = :id");
+ $stmt->execute([
+   ':image' => $values['image'],
+   ':title' => $values['title'],
+   ':address' => $values['address'],
+   ':due_date' => $values['due_date'],
+   ':comment' => $values['comment'],
+   ':id' => $values['thread_id'],
+ ]);
+//  var_dump($stmt->errorInfo());
+//  exit;
 }
 
 }

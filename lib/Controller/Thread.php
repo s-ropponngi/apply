@@ -3,10 +3,14 @@ namespace Apply\Controller;
 class Thread extends \Apply\Controller {
   public function run() {
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
-      if ($_POST['type']  === 'createthread') {
-        $this->createThread();
-      } elseif($_POST['type']  === 'createcomment') {
-        $this->createComment();
+      if(isset($_POST['type'])){
+        if ($_POST['type']  === 'createthread') {
+          $this->createThread();
+        } elseif($_POST['type']  === 'createcomment') {
+          $this->createComment();
+        } elseif($_POST['type']  === 'updatethread'){
+          $this->updateThread();
+        }
       }
     }
   }
@@ -21,6 +25,7 @@ class Thread extends \Apply\Controller {
     }
     $this->setValues('thread_name', $_POST['thread_name']);
     $this->setValues('address_name', $_POST['address_name']);
+    $this->setValues('due_date', $_POST['due_date']);
     $this->setValues('comment', $_POST['comment']);
     if ($this->hasError()){
       return;
@@ -28,46 +33,36 @@ class Thread extends \Apply\Controller {
       $threadModel = new \Apply\Model\Thread();
 
       // 画像の編集(画像のリンク変更)
-      $user_img = $_FILES['image'];
-      $ext = substr($user_img['name'], strrpos($user_img['name'], '.') + 1);
-      $user_img['name'] = uniqid("img_") .'.'. $ext;
-
-      $old_img = $_POST['old_image'];
-      if($old_img == '') {
-        $old_img = NULL;
+      if($_FILES['image']['name'] == '') {
+        $old_img = $_POST['old_image'];
+        $user_img['name'] = $old_img;
+      }else{
+        $user_img = $_FILES['image'];
+        $ext = substr($user_img['name'], strrpos($user_img['name'], '.') + 1);
+        $user_img['name'] = uniqid("img_") .'.'. $ext;
       }
       try {
         $userModel = new \Apply\Model\Thread();
-        // アップロードした画像があれば、gazouディレクトリにある古い画像を削除し、新しい画像を保存する。
-        // アップロードされてきた画像があれば実行する
+
+        // Model部分に渡すようにしている部分
+        $threadModel->createThread([
+          'image' => $user_img['name'],
+          'title' => $_POST['thread_name'],
+          'address' => $_POST['address_name'],
+          'due_date' => $_POST['due_date'],
+          'comment' => $_POST['comment'],
+          'user_id' => $_SESSION['me']->id
+        ]);
         if($user_img['size'] > 0) {
-          // gazouフォルダーの中にある古い画像をフォルダから削除する
           unlink('./gazou/'.$old_img);
-          // 新しい画像をgazouフォルダに移動
           move_uploaded_file($user_img['tmp_name'],'./gazou/'.$user_img['name']);
         }
       }catch(\Exception $e){
         return;
       }
-
     }
-    $_SESSION['me']->username = $_POST['username'];
-
-
-      // Model部分に渡すようにしている部分
-      $threadModel->createThread([
-        'image' => $user_img['name'],
-        'title' => $_POST['thread_name'],
-        'address' => $_POST['address_name'],
-        'due_date' => $_POST['due_date'],
-        'comment' => $_POST['comment'],
-        'user_id' => $_SESSION['me']->id
-      ]);
       header('Location: '. SITE_URL . '/index.php');
       exit();
-
-      
-
   }
 
   protected function showUser() {
@@ -102,47 +97,111 @@ class Thread extends \Apply\Controller {
       exit();
   }
 
-  private function validateSearch() {
-    if($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['type'])) {
-      if ($_GET['keyword'] === ''){
-        throw new \Apply\Exception\EmptyPost("検索キーワードが入力されていません！");
+  private function updateThread() {
+    try {
+      $this->validateupdate();
+      } catch (\Apply\Exception\EmptyPost $e) {
+          $this->setErrors('update_thread', $e->getMessage());
+      } catch (\Apply\Exception\CharLength $e) {
+          $this->setErrors('update_thread', $e->getMessage());
       }
-      if (mb_strlen($_GET['keyword']) > 20) {
-        throw new \Apply\Exception\CharLength("キーワードが長すぎます！");
+      $this->setValues('thread_name', $_POST['thread_name']);
+      $this->setValues('address_name', $_POST['address_name']);
+      $this->setValues('comment', $_POST['comment']);
+    if ($this->hasError()){
+      return;
+    } else {
+      $threadModel = new \Apply\Model\Thread();
+
+      // 画像の編集(画像のリンク変更)
+      if($_FILES['image']['name'] == '') {
+        $old_img = $_POST['old_image'];
+        $user_img['name'] = $old_img;
+      }else{
+        $user_img = $_FILES['image'];
+        $ext = substr($user_img['name'], strrpos($user_img['name'], '.') + 1);
+        $user_img['name'] = uniqid("img_") .'.'. $ext;
+      }
+      try {
+        $userModel = new \Apply\Model\Thread();
+
+        // Model部分に渡すようにしている部分
+      $threadModel->updateThread([
+        'image' => $user_img['name'],
+        'title' => $_POST['thread_name'],
+        'address' => $_POST['address_name'],
+        'due_date' => $_POST['due_date'],
+        'comment' => $_POST['comment'],
+        'thread_id' => $_POST['thread_id']
+      ]);
+        if($user_img['size'] > 0) {
+          unlink('./gazou/'.$old_img);
+          move_uploaded_file($user_img['tmp_name'],'./gazou/'.$user_img['name']);
+        }
+      }catch(\Exception $e){
+        return;
       }
     }
-  }
-
-  private function validate() {
-    if (!isset($_POST['token']) || $_POST['token'] !== $_SESSION['token']) {
-      echo "不正なトークンです!";
+      header('Location: '. SITE_URL . '/index.php');
       exit();
     }
-    if ($_POST['type'] === 'createthread') {
-      if (!isset($_POST['thread_name']) || !isset($_POST['comment'])){
-        echo '不正な投稿です';
+
+    private function validate() {
+      if (!isset($_POST['token']) || $_POST['token'] !== $_SESSION['token']) {
+        echo "不正なトークンです!";
         exit();
       }
-      if ( $_FILES['image']['type'] === ''|| $_POST['thread_name'] === '' || $_POST['comment'] === ''|| $_POST['address_name'] === ''|| $_POST['due_date'] === ''){
-        throw new \Apply\Exception\EmptyPost("全て入力してください！");
+      // 新規スレッド作成のスレッド名と最初のコメントのバリデーション
+      if ($_POST['type'] === 'createthread') {
+        // thread_nameとcommentにPOST送信されていなかったら不正な投稿(!issetはセットされていない意味)
+        if (!isset($_POST['thread_name']) || !isset($_POST['comment'])){
+          echo '不正な投稿です';
+          exit();
+        }
+        if ( $_FILES['image']['type'] === ''|| $_POST['thread_name'] === '' || $_POST['comment'] === ''|| $_POST['address_name'] === ''|| $_POST['due_date'] === ''){
+          throw new \Apply\Exception\EmptyPost("全て入力してください！");
+        }
+        // 20文字以上入力したらエラーがでる
+        if (mb_strlen($_POST['thread_name']) > 20) {
+          // エラーが出たらここが実行される
+          throw new \Apply\Exception\CharLength("スレッド名が長すぎます！");
+        }
+        // 200文字以上入力したらエラーがでる
+        if (mb_strlen($_POST['comment']) > 200) {
+          // エラーが出たらここが実行される
+          throw new \Apply\Exception\CharLength("コメントが長すぎます！");
+        }
       }
-
-      if (mb_strlen($_POST['comment']) > 200) {
-        throw new \Apply\Exception\CharLength("コメントが長すぎます！");
-      }
-    //   if (=== 'noimage.jpg')
-    // }
-
+      // スレッド詳細画面でコメントのバリデーション
       if($_POST['type'] === 'createcomment') {
         if (!isset($_POST['content'])){
           echo '不正な投稿です';
           exit();
         }
-
-      if($_POST['content'] === '') {
-        throw new \Apply\Exception\EmptyPost("コメントが入力されていません！");
+        if($_POST['content'] === '') {
+          throw new \Apply\Exception\EmptyPost("コメントが入力されていません！");
+        }
+        if (mb_strlen($_POST['content']) > 200) {
+          throw new \Apply\Exception\CharLength("コメントが長すぎます！");
       }
     }
   }
-}
-}
+
+  private function validateupdate() {
+    if (!isset($_POST['token']) || $_POST['token'] !== $_SESSION['token']) {
+      echo "不正なトークンです!";
+      exit();
+    }
+    if ($_POST['type'] === 'updatethread') {
+      if (!isset($_POST['thread_name']) ){
+        echo '不正な投稿です';
+        exit();
+      }
+      if ($_POST['thread_name'] === '' || $_POST['comment'] === ''|| $_POST['address_name'] === ''|| $_POST['due_date'] === ''){
+        throw new \Apply\Exception\EmptyPost("全て入力してください！");
+      }
+      }
+    }
+  }
+
+

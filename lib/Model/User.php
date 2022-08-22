@@ -1,8 +1,9 @@
 <?php
 namespace Apply\Model;
 class User extends \Apply\Model {
+
   public function create($values) {
-    $stmt = $this->db->prepare("INSERT INTO users (username,email,password,created,modified) VALUES (:username,:email,:password,now(),now())");
+    $stmt = $this->db->prepare("INSERT INTO users (username,email,password,created,modified) VALUES (:username,:email,:password,now(),now());");
     $res = $stmt->execute([
       ':username' => $values['username'],
       ':email' => $values['email'],
@@ -44,7 +45,17 @@ class User extends \Apply\Model {
 
   // ログインしている人の情報をマイページのフォームに反映させる
   public function find($id) {
-    $stmt = $this->db->prepare("SELECT * FROM users WHERE id = :id;");
+    $stmt = $this->db->prepare("SELECT * FROM users JOIN threads ON users.id = threads.user_id WHERE users.id = :id;");
+    $stmt->bindValue('id',$id);
+    $stmt->execute();
+    $stmt->setFetchMode(\PDO::FETCH_CLASS, 'stdClass');
+    $user = $stmt->fetchAll();
+    return $user;
+  }
+
+// 退会ページに飛ばすユーザーの値
+  public function findUser($id) {
+    $stmt = $this->db->prepare("SELECT * FROM users WHERE users.id = :id;");
     $stmt->bindValue('id',$id);
     $stmt->execute();
     $stmt->setFetchMode(\PDO::FETCH_CLASS, 'stdClass');
@@ -53,11 +64,10 @@ class User extends \Apply\Model {
   }
 
   public function update($values) {
-    $stmt = $this->db->prepare("UPDATE users SET username = :username,email = :email, image = :image, modified = now() where id = :id");
+    $stmt = $this->db->prepare("UPDATE users SET username = :username,email = :email, modified = now() where id = :id;");
     $stmt->execute([
       ':username' => $values['username'],
       ':email' => $values['email'],
-      'image' => $values['userimg'],
       ':id' => $_SESSION['me']->id,
     ]);
     // 既に登録されているメールアドレスが登録されたらここが反応する
@@ -68,7 +78,7 @@ class User extends \Apply\Model {
 
   public function delete() {
     // UPDATE文を使ってdelflagを0から1に変更して日付を削除した日に変更する
-    $stmt = $this->db->prepare("UPDATE users SET delflag = :delflag,modified = now() where id = :id");
+    $stmt = $this->db->prepare("UPDATE users SET delflag = :delflag,modified = now() where id = :id;");
     $stmt->execute([
       ':delflag' => 1,
       ':id' => $_SESSION['me']->id,
