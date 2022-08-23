@@ -54,8 +54,10 @@ class Thread extends \Apply\Controller {
           'user_id' => $_SESSION['me']->id
         ]);
         if($user_img['size'] > 0) {
-          unlink('./gazou/'.$old_img);
-          move_uploaded_file($user_img['tmp_name'],'./gazou/'.$user_img['name']);
+          // unlink('./gazou/'.$old_img);
+          // move_uploaded_file($user_img['tmp_name'],'./gazou/'.$user_img['name']);
+
+          $upload = $s3->upload($bucket, $_FILES['image']['name'], fopen($_FILES['image']['tmp_name'], 'rb'), 'public-read');
         }
       }catch(\Exception $e){
         return;
