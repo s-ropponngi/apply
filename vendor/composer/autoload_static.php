@@ -36,6 +36,10 @@ class ComposerStaticInita3722364ce5d4b89f258c35e58563340
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
         ),
+        'C' => 
+        array (
+            'Composer\\Installers\\' => 20,
+        ),
         'A' => 
         array (
             'Aws\\' => 4,
@@ -71,6 +75,10 @@ class ComposerStaticInita3722364ce5d4b89f258c35e58563340
         'GuzzleHttp\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
+        ),
+        'Composer\\Installers\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers',
         ),
         'Aws\\' => 
         array (
