@@ -1,8 +1,5 @@
 <?php
 namespace Apply\Controller;
-require('../vendor/autoload.php');
-use Aws\S3\S3Client;
-use Aws\Exception\AwsException;
 class Thread extends \Apply\Controller {
   public function run() {
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -60,6 +57,7 @@ class Thread extends \Apply\Controller {
           // unlink('./gazou/'.$old_img);
           // move_uploaded_file($user_img['tmp_name'],'./gazou/'.$user_img['name']);
 
+          require('../vendor/autoload.php');
           // this will simply read AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY from env vars
           $s3 = new Aws\S3\S3Client([
               'version'  => '2006-03-01',
