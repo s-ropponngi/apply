@@ -59,7 +59,6 @@ class Thread extends \Apply\Controller {
 
           require('../vendor/autoload.php');
           // this will simply read AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY from env vars
-          require_once('../vendor/aws/aws-sdk-php/src/S3/S3Client.php');
           $s3 = new Aws\S3\S3Client([
               'version'  => '2006-03-01',
               'region'   => 'us-east-1',
