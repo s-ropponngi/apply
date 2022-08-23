@@ -60,7 +60,7 @@ body {
 
 .ttl__area {
   font-family: 'Leckerli One', cursive;
-  margin: 3rem auto 1rem;
+  margin: 5rem auto 1rem;
   font-size: 60px;
   text-align: center;
 }
@@ -81,7 +81,7 @@ body {
   }
 
   .ttl__area {
-    margin: 5rem auto;
+    margin: 7rem auto 3rem;
     font-size: 100px;
   }
 
@@ -106,8 +106,8 @@ body {
   content: '';
   left: 50%;
   z-index: -2147483647;
-  width: 25%;
-  height: 100%;
+  width: 28%;
+  height: 180%;
   border-radius: 50%;
   background: inherit;
   transform: translateX(-50%) translateY(42%);
@@ -127,7 +127,7 @@ body {
 }
 
 .header__logo-img {
-  width: 15%;
+  width: 70px;
 }
 
 .header__inner {
@@ -152,7 +152,7 @@ body {
 }
 
 .header__inner nav ul li + li {
-  margin-left: 20px;
+  margin-left: 14rem;
 }
 
 .header__inner .prof-show {
@@ -176,9 +176,7 @@ body {
 }
 
 .user-btn {
-  display: flex;
-  align-items: center;
-  margin-left: 0.25rem;
+  margin-left: 2rem;
 }
 
 .user-btn input[type=submit] {
@@ -203,16 +201,24 @@ body {
   }
 
   .header::before {
-    width: 15%;
+    position: absolute;
+    content: '';
+    left: 50%;
+    z-index: -2147483647;
+    width: 20%;
+    height: 100%;
     border-radius: 50%;
+    background: inherit;
+    transform: translateX(-50%) translateY(42%);
+    bottom: 0px;
   }
 
   .header__logo {
-    margin-top: -6rem;
+    margin-top: -3rem;
   }
 
   .header__logo-img {
-    width: 10%;
+    width: 100px;
   }
 
   .header__inner {
@@ -222,6 +228,30 @@ body {
   .user-btn {
     margin-left: 1.25rem;
   }
+
+}
+
+@media screen and (min-width: 1000px) {
+  .header::before {
+    position: absolute;
+    content: '';
+    left: 50%;
+    z-index: -2147483647;
+    width: 20%;
+    height: 120%;
+    border-radius: 50%;
+    background: inherit;
+    transform: translateX(-50%) translateY(42%);
+    bottom: 0px;
+  }
+
+  .header__logo-img {
+    width: 150px;
+  }
+
+  .header__logo {
+    margin-top: -6rem;
+}
 
 }
 
