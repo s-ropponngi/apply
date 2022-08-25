@@ -18,7 +18,7 @@ $userNames = $user->findUser($_SESSION['me']->id);
       <div class="img__block">
         <div class="imgarea <?= isset($userData->image) ? '': 'noimage' ?>">
           <div class="imgfile">
-            <img src="<?= './gazou/'.h($userData->image); ?>" alt="">
+            <img src="<?= h($userData->image); ?>" alt="">
           </div>
         </div>
       </div>
