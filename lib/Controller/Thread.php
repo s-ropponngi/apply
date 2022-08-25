@@ -139,7 +139,8 @@ class Thread extends \Apply\Controller {
 
       // 画像の編集(画像のリンク変更)
       if($_FILES['image']['name'] == '') {
-        
+          $old_img = $_POST['old_image'];
+          $user_img['name'] = $old_img;
       }else {
         ///// 画像をs3へアップロードする/////
         $s3 = new S3Client([
@@ -164,6 +165,7 @@ class Thread extends \Apply\Controller {
 
         // Model部分に渡すようにしている部分
       $threadModel->updateThread([
+        'image' => $user_img['name'],
         'image' => $upload->get('ObjectURL'),// 画像をs3へアップロードする
         'title' => $_POST['thread_name'],
         'address' => $_POST['address_name'],
