@@ -72,8 +72,6 @@ class Thread extends \Apply\Controller {
       }
       try {
         $userModel = new \Apply\Model\Thread();
-        var_dump($upload->get('ObjectURL'));
-        exit;
         // Model部分に渡すようにしている部分
         $threadModel->createThread([
           'image' => $upload->get('ObjectURL'),// 画像をs3へアップロードする

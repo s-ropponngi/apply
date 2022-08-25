@@ -5,7 +5,8 @@ class Thread extends \Apply\Model {
     try {
       // // トランザクション開始
       $this->db->beginTransaction();
-
+      var_dump($values['image']);
+      exit;
       // threadsテーブルに新規レコードの作成
       $sql = "INSERT INTO threads (user_id,title,image,address,due_date,comment,created,modified) VALUES (:user_id,:title,:image,:address,:due_date,:comment,now(),now())";
       $stmt = $this->db->prepare($sql);
