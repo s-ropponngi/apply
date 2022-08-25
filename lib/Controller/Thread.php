@@ -139,6 +139,8 @@ class Thread extends \Apply\Controller {
 
       // 画像の編集(画像のリンク変更)
       if($_FILES['image']['name'] == '') {
+        
+      }else {
         ///// 画像をs3へアップロードする/////
         $s3 = new S3Client([
           'version' => 'latest',
@@ -156,9 +158,6 @@ class Thread extends \Apply\Controller {
 
         $upload = $s3->upload($bucket, $_FILES['image']['name'], fopen($_FILES['image']['tmp_name'], 'rb'), 'public-read');
         //////////////////////////////////
-
-        var_dump($upload);
-        exit;
       }
       try {
         $userModel = new \Apply\Model\Thread();
