@@ -139,19 +139,30 @@ class Thread extends \Apply\Controller {
 
       // 画像の編集(画像のリンク変更)
       if($_FILES['image']['name'] == '') {
-        $old_img = $_POST['old_image'];
-        $user_img['name'] = $old_img;
-      }else{
-        $user_img = $_FILES['image'];
-        $ext = substr($user_img['name'], strrpos($user_img['name'], '.') + 1);
-        $user_img['name'] = uniqid("img_") .'.'. $ext;
+        ///// 画像をs3へアップロードする/////
+        $s3 = new S3Client([
+          'version' => 'latest',
+          'region' => 'ap-northeast-1',
+          'credentials' => CredentialProvider::defaultProvider(),
+          // 'credentials' => false
+        ]);
+
+        // よく使われる書き方だが、動かなかった。
+        // $dotenv = Dotenv::createImmutable(__DIR__ . '/../..');
+        // $dotenv->load();
+        // $bucket = getenv('S3_BUCKET')?: die('No "S3_BUCKET" config var in found in env!');
+
+        $bucket = 'applylook';
+
+        $upload = $s3->upload($bucket, $_FILES['image']['name'], fopen($_FILES['image']['tmp_name'], 'rb'), 'public-read');
+        //////////////////////////////////
       }
       try {
         $userModel = new \Apply\Model\Thread();
 
         // Model部分に渡すようにしている部分
       $threadModel->updateThread([
-        'image' => $user_img['name'],
+        'image' => $upload->get('ObjectURL'),// 画像をs3へアップロードする
         'title' => $_POST['thread_name'],
         'address' => $_POST['address_name'],
         'due_date' => $_POST['due_date'],
