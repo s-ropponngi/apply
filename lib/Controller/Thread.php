@@ -165,7 +165,6 @@ class Thread extends \Apply\Controller {
 
         // Model部分に渡すようにしている部分
       $threadModel->updateThread([
-        'image' => $user_img['name'],
         'image' => $upload->get('ObjectURL'),// 画像をs3へアップロードする
         'title' => $_POST['thread_name'],
         'address' => $_POST['address_name'],
@@ -174,8 +173,8 @@ class Thread extends \Apply\Controller {
         'thread_id' => $_POST['thread_id']
       ]);
         if($user_img['size'] > 0) {
-          unlink('./gazou/'.$old_img);
-          move_uploaded_file($user_img['tmp_name'],'./gazou/'.$user_img['name']);
+          unlink($old_img);
+          move_uploaded_file($user_img['tmp_name'],$user_img['name']);
         }
       }catch(\Exception $e){
         return;
