@@ -16,8 +16,6 @@ class Thread extends \Apply\Model {
       $stmt->bindValue('due_date',$values['due_date']);
       $stmt->bindValue('comment',$values['comment']);
       $res = $stmt->execute();
-      var_dump($stmt->errorInfo());
-      exit;
       $thread_id = $this->db->lastInsertId();
 
       $this->db->commit();

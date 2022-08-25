@@ -83,7 +83,7 @@ $(function () {
 
 
           $('#thread__item' + index).find('.thread__img').each( function( key, element ) {
-            $(element).attr('src','./gazou/' + data[index]['image']);
+            $(element).attr('src', data[index]['image']);
           });
 
           $('#thread__item' + index).find('.thread__ttl').each( function( key, element ) {
@@ -210,7 +210,7 @@ $(function () {
 
 
           $('#thread__item' + index).find('.thread__img').each( function( key, element ) {
-            $(element).attr('src','./gazou/' + data[index]['image']);
+            $(element).attr('src', data[index]['image']);
           });
 
           $('#thread__item' + index).find('.thread__ttl').each( function( key, element ) {
