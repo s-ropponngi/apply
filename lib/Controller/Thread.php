@@ -1,5 +1,14 @@
 <?php
 namespace Apply\Controller;
+
+///// 画像をs3へアップロードする/////
+require(__DIR__ . '/../../vendor/autoload.php');
+use Aws\S3\S3Client;
+use Aws\Credentials\CredentialProvider;
+// use Dotenv\Dotenv;
+//////////////////////////////////
+
+
 class Thread extends \Apply\Controller {
   public function run() {
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -54,18 +63,17 @@ class Thread extends \Apply\Controller {
           'user_id' => $_SESSION['me']->id
         ]);
         if($user_img['size'] > 0) {
-          // unlink('./gazou/'.$old_img);
-          // move_uploaded_file($user_img['tmp_name'],'./gazou/'.$user_img['name']);
-
-          require('../vendor/autoload.php');
-          // this will simply read AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY from env vars
-          $s3 = new Aws\S3\S3Client([
-              'version'  => '2006-03-01',
-              'region'   => 'us-east-1',
+          ///// 画像をs3へアップロードする/////
+          $s3 = new S3Client([
+            'version' => 'latest',
+            'region' => 'ap-northeast-1',
+            'credentials' => CredentialProvider::defaultProvider(),
           ]);
-          $bucket = getenv('S3_BUCKET')?: die('No "S3_BUCKET" config var in found in env!');
+
+          $bucket = 'okr-upload-images';
 
           $upload = $s3->upload($bucket, $_FILES['image']['name'], fopen($_FILES['image']['tmp_name'], 'rb'), 'public-read');
+          //////////////////////////////////
         }
       }catch(\Exception $e){
         return;
