@@ -172,7 +172,7 @@ class Thread extends \Apply\Controller {
         'comment' => $_POST['comment'],
         'thread_id' => $_POST['thread_id']
       ]);
-        if($upload['size'] > 0) {
+        if('image' > 0) {
           unlink($old_img);
           move_uploaded_file($user_img['tmp_name'],$user_img['name']);
         }
