@@ -67,8 +67,8 @@ class Thread extends \Apply\Controller {
           $s3 = new S3Client([
             'version' => 'latest',
             'region' => 'ap-northeast-1',
-            // 'credentials' => CredentialProvider::defaultProvider(),
-            'credentials' => false
+            'credentials' => CredentialProvider::defaultProvider(),
+            // 'credentials' => false
           ]);
 
           // よく使われる書き方だが、動かなかった。
