@@ -156,6 +156,9 @@ class Thread extends \Apply\Controller {
 
         $upload = $s3->upload($bucket, $_FILES['image']['name'], fopen($_FILES['image']['tmp_name'], 'rb'), 'public-read');
         //////////////////////////////////
+
+        var_dump($upload);
+        exit;
       }
       try {
         $userModel = new \Apply\Model\Thread();
