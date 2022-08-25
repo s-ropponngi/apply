@@ -19,7 +19,7 @@ $threadCon->run();
         <div class="imgarea <?= isset($threadCon->getValues()->image) ? '': 'noimage' ?>">
 
           <div class="imgfile">
-            <img src="<?= isset($_POST['thread_id']) ? './gazou/'.h($threadDisp->image) : './gazou/'.h($_POST['image']) ; ?>" alt="">
+            <img src="<?= isset($_POST['thread_id']) ? h($threadDisp->image) : h($_POST['image']) ; ?>" alt="">
           </div>
         </div>
         <label class="file-img">
