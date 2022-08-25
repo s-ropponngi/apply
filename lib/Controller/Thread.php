@@ -67,10 +67,16 @@ class Thread extends \Apply\Controller {
           $s3 = new S3Client([
             'version' => 'latest',
             'region' => 'ap-northeast-1',
-            'credentials' => CredentialProvider::defaultProvider(),
+            // 'credentials' => CredentialProvider::defaultProvider(),
+            'credentials' => false
           ]);
 
-          $bucket = 'okr-upload-images';
+          // よく使われる書き方だが、動かなかった。
+          // $dotenv = Dotenv::createImmutable(__DIR__ . '/../..');
+          // $dotenv->load();
+          // $bucket = getenv('S3_BUCKET')?: die('No "S3_BUCKET" config var in found in env!');
+
+          $bucket = 'applylook';
 
           $upload = $s3->upload($bucket, $_FILES['image']['name'], fopen($_FILES['image']['tmp_name'], 'rb'), 'public-read');
           //////////////////////////////////
