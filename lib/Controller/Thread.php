@@ -49,19 +49,7 @@ class Thread extends \Apply\Controller {
         $user_img = $_FILES['image'];
         $ext = substr($user_img['name'], strrpos($user_img['name'], '.') + 1);
         $user_img['name'] = uniqid("img_") .'.'. $ext;
-      }
-      try {
-        $userModel = new \Apply\Model\Thread();
 
-        // Model部分に渡すようにしている部分
-        $threadModel->createThread([
-          'image' => $user_img['name'],
-          'title' => $_POST['thread_name'],
-          'address' => $_POST['address_name'],
-          'due_date' => $_POST['due_date'],
-          'comment' => $_POST['comment'],
-          'user_id' => $_SESSION['me']->id
-        ]);
         if($user_img['size'] > 0) {
           ///// 画像をs3へアップロードする/////
           $s3 = new S3Client([
@@ -81,6 +69,19 @@ class Thread extends \Apply\Controller {
           $upload = $s3->upload($bucket, $_FILES['image']['name'], fopen($_FILES['image']['tmp_name'], 'rb'), 'public-read');
           //////////////////////////////////
         }
+      }
+      try {
+        $userModel = new \Apply\Model\Thread();
+
+        // Model部分に渡すようにしている部分
+        $threadModel->createThread([
+          'image' => $upload->get('ObjectURL'),// 画像をs3へアップロードする
+          'title' => $_POST['thread_name'],
+          'address' => $_POST['address_name'],
+          'due_date' => $_POST['due_date'],
+          'comment' => $_POST['comment'],
+          'user_id' => $_SESSION['me']->id
+        ]);
       }catch(\Exception $e){
         return;
       }
